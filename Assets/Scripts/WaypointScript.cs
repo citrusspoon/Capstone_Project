@@ -11,8 +11,5 @@ public class WaypointScript : MonoBehaviour {
 		for (int i = 0; i < waypoints.Length; i++) {
 			waypoints [i] = transform.GetChild (i);
 		}
-
-		print (waypoints[0].transform.localPosition.x);
 	}
-
 }

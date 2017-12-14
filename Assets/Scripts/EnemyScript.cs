@@ -27,8 +27,6 @@ public class EnemyScript : MonoBehaviour {
 		dir = target.position - thisTransform.position;
 		transform.Translate (dir.normalized * speed * Time.deltaTime, Space.World);
 
-
-
 		if (Vector3.Distance (thisTransform.position, target.position) < 0.4f)
 			GetNextWaypoint ();
 	}
