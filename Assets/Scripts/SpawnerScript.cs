@@ -13,7 +13,7 @@ public class SpawnerScript : MonoBehaviour {
 	void Update(){
 
 		if(countdown <= 0f){
-			StartCoroutine ("SpawnWave");
+			StartCoroutine (SpawnWave());
 			countdown = timeBetweenWaves;
 		}
 		countdown -= Time.deltaTime;
