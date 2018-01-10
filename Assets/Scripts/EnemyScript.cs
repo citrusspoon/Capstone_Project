@@ -33,8 +33,10 @@ public class EnemyScript : MonoBehaviour {
 
 	void GetNextWaypoint(){
 
-		if (nextWaypointIndex >= WaypointScript.waypoints.Length - 1)
+		if (nextWaypointIndex >= WaypointScript.waypoints.Length - 1) {
+			//GameController.instance.spawnerScriptRef.enemyList.Remove (this);
 			this.gameObject.SetActive (false);
+		}
 		else {
 			nextWaypointIndex++;
 			target = WaypointScript.waypoints [nextWaypointIndex];

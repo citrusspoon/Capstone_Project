@@ -5,10 +5,15 @@ using UnityEngine;
 public class SpawnerScript : MonoBehaviour {
 
 	public float timeBetweenWaves = 5f;
-	private float countdown = 2f;
+	private float countdown = 0f;
 	private int waveNum = 0;
 	public GameObject enemyPrefab;
 	public Transform spawnPoint;
+	public List<GameObject> enemyList;
+
+	void Start(){
+		enemyList = new List<GameObject>();
+	}
 
 	void Update(){
 
@@ -17,6 +22,8 @@ public class SpawnerScript : MonoBehaviour {
 			countdown = timeBetweenWaves;
 		}
 		countdown -= Time.deltaTime;
+		//print (countdown);
+
 	}
 
 	IEnumerator SpawnWave(){
@@ -28,9 +35,13 @@ public class SpawnerScript : MonoBehaviour {
 		waveNum++;
 	}
 
-	void SpawnEnemy(){
 
-		Instantiate (enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+	//----------Function Variables----------//
+
+	private GameObject gameObject;
+
+	void SpawnEnemy(){
+		enemyList.Add (Instantiate (enemyPrefab, spawnPoint.position, spawnPoint.rotation));
 	}
 
 }
