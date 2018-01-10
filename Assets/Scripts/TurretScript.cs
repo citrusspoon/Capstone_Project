@@ -8,6 +8,8 @@ public class TurretScript : MonoBehaviour {
 	public float range;
 	private GameController GCInstance;
 	private Transform thisTransform;
+	//piece of the turret that rotates to face the target
+	public Transform partToRotate;
 
 	// Use this for initialization
 	void Start () {
@@ -17,8 +19,20 @@ public class TurretScript : MonoBehaviour {
 		InvokeRepeating ("UpdateTarget", 0f, 0.5f);
 	}
 	
-	// Update is called once per frame
+	//========Update Variables============//
+	Vector3 dir;
+	Quaternion lookRotation;
+	Vector3 rotation;
+
 	void Update () {
+		if (target == null)
+			return;
+		
+		dir = target.position - thisTransform.position;
+		lookRotation = Quaternion.LookRotation (dir);
+		rotation = lookRotation.eulerAngles;
+
+		partToRotate.rotation  = Quaternion.Euler (0f, rotation.y, 0f);
 		
 	}
 
