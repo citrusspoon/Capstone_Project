@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class TurretScript : MonoBehaviour {
 
+	/*
+		TODO: Create list of turret targeting options with enum
+		TODO: Use list to track enemies that enter turret sight
+	*/
+
+
 	private Transform target;
 	public float range;
 	public float rotationSpeed;
