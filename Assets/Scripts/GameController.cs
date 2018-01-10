@@ -24,6 +24,6 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		print(spawnerScriptRef.enemyList.Count);
+		//print(spawnerScriptRef.enemyList.Count);
 	}
 }

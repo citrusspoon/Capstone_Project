@@ -6,14 +6,17 @@ public class TurretScript : MonoBehaviour {
 
 	private Transform target;
 	public float range;
+	public float rotationSpeed;
 	private GameController GCInstance;
 	private Transform thisTransform;
 	//piece of the turret that rotates to face the target
 	public Transform partToRotate;
+	private List<GameObject> enemiesInRange;
 
 	// Use this for initialization
 	void Start () {
 		GCInstance = GameController.instance;
+		enemiesInRange = new List<GameObject> ();
 		thisTransform = GetComponent<Transform> ();
 		//updates target every half second to save computing power
 		InvokeRepeating ("UpdateTarget", 0f, 0.5f);
@@ -30,9 +33,12 @@ public class TurretScript : MonoBehaviour {
 		
 		dir = target.position - thisTransform.position;
 		lookRotation = Quaternion.LookRotation (dir);
-		rotation = lookRotation.eulerAngles;
+		rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime*rotationSpeed).eulerAngles;
 
-		partToRotate.rotation  = Quaternion.Euler (0f, rotation.y, 0f);
+		partToRotate.rotation = Quaternion.Euler (0f, rotation.y, 0f);
+
+		if(target != null)
+			Debug.DrawLine (thisTransform.position, target.position, Color.green);
 		
 	}
 
@@ -44,6 +50,10 @@ public class TurretScript : MonoBehaviour {
 
 	void UpdateTarget(){
 
+		shortestDistance = Mathf.Infinity;
+		distanceToEnemy = Mathf.Infinity;
+		currentEnemy = null;
+		nearestEnemy = null;
 		for (int i = 0; i < GCInstance.spawnerScriptRef.enemyList.Count; i++) {
 			
 			currentEnemy = GCInstance.spawnerScriptRef.enemyList [i];
@@ -58,6 +68,7 @@ public class TurretScript : MonoBehaviour {
 		if (nearestEnemy != null && shortestDistance <= range) {
 			target = nearestEnemy.transform;
 		}
+
 	}
 
 
