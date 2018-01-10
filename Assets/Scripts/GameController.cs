@@ -15,7 +15,6 @@ public class GameController : MonoBehaviour {
 			instance = this;
 		else if (instance != this)
 			Destroy (gameObject);
-
 	}
 
 	// Use this for initialization

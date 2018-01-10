@@ -6,8 +6,7 @@ public class EnemyScript : MonoBehaviour {
 
 	public float speed = 10f;
 	//reference to this object's Transform component
-	private Transform thisTransform;
-
+	public Transform thisTransform;
 	private Transform target;
 	private int nextWaypointIndex = 0;
 
@@ -34,7 +33,7 @@ public class EnemyScript : MonoBehaviour {
 	void GetNextWaypoint(){
 
 		if (nextWaypointIndex >= WaypointScript.waypoints.Length - 1) {
-			//GameController.instance.spawnerScriptRef.enemyList.Remove (this);
+			GameController.instance.spawnerScriptRef.enemyList.Remove (this.gameObject);
 			this.gameObject.SetActive (false);
 		}
 		else {
