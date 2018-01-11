@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum TargetingMode {First, Last, Closest, Furthest};
+
 public class TurretScript : MonoBehaviour {
 
 	/*
@@ -9,8 +11,8 @@ public class TurretScript : MonoBehaviour {
 		TODO: Use list to track enemies that enter turret sight
 	*/
 
-
 	private Transform target;
+	public TargetingMode mode;
 	public float range;
 	public float rotationSpeed;
 	private GameController GCInstance;
@@ -56,25 +58,33 @@ public class TurretScript : MonoBehaviour {
 
 	void UpdateTarget(){
 
+		switch(mode) {
+		case TargetingMode.Closest:
+			UpdateTargetShortest ();
+			break;
+		}
+
+	}
+
+	void UpdateTargetShortest(){
 		shortestDistance = Mathf.Infinity;
 		distanceToEnemy = Mathf.Infinity;
 		currentEnemy = null;
 		nearestEnemy = null;
 		for (int i = 0; i < GCInstance.spawnerScriptRef.enemyList.Count; i++) {
-			
+
 			currentEnemy = GCInstance.spawnerScriptRef.enemyList [i];
 			distanceToEnemy = Vector3.Distance (thisTransform.position, currentEnemy.transform.position);
 
 			if (distanceToEnemy < shortestDistance) {
 				shortestDistance = distanceToEnemy;
 				nearestEnemy = currentEnemy;
-			}
+			} 
 
 		}
 		if (nearestEnemy != null && shortestDistance <= range) {
 			target = nearestEnemy.transform;
 		}
-
 	}
 
 
