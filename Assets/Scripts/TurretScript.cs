@@ -55,6 +55,7 @@ public class TurretScript : MonoBehaviour {
 	float longestDistance = Mathf.NegativeInfinity;
 	float distanceToEnemy = Mathf.Infinity;
 	float distanceToFirstEnemy = Mathf.Infinity;
+	float distanceToLastEnemy = Mathf.Infinity;
 	GameObject currentEnemy = null;
 	GameObject nearestEnemy = null;
 	GameObject furthestEnemy = null;
@@ -72,6 +73,9 @@ public class TurretScript : MonoBehaviour {
 			break;
 		case TargetingMode.First:
 			UpdateTargetFirst ();
+			break;
+		case TargetingMode.Last:
+			UpdateTargetLast ();
 			break;
 			
 		}
@@ -91,11 +95,22 @@ public class TurretScript : MonoBehaviour {
 					return;
 				}
 			}
-
-			//distanceToFirstEnemy = Vector3.Distance (thisTransform.position, GCInstance.spawnerScriptRef.enemyList [0].transform.position);
-
 		}
+	}
 
+	void UpdateTargetLast(){
+
+		if (GCInstance.spawnerScriptRef.enemyList.Count > 0) {
+
+			for (int i = GCInstance.spawnerScriptRef.enemyList.Count-1; i >= 0; i--) {
+
+				distanceToLastEnemy = Vector3.Distance (thisTransform.position, GCInstance.spawnerScriptRef.enemyList [i].transform.position);
+				if (distanceToLastEnemy <= range) {
+					target = GCInstance.spawnerScriptRef.enemyList [i].transform;
+					return;
+				}
+			}
+		}
 	}
 
 
