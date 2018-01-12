@@ -6,20 +6,23 @@ public enum TargetingMode {First, Last, Closest, Furthest};
 
 public class TurretScript : MonoBehaviour {
 
-	/*
-		TODO: Create list of turret targeting options with enum
-		TODO: Use list to track enemies that enter turret sight
-	*/
-
 	private Transform target;
+	[Header("Attributes")]
 	public TargetingMode mode;
 	public float range;
+	public float fireRate = 1f;
+	private float fireCountdown = 0f;
 	public float rotationSpeed;
+	[Header("Other")]
+	public Transform partToRotate;
+	public Transform firePoint;
+	public GameObject bulletPrefab;
 	private GameController GCInstance;
 	private Transform thisTransform;
 	//piece of the turret that rotates to face the target
-	public Transform partToRotate;
+
 	private List<GameObject> enemiesInRange;
+
 
 	// Use this for initialization
 	void Start () {
@@ -36,9 +39,9 @@ public class TurretScript : MonoBehaviour {
 	Vector3 rotation;
 
 	void Update () {
-		if (target == null)
+		if (target == null) //if there is no target nothing below here will run
 			return;
-		
+		//==================Aiming====================//
 		dir = target.position - thisTransform.position;
 		lookRotation = Quaternion.LookRotation (dir);
 		rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime*rotationSpeed).eulerAngles;
@@ -47,7 +50,28 @@ public class TurretScript : MonoBehaviour {
 
 		if(target != null)
 			Debug.DrawLine (thisTransform.position, target.position, Color.green);
+
+		//=========Firing=========//
+
+		if (fireCountdown <= 0f) {
+			Shoot ();
+			fireCountdown = 1f / fireRate;
+		}
+
+		fireCountdown -= Time.deltaTime;
+
+
 		
+	}
+	//==========Shoot Variables============//
+	GameObject bullet;
+	BulletScript bulletScript;
+	void Shoot(){
+		bullet = (GameObject)Instantiate (bulletPrefab, firePoint.position, firePoint.rotation);
+		bulletScript = bullet.GetComponent<BulletScript> ();
+
+		if (bulletScript != null)
+			bulletScript.Seek (target);
 	}
 
 	//======UpdateTarget Variables=======//
