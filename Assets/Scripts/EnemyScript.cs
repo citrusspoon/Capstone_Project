@@ -9,6 +9,8 @@ public class EnemyScript : MonoBehaviour {
 	public Transform thisTransform;
 	private Transform target;
 	private int nextWaypointIndex = 0;
+	public int health = 3;
+	public GameObject deathEffect;
 
 	void Awake(){
 		thisTransform = transform;
@@ -39,6 +41,18 @@ public class EnemyScript : MonoBehaviour {
 		else {
 			nextWaypointIndex++;
 			target = WaypointScript.waypoints [nextWaypointIndex];
+		}
+	}
+	//======ReduceHealth Variables=========/
+	GameObject effect;
+
+	public void ReduceHealth(int h){
+		health -= h;
+		if (health < 1) {
+			effect = Instantiate (deathEffect, thisTransform.position, thisTransform.rotation);
+			Destroy (effect, 2f);
+			GameController.instance.spawnerScriptRef.enemyList.Remove (this.gameObject);
+			this.gameObject.SetActive (false);
 		}
 	}
 }

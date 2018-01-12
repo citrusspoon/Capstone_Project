@@ -107,3 +107,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   thisTransform: {fileID: 4701810735258952}
+  health: 3
+  deathEffect: {fileID: 1864067316416690, guid: a078f88ab0634644da9e6714fe78686d,
+    type: 2}

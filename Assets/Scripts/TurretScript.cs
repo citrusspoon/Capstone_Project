@@ -7,6 +7,7 @@ public enum TargetingMode {First, Last, Closest, Furthest};
 public class TurretScript : MonoBehaviour {
 
 	private Transform target;
+	private EnemyScript targetScript;
 	[Header("Attributes")]
 	public TargetingMode mode;
 	public float range;
@@ -71,7 +72,7 @@ public class TurretScript : MonoBehaviour {
 		bulletScript = bullet.GetComponent<BulletScript> ();
 
 		if (bulletScript != null)
-			bulletScript.Seek (target);
+			bulletScript.Seek (target, targetScript);
 	}
 
 	//======UpdateTarget Variables=======//
@@ -116,6 +117,7 @@ public class TurretScript : MonoBehaviour {
 				distanceToFirstEnemy = Vector3.Distance (thisTransform.position, GCInstance.spawnerScriptRef.enemyList [i].transform.position);
 				if (distanceToFirstEnemy <= range) {
 					target = GCInstance.spawnerScriptRef.enemyList [i].transform;
+					targetScript = GCInstance.spawnerScriptRef.enemyList [i].GetComponent<EnemyScript>();
 					return;
 				}
 			}
@@ -131,6 +133,7 @@ public class TurretScript : MonoBehaviour {
 				distanceToLastEnemy = Vector3.Distance (thisTransform.position, GCInstance.spawnerScriptRef.enemyList [i].transform.position);
 				if (distanceToLastEnemy <= range) {
 					target = GCInstance.spawnerScriptRef.enemyList [i].transform;
+					targetScript = GCInstance.spawnerScriptRef.enemyList [i].GetComponent<EnemyScript>();
 					return;
 				}
 			}
@@ -159,6 +162,7 @@ public class TurretScript : MonoBehaviour {
 
 		if (furthestEnemy != null && longestDistance <= range) {
 			target = furthestEnemy.transform;
+
 		}
 	}
 
@@ -180,6 +184,7 @@ public class TurretScript : MonoBehaviour {
 		}
 		if (nearestEnemy != null && shortestDistance <= range) {
 			target = nearestEnemy.transform;
+			targetScript = nearestEnemy.GetComponent<EnemyScript> ();
 		}
 	}
 

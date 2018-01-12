@@ -5,13 +5,15 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour {
 
 	private Transform target;
+	private EnemyScript targetScript;
 	private Transform thisTransform;
 	public float speed = 70f;
+	public GameObject hitEffect;
+	public int power = 1;
 
-	public void Seek(Transform t){
+	public void Seek(Transform t, EnemyScript e){
 		target = t;
-		print ("seek entered");
-
+		targetScript = e;
 	}
 
 	// Use this for initialization
@@ -40,7 +42,12 @@ public class BulletScript : MonoBehaviour {
 		thisTransform.Translate (dir.normalized * distanceThisFrame, Space.World);
 
 	}
+	//======HitTarget Variables=======//
+	GameObject effect;
 	void HitTarget(){
-		print ("hit");
+		effect = Instantiate (hitEffect, thisTransform.position, thisTransform.rotation);
+		Destroy (effect, 2f);
+		this.gameObject.SetActive (false);
+		targetScript.ReduceHealth (power);
 	}
 }

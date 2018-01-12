@@ -7486,7 +7486,7 @@ MonoBehaviour:
   rotationSpeed: 10
   partToRotate: {fileID: 446502653}
   firePoint: {fileID: 430778711}
-  bulletPrefab: {fileID: 1088975856765906, guid: b5f1ab37cae8de64d992736d4651036b,
+  bulletPrefab: {fileID: 1149359213581380, guid: e0742e2d6488c0f449933942ba03ece6,
     type: 2}
 --- !u!95 &851888515
 Animator:
