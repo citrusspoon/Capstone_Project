@@ -45,12 +45,11 @@ public class EnemyScript : MonoBehaviour {
 	}
 	//======ReduceHealth Variables=========/
 	GameObject effect;
-
 	public void ReduceHealth(int h){
 		health -= h;
 		if (health < 1) {
 			effect = Instantiate (deathEffect, thisTransform.position, thisTransform.rotation);
-			Destroy (effect, 2f);
+			Destroy (effect, 1f);
 			GameController.instance.spawnerScriptRef.enemyList.Remove (this.gameObject);
 			this.gameObject.SetActive (false);
 		}

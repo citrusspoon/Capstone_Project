@@ -45,8 +45,12 @@ public class BulletScript : MonoBehaviour {
 	//======HitTarget Variables=======//
 	GameObject effect;
 	void HitTarget(){
-		effect = Instantiate (hitEffect, thisTransform.position, thisTransform.rotation);
-		Destroy (effect, 2f);
+		
+		if (hitEffect != null) {
+			effect = Instantiate (hitEffect, thisTransform.position, thisTransform.rotation);
+			Destroy (effect, 2f);
+		}
+
 		AmmoBank.instance.bullets.Push (this.gameObject);
 		this.gameObject.SetActive (false);
 		targetScript.ReduceHealth (power);

@@ -28,11 +28,17 @@ public class AmmoBank : MonoBehaviour {
 			temp.SetActive (false);
 			bullets.Push (temp);
 		}
-		
 	}
 	
-	// Update is called once per frame
+
 	void Update () {
-		print (bullets.Count);
+		//print (bullets.Count);
+
+		//if stack runs low
+		if (bullets.Count < 5) {
+			temp = (GameObject)Instantiate (bulletPrefab);
+			temp.SetActive (false);
+			bullets.Push (temp);
+		}
 	}
 }
