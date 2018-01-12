@@ -23,10 +23,12 @@ public class TurretScript : MonoBehaviour {
 	//piece of the turret that rotates to face the target
 
 	private List<GameObject> enemiesInRange;
+	private List<GameObject> bullets;
 
 
 	// Use this for initialization
 	void Start () {
+		bullets = new List<GameObject> ();
 		GCInstance = GameController.instance;
 		enemiesInRange = new List<GameObject> ();
 		thisTransform = GetComponent<Transform> ();
@@ -58,17 +60,17 @@ public class TurretScript : MonoBehaviour {
 			Shoot ();
 			fireCountdown = 1f / fireRate;
 		}
-
-		fireCountdown -= Time.deltaTime;
-
-
-		
+		fireCountdown -= Time.deltaTime;	
 	}
 	//==========Shoot Variables============//
 	GameObject bullet;
 	BulletScript bulletScript;
 	void Shoot(){
-		bullet = (GameObject)Instantiate (bulletPrefab, firePoint.position, firePoint.rotation);
+		//bullet = (GameObject)Instantiate (bulletPrefab, firePoint.position, firePoint.rotation);
+		bullet = AmmoBank.instance.bullets.Pop();
+		bullet.transform.position = firePoint.position;
+		bullet.transform.localRotation = firePoint.rotation;
+		bullet.SetActive (true);
 		bulletScript = bullet.GetComponent<BulletScript> ();
 
 		if (bulletScript != null)
