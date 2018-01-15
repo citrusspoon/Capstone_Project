@@ -35,7 +35,7 @@ public class BulletScript : MonoBehaviour {
 
 		//triggers if target is hit
 		if (dir.magnitude <= distanceThisFrame) {
-			HitTarget ();
+			StartCoroutine(HitTarget ());
 			return;
 		}
 
@@ -44,12 +44,14 @@ public class BulletScript : MonoBehaviour {
 	}
 	//======HitTarget Variables=======//
 	GameObject effect;
-	void HitTarget(){
+	IEnumerator HitTarget(){
 		
 		if (hitEffect != null) {
 			effect = Instantiate (hitEffect, thisTransform.position, thisTransform.rotation);
 			Destroy (effect, 2f);
 		}
+
+		yield return new WaitForSeconds(0.2f);
 
 		AmmoBank.instance.bullets.Push (this.gameObject);
 		this.gameObject.SetActive (false);
