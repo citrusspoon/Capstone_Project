@@ -10,7 +10,7 @@ public class TurretScript : MonoBehaviour {
 	private EnemyScript targetScript;
 	[Header("Attributes")]
 	public TargetingMode mode;
-	public float range;
+	public float range = 18f;
 	public float fireRate = 1f;
 	private float fireCountdown = 0f;
 	public float rotationSpeed;

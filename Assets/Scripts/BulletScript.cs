@@ -9,7 +9,7 @@ public class BulletScript : MonoBehaviour {
 	private Transform thisTransform;
 	public float speed = 70f;
 	public GameObject hitEffect;
-	public int power = 1;
+	public float power = 1f;
 
 	public void Seek(Transform t, EnemyScript e){
 		target = t;
@@ -51,6 +51,7 @@ public class BulletScript : MonoBehaviour {
 			Destroy (effect, 2f);
 		}
 
+		//Keeps the trail from disappearing too quickly
 		yield return new WaitForSeconds(0.2f);
 
 		AmmoBank.instance.bullets.Push (this.gameObject);

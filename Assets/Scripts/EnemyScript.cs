@@ -9,7 +9,7 @@ public class EnemyScript : MonoBehaviour {
 	public Transform thisTransform;
 	private Transform target;
 	private int nextWaypointIndex = 0;
-	public int health = 3;
+	public float health = 3f;
 	public GameObject deathEffect;
 
 	void Awake(){
@@ -45,7 +45,7 @@ public class EnemyScript : MonoBehaviour {
 	}
 	//======ReduceHealth Variables=========/
 	GameObject effect;
-	public void ReduceHealth(int h){
+	public void ReduceHealth(float h){
 		health -= h;
 		if (health < 1) {
 			effect = Instantiate (deathEffect, thisTransform.position, thisTransform.rotation);
