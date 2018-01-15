@@ -32,8 +32,15 @@ public class AmmoBank : MonoBehaviour {
 	
 
 	void Update () {
-		//print (bullets.Count);
+		
+		StackFailsafe();
+	}
 
+
+	/// <summary>
+	/// Instantiates more bullets if the stack runs low.
+	/// </summary>
+	void StackFailsafe(){
 		//if stack runs low
 		if (bullets.Count < 5) {
 			temp = (GameObject)Instantiate (bulletPrefab);
