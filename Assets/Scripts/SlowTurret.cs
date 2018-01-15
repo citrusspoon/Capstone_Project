@@ -17,4 +17,10 @@ public class SlowTurret : MonoBehaviour {
 	void Update () {
 		
 	}
+
+	//Draws the wirefram that show turret range in editor
+	void OnDrawGizmosSelected(){
+		Gizmos.color = Color.red;
+		Gizmos.DrawWireSphere (transform.position, range);
+	}
 }
