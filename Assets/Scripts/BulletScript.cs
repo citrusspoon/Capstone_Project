@@ -47,11 +47,11 @@ public class BulletScript : MonoBehaviour {
 	//======HitTarget Variables=======//
 	GameObject effect;
 	IEnumerator HitTarget(){
-		
+		/*
 		if (hitEffect != null) {
 			effect = Instantiate (hitEffect, thisTransform.position, thisTransform.rotation);
 			Destroy (effect, 2f);
-		}
+		}*/
 
 		//Keeps the trail from disappearing too quickly
 		yield return new WaitForSeconds(0.2f);

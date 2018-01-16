@@ -15,6 +15,7 @@ public class EnemyScript : MonoBehaviour {
 	private int nextWaypointIndex;
 	public float health;
 	public GameObject deathEffect;
+	public ParticleSystem hitEffect;
 
 	void Awake(){
 		thisTransform = transform;
@@ -30,6 +31,7 @@ public class EnemyScript : MonoBehaviour {
 		slowRecovery = 2f;
 		nextWaypointIndex = 0;
 		health = 3f;
+		hitEffect = GetComponentInChildren<ParticleSystem> ();
 	}
 
 	//direction the enemy is moving
@@ -74,6 +76,11 @@ public class EnemyScript : MonoBehaviour {
 	//======ReduceHealth Variables=========/
 	GameObject effect;
 	public void ReduceHealth(float h){
+
+		if (hitEffect != null) {
+			hitEffect.Play ();
+		}
+
 		health -= h;
 		if (health < 1) {
 			effect = Instantiate (deathEffect, thisTransform.position, thisTransform.rotation);

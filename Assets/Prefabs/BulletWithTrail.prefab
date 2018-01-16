@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 70
-  hitEffect: {fileID: 0}
+  hitEffect: {fileID: 1772957027724822, guid: f8adfd9d620b06c4cb84c26b03ebd58f, type: 2}
   power: 1
 --- !u!135 &135577094257614668
 SphereCollider:
