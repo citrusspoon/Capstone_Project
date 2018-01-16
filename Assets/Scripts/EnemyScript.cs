@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour {
 
-	public float speed = 10f;
+	public float speed;
 	private float originalSpeed;
-	[HideInInspector]public bool isSlowed = false;
-	public float slowRecovery = 2f;
+	[HideInInspector]public bool isSlowed;
+	public float slowRecovery;
 	private float originalSlowRecovery;
 	//reference to this object's Transform component
 	public Transform thisTransform;
 	private Transform target;
-	private int nextWaypointIndex = 0;
-	public float health = 3f;
+	private int nextWaypointIndex;
+	public float health;
 	public GameObject deathEffect;
 
 	void Awake(){
@@ -25,6 +25,11 @@ public class EnemyScript : MonoBehaviour {
 		target = WaypointScript.waypoints[0];
 		originalSpeed = speed;
 		originalSlowRecovery = slowRecovery;
+		speed = 10f;
+		isSlowed = false;
+		slowRecovery = 2f;
+		nextWaypointIndex = 0;
+		health = 3f;
 	}
 
 	//direction the enemy is moving

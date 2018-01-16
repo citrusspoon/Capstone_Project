@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletScript : MonoBehaviour {
+public class RocketScript : MonoBehaviour {
+
 
 	private Transform target;
 	private EnemyScript targetScript;
@@ -10,6 +11,7 @@ public class BulletScript : MonoBehaviour {
 	public float speed;
 	public GameObject hitEffect;
 	public float power;
+	public float rotationSpeed;
 
 	public void Seek(Transform t, EnemyScript e){
 		target = t;
@@ -19,13 +21,16 @@ public class BulletScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		thisTransform = transform;
-		speed = 70f;
-		power = 1f;
+		speed = 50f;
+		power = 3f;
+		rotationSpeed = 20f;
 	}
-	
+
 	//==========Update Variables===========//
 	Vector3 dir;
 	float distanceThisFrame;
+	Quaternion lookRotation;
+	Vector3 rotation;
 	void Update () {
 		if (target == null) {
 			this.gameObject.SetActive (false);
@@ -33,11 +38,17 @@ public class BulletScript : MonoBehaviour {
 		}
 
 		dir = target.position - thisTransform.position;
+
+		lookRotation = Quaternion.LookRotation (dir);
+		rotation = Quaternion.Lerp(thisTransform.rotation, lookRotation, Time.deltaTime*rotationSpeed).eulerAngles;
+
+		thisTransform.rotation = Quaternion.Euler (0f, rotation.y, 0f);
+
 		distanceThisFrame = speed * Time.deltaTime;
 
 		//triggers if target is hit
 		if (dir.magnitude <= distanceThisFrame) {
-			StartCoroutine(HitTarget ());
+			HitTarget ();
 			return;
 		}
 
@@ -46,17 +57,9 @@ public class BulletScript : MonoBehaviour {
 	}
 	//======HitTarget Variables=======//
 	GameObject effect;
-	IEnumerator HitTarget(){
-		
-		if (hitEffect != null) {
-			effect = Instantiate (hitEffect, thisTransform.position, thisTransform.rotation);
-			Destroy (effect, 2f);
-		}
+	void HitTarget(){
 
-		//Keeps the trail from disappearing too quickly
-		yield return new WaitForSeconds(0.2f);
-
-		AmmoBank.instance.bullets.Push (this.gameObject);
+		AmmoBank.instance.rockets.Push (this.gameObject);
 		this.gameObject.SetActive (false);
 		targetScript.ReduceHealth (power);
 	}

@@ -6,7 +6,7 @@ public class AmmoBank : MonoBehaviour {
 
 	public static AmmoBank instance = null;
 
-	public int poolSize = 50;
+	public int poolSize;
 	public Stack<GameObject> bullets;
 	public GameObject bulletPrefab;
 	public Stack<GameObject> rockets;
@@ -26,6 +26,7 @@ public class AmmoBank : MonoBehaviour {
 	void Start () {
 		bullets = new Stack<GameObject> ();
 		rockets = new Stack<GameObject> ();
+		poolSize = 50;
 		for (int i = 0; i < poolSize; i++) {
 			temp = (GameObject)Instantiate (bulletPrefab);
 			temp.SetActive (false);

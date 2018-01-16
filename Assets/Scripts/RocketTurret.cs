@@ -10,27 +10,30 @@ public class RocketTurret : MonoBehaviour {
 	private EnemyScript targetScript;
 	[Header("Attributes")]
 	public TargetingMode mode;
-	public float range = 18f;
-	public float fireRate = 1f;
-	private float fireCountdown = 0f;
-	public float rotationSpeed = 10f;
+	public float range;
+	public float fireRate;
+	private float fireCountdown;
+	public float rotationSpeed;
 	[Header("Other")]
 	public Transform partToRotate;
 	public Transform firePoint;
-	public GameObject bulletPrefab;
+	public GameObject rocketPrefab;
 	private GameController GCInstance;
 	private Transform thisTransform;
 	//piece of the turret that rotates to face the target
 
-	private List<GameObject> enemiesInRange;
-	private List<GameObject> bullets;
 
 
 	// Use this for initialization
 	void Start () {
-		bullets = new List<GameObject> ();
+
+		range = 18f;
+		fireRate = 1f;
+		fireCountdown = 0f;
+		rotationSpeed = 10f;
+		
 		GCInstance = GameController.instance;
-		enemiesInRange = new List<GameObject> ();
+	
 		thisTransform = GetComponent<Transform> ();
 		//updates target every half second to save computing power
 		InvokeRepeating ("UpdateTarget", 0f, 0.5f);
@@ -63,18 +66,17 @@ public class RocketTurret : MonoBehaviour {
 		fireCountdown -= Time.deltaTime;	
 	}
 	//==========Shoot Variables============//
-	GameObject bullet;
-	BulletScript bulletScript;
+	GameObject rocket;
+	RocketScript rocketScript;
 	void Shoot(){
-		//bullet = (GameObject)Instantiate (bulletPrefab, firePoint.position, firePoint.rotation);
-		bullet = AmmoBank.instance.bullets.Pop();
-		bullet.transform.position = firePoint.position;
-		bullet.transform.localRotation = firePoint.rotation;
-		bullet.SetActive (true);
-		bulletScript = bullet.GetComponent<BulletScript> ();
+		rocket = AmmoBank.instance.rockets.Pop();
+		rocket.transform.position = firePoint.position;
+		rocket.transform.localRotation = firePoint.rotation;
+		rocket.SetActive (true);
+		rocketScript = rocket.GetComponent<RocketScript> ();
 
-		if (bulletScript != null)
-			bulletScript.Seek (target, targetScript);
+		if (rocketScript != null)
+			rocketScript.Seek (target, targetScript);
 	}
 
 	//======UpdateTarget Variables=======//

@@ -8,10 +8,10 @@ public class TurretScript : MonoBehaviour {
 	private EnemyScript targetScript;
 	[Header("Attributes")]
 	public TargetingMode mode;
-	public float range = 18f;
-	public float fireRate = 1f;
-	private float fireCountdown = 0f;
-	public float rotationSpeed = 10f;
+	public float range;
+	public float fireRate;
+	private float fireCountdown;
+	public float rotationSpeed;
 	[Header("Other")]
 	public Transform partToRotate;
 	public Transform firePoint;
@@ -20,18 +20,17 @@ public class TurretScript : MonoBehaviour {
 	private Transform thisTransform;
 	//piece of the turret that rotates to face the target
 
-	private List<GameObject> enemiesInRange;
-	private List<GameObject> bullets;
-
 
 	// Use this for initialization
 	void Start () {
-		bullets = new List<GameObject> ();
 		GCInstance = GameController.instance;
-		enemiesInRange = new List<GameObject> ();
 		thisTransform = GetComponent<Transform> ();
 		//updates target every half second to save computing power
 		InvokeRepeating ("UpdateTarget", 0f, 0.5f);
+		range = 18f;
+		fireRate = 1f;
+		fireCountdown = 0f;
+		rotationSpeed = 10f;
 	}
 	
 	//========Update Variables============//

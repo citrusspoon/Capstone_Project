@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class SlowTurret : MonoBehaviour {
 
-	public float range = 18f;
-	public float fireRate = 1f;
-	private float fireCountdown = 0f;
-	//how much to reduce sspeed by
-	public float slowPercent = 0.3f;
-	public float power = 0f;
+	public float range;
+	public float fireRate;
+	private float fireCountdown;
+	//how much to reduce speed by
+	public float slowPercent;
+	public float power;
 	public ParticleSystem slowParticles;
 	private List<GameObject> enemiesInRange;
 
@@ -17,6 +17,11 @@ public class SlowTurret : MonoBehaviour {
 	void Start () {
 		enemiesInRange = new List<GameObject> ();
 		GetComponent<SphereCollider> ().radius = range;
+		range = 18f;
+		fireRate = 1f;
+		fireCountdown = 0f;
+		slowPercent = 0.3f;
+	 	power = 0f;
 	}
 	
 	// Update is called once per frame
