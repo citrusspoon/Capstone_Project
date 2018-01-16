@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretScript : MonoBehaviour {
+public enum TargetingMode {First, Last, Closest, Furthest};
+
+public class RocketTurret : MonoBehaviour {
 
 	private Transform target;
 	private EnemyScript targetScript;
@@ -33,7 +35,7 @@ public class TurretScript : MonoBehaviour {
 		//updates target every half second to save computing power
 		InvokeRepeating ("UpdateTarget", 0f, 0.5f);
 	}
-	
+
 	//========Update Variables============//
 	Vector3 dir;
 	Quaternion lookRotation;
@@ -102,7 +104,7 @@ public class TurretScript : MonoBehaviour {
 		case TargetingMode.Last:
 			UpdateTargetLast ();
 			break;
-			
+
 		}
 
 	}
@@ -194,5 +196,4 @@ public class TurretScript : MonoBehaviour {
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireSphere (transform.position, range);
 	}
-
 }

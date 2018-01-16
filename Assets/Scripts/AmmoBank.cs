@@ -9,6 +9,8 @@ public class AmmoBank : MonoBehaviour {
 	public int poolSize = 50;
 	public Stack<GameObject> bullets;
 	public GameObject bulletPrefab;
+	public Stack<GameObject> rockets;
+	public GameObject rocketPrefab;
 
 	void Awake()
 	{
@@ -23,10 +25,15 @@ public class AmmoBank : MonoBehaviour {
 	GameObject temp;
 	void Start () {
 		bullets = new Stack<GameObject> ();
+		rockets = new Stack<GameObject> ();
 		for (int i = 0; i < poolSize; i++) {
 			temp = (GameObject)Instantiate (bulletPrefab);
 			temp.SetActive (false);
 			bullets.Push (temp);
+
+			temp = (GameObject)Instantiate (rocketPrefab);
+			temp.SetActive (false);
+			rockets.Push (temp);
 		}
 	}
 	
@@ -46,6 +53,11 @@ public class AmmoBank : MonoBehaviour {
 			temp = (GameObject)Instantiate (bulletPrefab);
 			temp.SetActive (false);
 			bullets.Push (temp);
+		}
+		if (rockets.Count < 5) {
+			temp = (GameObject)Instantiate (rocketPrefab);
+			temp.SetActive (false);
+			rockets.Push (temp);
 		}
 	}
 }
