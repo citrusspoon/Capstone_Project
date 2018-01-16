@@ -5,8 +5,10 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour {
 
 	public float speed = 10f;
-	private float currentSpeed;
+	private float originalSpeed;
 	[HideInInspector]public bool isSlowed = false;
+	public float slowRecovery = 2f;
+	private float originalSlowRecovery;
 	//reference to this object's Transform component
 	public Transform thisTransform;
 	private Transform target;
@@ -21,7 +23,8 @@ public class EnemyScript : MonoBehaviour {
 
 	void Start(){
 		target = WaypointScript.waypoints[0];
-		currentSpeed = speed;
+		originalSpeed = speed;
+		originalSlowRecovery = slowRecovery;
 	}
 
 	//direction the enemy is moving
@@ -33,6 +36,24 @@ public class EnemyScript : MonoBehaviour {
 
 		if (Vector3.Distance (thisTransform.position, target.position) < 0.4f)
 			GetNextWaypoint ();
+		/*
+		if (isSlowed)
+			HandleSlowRecovery ();
+			*/
+
+
+	}
+
+
+	/// <summary>
+	/// Resets speed after slowRecovery seconds.  
+	/// </summary>
+	void HandleSlowRecovery(){
+		if (slowRecovery <= 0f) {
+			speed = originalSpeed;
+			isSlowed = false;
+		}
+		slowRecovery -= Time.deltaTime;
 	}
 
 	void GetNextWaypoint(){
@@ -65,5 +86,12 @@ public class EnemyScript : MonoBehaviour {
 	public void Slow(float percent){
 		speed -= speed * percent;
 		isSlowed = true;
+		//slowRecovery = originalSlowRecovery;
+	}
+	/// <summary>
+	/// Resets enemy speed to default.
+	/// </summary>
+	public void ResetSpeed(){
+		speed = originalSpeed;
 	}
 }

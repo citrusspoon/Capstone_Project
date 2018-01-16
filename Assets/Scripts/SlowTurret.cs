@@ -58,7 +58,9 @@ public class SlowTurret : MonoBehaviour {
 	}
 
 	void OnTriggerExit(Collider c){
+		c.gameObject.GetComponent<EnemyScript> ().ResetSpeed ();
 		enemiesInRange.Remove (c.gameObject);
+
 	}
 
 	//Draws the wirefram that show turret range in editor
