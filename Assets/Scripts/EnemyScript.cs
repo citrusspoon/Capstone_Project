@@ -36,15 +36,14 @@ public class EnemyScript : MonoBehaviour {
 
 		if (Vector3.Distance (thisTransform.position, target.position) < 0.4f)
 			GetNextWaypoint ();
-		/*
-		if (isSlowed)
-			HandleSlowRecovery ();
-			*/
+		
+			//HandleSlowRecovery ();
+		
 
 
 	}
 
-
+	/*
 	/// <summary>
 	/// Resets speed after slowRecovery seconds.  
 	/// </summary>
@@ -54,7 +53,7 @@ public class EnemyScript : MonoBehaviour {
 			isSlowed = false;
 		}
 		slowRecovery -= Time.deltaTime;
-	}
+	}*/
 
 	void GetNextWaypoint(){
 
@@ -86,12 +85,13 @@ public class EnemyScript : MonoBehaviour {
 	public void Slow(float percent){
 		speed -= speed * percent;
 		isSlowed = true;
-		//slowRecovery = originalSlowRecovery;
+		slowRecovery = originalSlowRecovery;
 	}
 	/// <summary>
 	/// Resets enemy speed to default.
 	/// </summary>
 	public void ResetSpeed(){
 		speed = originalSpeed;
+		isSlowed = false;
 	}
 }

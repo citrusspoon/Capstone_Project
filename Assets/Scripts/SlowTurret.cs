@@ -21,7 +21,6 @@ public class SlowTurret : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		print (enemiesInRange.Count);
 		if (enemiesInRange.Count == 0) {//if there are no enemies in range nothing below here will run
 			slowParticles.Stop();
 			return;
