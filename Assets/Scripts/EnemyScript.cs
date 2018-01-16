@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour {
 
 	public float speed = 10f;
+	private float currentSpeed;
+	[HideInInspector]public bool isSlowed = false;
 	//reference to this object's Transform component
 	public Transform thisTransform;
 	private Transform target;
@@ -19,6 +21,7 @@ public class EnemyScript : MonoBehaviour {
 
 	void Start(){
 		target = WaypointScript.waypoints[0];
+		currentSpeed = speed;
 	}
 
 	//direction the enemy is moving
@@ -53,5 +56,14 @@ public class EnemyScript : MonoBehaviour {
 			GameController.instance.spawnerScriptRef.enemyList.Remove (this.gameObject);
 			this.gameObject.SetActive (false);
 		}
+	}
+
+	/// <summary>
+	/// Slow enemy speed by the percent passed
+	/// </summary>
+	/// <param name="percent">Percent to slow enemy by.</param>
+	public void Slow(float percent){
+		speed -= speed * percent;
+		isSlowed = true;
 	}
 }
