@@ -77,6 +77,7 @@ public class EnemyScript : MonoBehaviour {
 	GameObject effect;
 	public void ReduceHealth(float h){
 
+		//TODO: Figure out how to make this look good
 		if (hitEffect != null) {
 			hitEffect.Play ();
 		}
