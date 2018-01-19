@@ -20,8 +20,6 @@ public class RocketTurret : MonoBehaviour {
 	public GameObject rocketPrefab;
 	private GameController GCInstance;
 	private Transform thisTransform;
-	//piece of the turret that rotates to face the target
-
 
 
 	// Use this for initialization

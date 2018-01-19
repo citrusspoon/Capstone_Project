@@ -12,6 +12,8 @@ public class RocketScript : MonoBehaviour {
 	public GameObject hitEffect;
 	public float power;
 	public float rotationSpeed;
+	public float blastRadius;
+	private List<GameObject> enemiesInBlast;
 
 	public void Seek(Transform t, EnemyScript e){
 		target = t;
@@ -24,6 +26,16 @@ public class RocketScript : MonoBehaviour {
 		speed = 50f;
 		power = 3f;
 		rotationSpeed = 20f;
+		enemiesInBlast = new List<GameObject> ();
+		GetComponent<SphereCollider> ().radius = blastRadius;
+	}
+
+	void OnTriggerEnter(Collider c){
+		if(c.gameObject.tag == "Enemy" && c.gameObject.GetComponent<EnemyScript>().health > 0)
+			enemiesInBlast.Add (c.gameObject);
+	}
+	void OnTriggerExit(Collider c){
+		enemiesInBlast.Remove(c.gameObject);
 	}
 
 	//==========Update Variables===========//
@@ -35,6 +47,11 @@ public class RocketScript : MonoBehaviour {
 		if (target == null) {
 			this.gameObject.SetActive (false);
 			return;
+		}
+		print (enemiesInBlast.Count);
+
+		for (int i = 0; i < enemiesInBlast.Count; i++) {
+			Debug.DrawLine (thisTransform.position, enemiesInBlast[i].transform.position, Color.red);
 		}
 
 		dir = target.position - thisTransform.position;
@@ -61,6 +78,17 @@ public class RocketScript : MonoBehaviour {
 
 		AmmoBank.instance.rockets.Push (this.gameObject);
 		this.gameObject.SetActive (false);
-		targetScript.ReduceHealth (power);
+		//targetScript.ReduceHealth (power);
+		AOEHit ();
 	}
+
+	void AOEHit(){
+
+		for (int i = 0; i < enemiesInBlast.Count; i++) {
+			enemiesInBlast [i].GetComponent<EnemyScript> ().ReduceHealth(power);
+		}
+
+		enemiesInBlast.Clear ();
+	}
+
 }

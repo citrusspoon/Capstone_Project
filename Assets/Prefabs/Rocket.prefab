@@ -22,9 +22,10 @@ GameObject:
   - component: {fileID: 33841094004133770}
   - component: {fileID: 23482345255221814}
   - component: {fileID: 114682815144517044}
-  m_Layer: 0
+  - component: {fileID: 135652004975606056}
+  m_Layer: 8
   m_Name: Rocket
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1562199190092640}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.06722, y: 1.3932071, z: 38.36341}
+  m_LocalPosition: {x: 46.09926, y: 1.3932034, z: 49.747387}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children: []
   m_Father: {fileID: 0}
@@ -95,3 +96,17 @@ MonoBehaviour:
   speed: 70
   hitEffect: {fileID: 0}
   power: 1
+  rotationSpeed: 0
+  blastRadius: 10
+--- !u!135 &135652004975606056
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1562199190092640}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: -0.0122766495, y: 0.0032894611, z: 0.76861775}

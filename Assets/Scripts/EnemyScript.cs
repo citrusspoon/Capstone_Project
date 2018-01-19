@@ -79,7 +79,7 @@ public class EnemyScript : MonoBehaviour {
 
 		//TODO: Figure out how to make this look good
 		if (hitEffect != null) {
-			hitEffect.Play ();
+			//hitEffect.Play();
 		}
 
 		health -= h;
@@ -88,6 +88,7 @@ public class EnemyScript : MonoBehaviour {
 			Destroy (effect, 1f);
 			GameController.instance.spawnerScriptRef.enemyList.Remove (this.gameObject);
 			this.gameObject.SetActive (false);
+			//thisTransform.position = new Vector3(100f,100f,100f);
 		}
 	}
 
