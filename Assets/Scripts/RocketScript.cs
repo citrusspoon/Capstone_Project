@@ -48,11 +48,11 @@ public class RocketScript : MonoBehaviour {
 			this.gameObject.SetActive (false);
 			return;
 		}
-		print (enemiesInBlast.Count);
+		//print (enemiesInBlast.Count);
 
-		for (int i = 0; i < enemiesInBlast.Count; i++) {
+		/*for (int i = 0; i < enemiesInBlast.Count; i++) {
 			Debug.DrawLine (thisTransform.position, enemiesInBlast[i].transform.position, Color.red);
-		}
+		}*/
 
 		dir = target.position - thisTransform.position;
 

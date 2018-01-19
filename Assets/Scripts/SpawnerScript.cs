@@ -10,12 +10,16 @@ public class SpawnerScript : MonoBehaviour {
 	public GameObject enemyPrefab;
 	public Transform spawnPoint;
 	public List<GameObject> enemyList;
+	public bool spawnerActive;
 
 	void Start(){
 		enemyList = new List<GameObject>();
 	}
 
 	void Update(){
+
+		if (!spawnerActive)
+			return;
 
 		if(countdown <= 0f){
 			StartCoroutine (SpawnWave());
