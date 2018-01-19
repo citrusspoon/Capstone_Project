@@ -9,8 +9,6 @@ public class TestSpawner : MonoBehaviour {
 	public GameObject enemyLV2;
 	[Header("Other")]
 	public Transform spawnPoint;
-	public GameObject realSpawner;
-
 
 	void Start(){
 
@@ -20,9 +18,6 @@ public class TestSpawner : MonoBehaviour {
 
 
 	}
-		
-
-	private GameObject gameObject;
 
 	public void SpawnEnemy(GameObject enemy){
 		GameController.instance.spawnerScriptRef.enemyList.Add (Instantiate (enemy, spawnPoint.position, spawnPoint.rotation));

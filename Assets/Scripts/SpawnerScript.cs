@@ -39,11 +39,6 @@ public class SpawnerScript : MonoBehaviour {
 		waveNum++;
 	}
 
-
-	//----------Function Variables----------//
-
-	private GameObject gameObject;
-
 	void SpawnEnemy(){
 		enemyList.Add (Instantiate (enemyPrefab, spawnPoint.position, spawnPoint.rotation));
 	}
