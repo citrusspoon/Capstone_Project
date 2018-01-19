@@ -26,11 +26,8 @@ public class EnemyScript : MonoBehaviour {
 		target = WaypointScript.waypoints[0];
 		originalSpeed = speed;
 		originalSlowRecovery = slowRecovery;
-		speed = 10f;
 		isSlowed = false;
-		slowRecovery = 2f;
 		nextWaypointIndex = 0;
-		health = 3f;
 		hitEffect = GetComponentInChildren<ParticleSystem> ();
 	}
 
