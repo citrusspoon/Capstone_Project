@@ -10,6 +10,7 @@ TagManager:
   - TrayBasic
   - TraySlow
   - TrayRocket
+  - TurretNode
   layers:
   - Default
   - TransparentFX

@@ -47,6 +47,9 @@ public class TouchManager : MonoBehaviour {
 	}
 
 	TurretType type;
+	/// <summary>
+	/// Checks for when the user touches a turret to be dragged from the tray.
+	/// </summary>
 	void CheckTrayTouch(){
 		if (Input.touchCount == 1 && !placingTurret) {
 			touch = Input.GetTouch (0);
@@ -74,6 +77,10 @@ public class TouchManager : MonoBehaviour {
 	}
 	GameObject ghostTurret;
 	Transform ghostTurretTransform;
+	/// <summary>
+	/// Selects a turret from the tray, and creates a copy to be placed.
+	/// </summary>
+	/// <param name="t">The type of turret to be selected</param>
 	void SelectTurret(TurretType t){
 		//print ("Selected " + t);
 		switch (t) {
@@ -103,9 +110,13 @@ public class TouchManager : MonoBehaviour {
 			//print ("turret placed");
 		}
 	}
+
 	RaycastHit locHit;
-	Ray nRay,sRay,eRay,wRay, cRay;//north south east and west
-	//bool nValid, sValid, eValid, wValid;
+	Ray nRay,sRay,eRay,wRay, cRay;//north south east and west center?
+	//TODO: include placed turrets in check
+	/// <summary>
+	/// Raycasts around the turret being placed to determine if it is currently above a valid placement location.
+	/// </summary>
 	void CheckLocation(){
 		//sets raycasts based on turret type
 		switch (selectedTurretType) {
@@ -157,6 +168,9 @@ public class TouchManager : MonoBehaviour {
 
 		
 	}
+	/// <summary>
+	/// Updates the location of the to be placed turret to follow the touch
+	/// </summary>
 	void UpdateGhostTurret(){
 		if (Input.touchCount == 1) {
 			touch = Input.GetTouch (0);
