@@ -3730,6 +3730,54 @@ Transform:
   m_PrefabParentObject: {fileID: 4364004340437948, guid: 26c1b0b54a3eaca488f8c4c5f0b011fd,
     type: 2}
   m_PrefabInternal: {fileID: 313590190}
+--- !u!1 &318659688
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 318659689}
+  - component: {fileID: 318659690}
+  m_Layer: 0
+  m_Name: TurretManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &318659689
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 318659688}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2123756508}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &318659690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 318659688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04f45ccfa3e689f4cad8a436e8ff1c66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basicPoolSize: 3
+  slowPoolSize: 3
+  rocketPoolSize: 3
+  basicPrefab: {fileID: 1708875658299734, guid: 8bcd85d25cf9d924e8be1d80527cfd52,
+    type: 2}
+  slowPrefab: {fileID: 1229600278437786, guid: 0436c1da1f2c9aa4e82ca45c8ce9e1cd, type: 2}
+  rocketPrefab: {fileID: 1957111335276490, guid: a7af6c7dba7ae3e4bbe9c94e98bed6f9,
+    type: 2}
 --- !u!1 &321163098
 GameObject:
   m_ObjectHideFlags: 0
@@ -7021,6 +7069,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnerScriptRef: {fileID: 906424296}
+  touchManagerRef: {fileID: 1203091691}
+  turretManagerRef: {fileID: 318659690}
 --- !u!4 &714375247
 Transform:
   m_ObjectHideFlags: 0
@@ -20938,6 +20988,7 @@ Transform:
   m_Children:
   - {fileID: 714375247}
   - {fileID: 1203091690}
+  - {fileID: 318659689}
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

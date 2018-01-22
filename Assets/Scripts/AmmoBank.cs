@@ -5,12 +5,16 @@ using UnityEngine;
 public class AmmoBank : MonoBehaviour {
 
 	public static AmmoBank instance = null;
-
-	public int poolSize;
-	public Stack<GameObject> bullets;
+	[Header("Ammo Pool Sizes")]
+	public int bulletPoolSize;
+	public int rocketPoolSize;
+	[Header("Ammo Prefabs")]
 	public GameObject bulletPrefab;
-	public Stack<GameObject> rockets;
 	public GameObject rocketPrefab;
+	[Header("Stacks")]
+	public Stack<GameObject> rockets;
+	public Stack<GameObject> bullets;
+
 
 	void Awake()
 	{
@@ -26,12 +30,12 @@ public class AmmoBank : MonoBehaviour {
 	void Start () {
 		bullets = new Stack<GameObject> ();
 		rockets = new Stack<GameObject> ();
-		poolSize = 50;
-		for (int i = 0; i < poolSize; i++) {
+		for (int i = 0; i < bulletPoolSize; i++) {
 			temp = (GameObject)Instantiate (bulletPrefab);
 			temp.SetActive (false);
 			bullets.Push (temp);
-
+		}
+		for (int i = 0; i < rocketPoolSize; i++) {
 			temp = (GameObject)Instantiate (rocketPrefab);
 			temp.SetActive (false);
 			rockets.Push (temp);
