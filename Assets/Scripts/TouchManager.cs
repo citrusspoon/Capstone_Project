@@ -110,8 +110,10 @@ public class TouchManager : MonoBehaviour {
 		//sets raycasts based on turret type
 		switch (selectedTurretType) {
 		case TurretType.Basic:
-			nRay = new Ray(new Vector3(x,5,z+4f), Vector3.down*5);
-			Debug.DrawRay (new Vector3(x ,5,z+4f), Vector3.down*5, Color.red);
+			nRay = new Ray(new Vector3(x,5,z+3.5f), Vector3.down*5);Debug.DrawRay (new Vector3(x ,5,z+3.5f), Vector3.down*5, Color.red);
+			sRay = new Ray(new Vector3(x,5,z-3.5f), Vector3.down*5);Debug.DrawRay (new Vector3(x ,5,z-3.5f), Vector3.down*5, Color.red);
+			eRay = new Ray(new Vector3(x+3.5f,5,z), Vector3.down*5);Debug.DrawRay (new Vector3(x +3.5f,5,z), Vector3.down*5, Color.red);
+			wRay = new Ray(new Vector3(x-3.5f,5,z), Vector3.down*5);Debug.DrawRay (new Vector3(x -3.5f,5,z), Vector3.down*5, Color.red);
 			break;
 		case TurretType.Slow:
 			nRay = new Ray(new Vector3(x,5,z+4f), Vector3.down*5);Debug.DrawRay (new Vector3(x ,5,z+4f), Vector3.down*5, Color.red);
@@ -122,8 +124,10 @@ public class TouchManager : MonoBehaviour {
 
 			break;
 		case TurretType.Rocket:
-			nRay = new Ray(new Vector3(x,5,z+4f), Vector3.down*5);
-			Debug.DrawRay (new Vector3(x ,5,z+4f), Vector3.down*5, Color.red);
+			nRay = new Ray(new Vector3(x,5,z+3.5f), Vector3.down*5);Debug.DrawRay (new Vector3(x ,5,z+3.5f), Vector3.down*5, Color.red);
+			sRay = new Ray(new Vector3(x,5,z-3.5f), Vector3.down*5);Debug.DrawRay (new Vector3(x ,5,z-3.5f), Vector3.down*5, Color.red);
+			eRay = new Ray(new Vector3(x+3.5f,5,z), Vector3.down*5);Debug.DrawRay (new Vector3(x +3.5f,5,z), Vector3.down*5, Color.red);
+			wRay = new Ray(new Vector3(x-3.5f,5,z), Vector3.down*5);Debug.DrawRay (new Vector3(x -3.5f,5,z), Vector3.down*5, Color.red);
 			break;
 
 		}
@@ -134,27 +138,22 @@ public class TouchManager : MonoBehaviour {
 		if (Physics.Raycast (nRay, out hit)) {
 			if (hit.transform.tag != "TurretNode") {
 				locationValid = false;
-				print ("north");
 			}
-			
 		}if (Physics.Raycast (sRay, out hit)) {
 			if (hit.transform.tag != "TurretNode") {
 				locationValid = false;
-				print ("south");
 			}
 		}if (Physics.Raycast (eRay, out hit)) {
 			if (hit.transform.tag != "TurretNode") {
 				locationValid = false;
-				print ("east");
 			}
 		}if (Physics.Raycast (wRay, out hit)) {
 			if (hit.transform.tag != "TurretNode") {
 				locationValid = false;
-				print ("west");
 			}
 		}
 
-		print (locationValid);
+		//print (locationValid);
 
 		
 	}
