@@ -97,7 +97,6 @@ public class TouchManager : MonoBehaviour {
 			x = -50f + 100f * touch.position.x / Screen.width;
 			z = -80f + 160f * touch.position.y / Screen.height;
 			ghostTurretTransform.position = new Vector3 (x, 0.6f, z);
-
 		}
 	}
 
