@@ -32,6 +32,9 @@ public class TouchManager : MonoBehaviour {
 		if(placingTurret)
 			CheckPlaceTurret ();
 
+		if (placingTurret)
+			UpdateGhostTurret();
+
 
 	}
 
@@ -60,14 +63,41 @@ public class TouchManager : MonoBehaviour {
 
 		}
 	}
+	GameObject ghostTurret;
+	Transform ghostTurretTransform;
 	void SelectTurret(TurretType t){
 		print ("Selected " + t);
+		switch (t) {
+		case TurretType.Basic:
+			ghostTurret = TurretManager.instance.basicStack.Pop ();
+			break;
+		case TurretType.Slow:
+			ghostTurret = TurretManager.instance.slowStack.Pop ();
+			break;
+		case TurretType.Rocket:
+			ghostTurret = TurretManager.instance.rocketStack.Pop ();
+			break;
+			
+		}
+		ghostTurret.transform.position = new Vector3 (x, 0.6f, z);
+		ghostTurret.transform.localRotation = Quaternion.Euler (0,0,0);
+		ghostTurretTransform = ghostTurret.GetComponent<Transform> ();
+		ghostTurret.SetActive (true);
 
 	}
 	void CheckPlaceTurret(){
 		if (Input.touchCount < 1) {
 			placingTurret = false;
 			print ("turret placed");
+		}
+	}
+	void UpdateGhostTurret(){
+		if (Input.touchCount == 1) {
+			touch = Input.GetTouch (0);
+			x = -50f + 100f * touch.position.x / Screen.width;
+			z = -80f + 160f * touch.position.y / Screen.height;
+			ghostTurretTransform.position = new Vector3 (x, 0.6f, z);
+
 		}
 	}
 

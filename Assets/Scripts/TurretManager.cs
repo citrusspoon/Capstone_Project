@@ -17,6 +17,10 @@ public class TurretManager : MonoBehaviour {
 	public Stack<GameObject> basicStack;
 	public Stack<GameObject> slowStack;
 	public Stack<GameObject> rocketStack;
+	/*[Header("Tray")]
+	public Vector3 basicTraySpawnPoint;
+	public Vector3 slowTraySpawnPoint;
+	public Vector3 rocketTraySpawnPoint;*/
 
 
 	void Awake()
@@ -33,7 +37,7 @@ public class TurretManager : MonoBehaviour {
 	void Start () {
 		basicStack = new Stack<GameObject> ();
 		slowStack = new Stack<GameObject> ();
-		slowStack = new Stack<GameObject> ();
+		rocketStack = new Stack<GameObject> ();
 		for (int i = 0; i < basicPoolSize; i++) {
 			temp = (GameObject)Instantiate (basicPrefab);
 			temp.SetActive (false);
@@ -54,6 +58,28 @@ public class TurretManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		StackFailsafe ();
 		
+	}
+	/// <summary>
+	/// Instantiates more turrets if the stack runs low.
+	/// </summary>
+	void StackFailsafe(){
+		//if stack runs low
+		if (basicStack.Count < 2) {
+			temp = (GameObject)Instantiate (basicPrefab);
+			temp.SetActive (false);
+			basicStack.Push (temp);
+		}
+		if (slowStack.Count < 2) {
+			temp = (GameObject)Instantiate (slowPrefab);
+			temp.SetActive (false);
+			slowStack.Push (temp);
+		}
+		if (rocketStack.Count < 2) {
+			temp = (GameObject)Instantiate (rocketPrefab);
+			temp.SetActive (false);
+			rocketStack.Push (temp);
+		}
 	}
 }
