@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum TargetingMode {First, Last, Closest, Furthest};
+public enum TurretType {Basic, Slow, Rocket};
+
 public class GameController : MonoBehaviour {
 
 	public static GameController instance = null;
 
 	public SpawnerScript spawnerScriptRef;
+	public TouchManager touchManagerRef;
+	public TurretManager turretManagerRef;
 
 
 	void Awake()

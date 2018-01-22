@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TargetingMode {First, Last, Closest, Furthest};
+
 
 public class RocketTurret : MonoBehaviour {
 

@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Enemy
   - Turret
+  - TrayTurret
+  - TrayBasic
+  - TraySlow
+  - TrayRocket
   layers:
   - Default
   - TransparentFX
