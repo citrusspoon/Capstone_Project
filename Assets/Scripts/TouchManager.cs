@@ -132,17 +132,26 @@ public class TouchManager : MonoBehaviour {
 		//checks each raycast and sets the location to invalid if any hit a non turretnode
 		locationValid = true;
 		if (Physics.Raycast (nRay, out hit)) {
-			if (hit.transform.tag != "TurretNode")
+			if (hit.transform.tag != "TurretNode") {
 				locationValid = false;
-		}else if (Physics.Raycast (sRay, out hit)) {
-			if (hit.transform.tag != "TurretNode")
+				print ("north");
+			}
+			
+		}if (Physics.Raycast (sRay, out hit)) {
+			if (hit.transform.tag != "TurretNode") {
 				locationValid = false;
-		}else if (Physics.Raycast (eRay, out hit)) {
-			if (hit.transform.tag != "TurretNode")
+				print ("south");
+			}
+		}if (Physics.Raycast (eRay, out hit)) {
+			if (hit.transform.tag != "TurretNode") {
 				locationValid = false;
-		}else if (Physics.Raycast (wRay, out hit)) {
-			if (hit.transform.tag != "TurretNode")
+				print ("east");
+			}
+		}if (Physics.Raycast (wRay, out hit)) {
+			if (hit.transform.tag != "TurretNode") {
 				locationValid = false;
+				print ("west");
+			}
 		}
 
 		print (locationValid);
