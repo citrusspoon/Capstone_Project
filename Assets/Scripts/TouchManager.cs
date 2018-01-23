@@ -107,6 +107,7 @@ public class TouchManager : MonoBehaviour {
 	void CheckPlaceTurret(){
 		if (Input.touchCount < 1 && locationValid) {
 			placingTurret = false;
+			TurretManager.instance.placedTurretPositions.Add (ghostTurret.transform.position);
 			//print ("turret placed");
 		}
 	}
@@ -121,12 +122,34 @@ public class TouchManager : MonoBehaviour {
 		//sets raycasts based on turret type
 		locationValid = true;
 		//==========Checks for surrrounding turrets===========//
+
+
+		//loop method
+
+		for (int i = 0; i < TurretManager.instance.placedTurretPositions.Count; i++) {
+			//loop and calculate distance between turrets
+		}
+
+
+
+
+
+
+
+		//raycast method
+		/*
 		switch (selectedTurretType) {
 		case TurretType.Basic:
 			nRay = new Ray(new Vector3(x,1,z+3.5f), Vector3.forward*3);Debug.DrawRay (new Vector3(x ,1,z+3.5f), Vector3.forward*3, Color.cyan);
 			sRay = new Ray(new Vector3(x,1,z-3.5f), Vector3.back*3);Debug.DrawRay (new Vector3(x ,1,z-3.5f), Vector3.back*3, Color.cyan);
 			eRay = new Ray(new Vector3(x+3.5f,1,z), Vector3.right*3);Debug.DrawRay (new Vector3(x +3.5f,1,z), Vector3.right*3, Color.cyan);
 			wRay = new Ray(new Vector3(x-3.5f,1,z), Vector3.left*3);Debug.DrawRay (new Vector3(x -3.5f,1,z), Vector3.left*3, Color.cyan);
+			cRay = new Ray(new Vector3(x,1,z), Vector3.down*3); Debug.DrawRay (new Vector3(x,1,z), Vector3.down*3, Color.cyan);
+			nRay = new Ray(new Vector3(x,1,z), Vector3.forward);Debug.DrawRay (new Vector3(x ,1,z), Vector3.forward*4, Color.cyan);
+			sRay = new Ray(new Vector3(x,1,z), Vector3.back);Debug.DrawRay (new Vector3(x ,1,z), Vector3.back*4, Color.cyan);
+			eRay = new Ray(new Vector3(x,1,z), Vector3.right);Debug.DrawRay (new Vector3(x ,1,z), Vector3.right*4, Color.cyan);
+			wRay = new Ray(new Vector3(x,1,z), Vector3.left);Debug.DrawRay (new Vector3(x ,1,z), Vector3.left*4, Color.cyan);
+			cRay = new Ray(new Vector3(x,1,z), Vector3.left);Debug.DrawRay (new Vector3(x ,1,z), Vector3.down*4, Color.cyan);
 			break;
 		case TurretType.Slow:
 
@@ -138,30 +161,38 @@ public class TouchManager : MonoBehaviour {
 		}
 
 
+
 		//checks each raycast and sets the location to invalid if any hit a non turretnode
 
-		if (Physics.Raycast (nRay, out hit)) {
+		if (Physics.Raycast (nRay, out hit, 4f)) {
 			if (hit.transform.tag == "Turret") {
 				locationValid = false;
 				print ("hit north");
 			}
-		}if (Physics.Raycast (sRay, out hit)) {
+		}if (Physics.Raycast (sRay, out hit, 4f)) {
 			if (hit.transform.tag == "Turret") {
 				locationValid = false;
 				print ("hit south");
 			}
-		}if (Physics.Raycast (eRay, out hit)) {
+		}if (Physics.Raycast (eRay, out hit, 4f)) {
 			if (hit.transform.tag == "Turret") {
 				locationValid = false;
 				print ("hit east");
 			}
-		}if (Physics.Raycast (wRay, out hit)) {
+		}if (Physics.Raycast (wRay, out hit, 4f)) {
 			if (hit.transform.tag == "Turret") {
 				locationValid = false;
 				print ("hit west");
 			}
 		}
+		if (Physics.Raycast (cRay, out hit, 4f)) {
+			if (hit.transform.tag == "Turret") {
+				locationValid = false;
+				print ("hit center");
+			}
+		}
 
+*/
 		if (!locationValid)
 			return;
 
