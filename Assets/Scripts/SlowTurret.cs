@@ -12,6 +12,7 @@ public class SlowTurret : MonoBehaviour {
 	public float power;
 	public ParticleSystem slowParticles;
 	private List<GameObject> enemiesInRange;
+	[HideInInspector]public bool turretConflict = false; //if you try to place a turret on top of another
 
 	// Use this for initialization
 	void Start () {
@@ -58,12 +59,19 @@ public class SlowTurret : MonoBehaviour {
 
 
 	void OnTriggerEnter(Collider c){
-		enemiesInRange.Add (c.gameObject);
+		if(c.gameObject.tag == "Enemy")
+			enemiesInRange.Add (c.gameObject);
+		/*if (c.gameObject.tag == "Turret")
+			turretConflict = true;*/
 	}
 
 	void OnTriggerExit(Collider c){
-		c.gameObject.GetComponent<EnemyScript> ().ResetSpeed ();
-		enemiesInRange.Remove (c.gameObject);
+		if (c.gameObject.tag == "Enemy") {
+			c.gameObject.GetComponent<EnemyScript> ().ResetSpeed ();
+			enemiesInRange.Remove (c.gameObject);
+		}
+		/*if (c.gameObject.tag == "Turret")
+			turretConflict = false;*/
 
 	}
 

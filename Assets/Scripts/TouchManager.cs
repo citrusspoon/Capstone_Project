@@ -119,6 +119,55 @@ public class TouchManager : MonoBehaviour {
 	/// </summary>
 	void CheckLocation(){
 		//sets raycasts based on turret type
+		locationValid = true;
+		//==========Checks for surrrounding turrets===========//
+		switch (selectedTurretType) {
+		case TurretType.Basic:
+			nRay = new Ray(new Vector3(x,1,z+3.5f), Vector3.forward*3);Debug.DrawRay (new Vector3(x ,1,z+3.5f), Vector3.forward*3, Color.cyan);
+			sRay = new Ray(new Vector3(x,1,z-3.5f), Vector3.back*3);Debug.DrawRay (new Vector3(x ,1,z-3.5f), Vector3.back*3, Color.cyan);
+			eRay = new Ray(new Vector3(x+3.5f,1,z), Vector3.right*3);Debug.DrawRay (new Vector3(x +3.5f,1,z), Vector3.right*3, Color.cyan);
+			wRay = new Ray(new Vector3(x-3.5f,1,z), Vector3.left*3);Debug.DrawRay (new Vector3(x -3.5f,1,z), Vector3.left*3, Color.cyan);
+			break;
+		case TurretType.Slow:
+
+
+			break;
+		case TurretType.Rocket:
+			break;
+
+		}
+
+
+		//checks each raycast and sets the location to invalid if any hit a non turretnode
+
+		if (Physics.Raycast (nRay, out hit)) {
+			if (hit.transform.tag == "Turret") {
+				locationValid = false;
+				print ("hit north");
+			}
+		}if (Physics.Raycast (sRay, out hit)) {
+			if (hit.transform.tag == "Turret") {
+				locationValid = false;
+				print ("hit south");
+			}
+		}if (Physics.Raycast (eRay, out hit)) {
+			if (hit.transform.tag == "Turret") {
+				locationValid = false;
+				print ("hit east");
+			}
+		}if (Physics.Raycast (wRay, out hit)) {
+			if (hit.transform.tag == "Turret") {
+				locationValid = false;
+				print ("hit west");
+			}
+		}
+
+		if (!locationValid)
+			return;
+
+
+		//============Checks ground=============//
+
 		switch (selectedTurretType) {
 		case TurretType.Basic:
 			nRay = new Ray(new Vector3(x,5,z+3.5f), Vector3.down*5);Debug.DrawRay (new Vector3(x ,5,z+3.5f), Vector3.down*5, Color.red);
@@ -145,7 +194,7 @@ public class TouchManager : MonoBehaviour {
 
 
 		//checks each raycast and sets the location to invalid if any hit a non turretnode
-		locationValid = true;
+
 		if (Physics.Raycast (nRay, out hit)) {
 			if (hit.transform.tag != "TurretNode") {
 				locationValid = false;

@@ -18,6 +18,7 @@ public class TurretScript : MonoBehaviour {
 	public GameObject bulletPrefab;
 	private GameController GCInstance;
 	private Transform thisTransform;
+	[HideInInspector]public bool turretConflict = false; //if you try to place a turret on top of another
 	//piece of the turret that rotates to face the target
 
 
@@ -85,7 +86,7 @@ public class TurretScript : MonoBehaviour {
 	GameObject furthestEnemy = null;
 
 	void UpdateTarget(){
-
+		//TODO: add strongest/weakest
 		target = null;
 
 		switch(mode) {
@@ -186,6 +187,15 @@ public class TurretScript : MonoBehaviour {
 			targetScript = nearestEnemy.GetComponent<EnemyScript> ();
 		}
 	}
+	/*
+	void OnTriggerEnter(Collider c){
+		if (c.gameObject.tag == "Turret")
+			turretConflict = true;
+	}
+	void OnTriggerExit(Collider c){
+		if (c.gameObject.tag == "Turret")
+			turretConflict = false;
+	}*/
 
 
 	//Draws the wirefram that show turret range in editor

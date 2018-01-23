@@ -20,6 +20,7 @@ public class RocketTurret : MonoBehaviour {
 	public GameObject rocketPrefab;
 	private GameController GCInstance;
 	private Transform thisTransform;
+	[HideInInspector]public bool turretConflict = false; //if you try to place a turret on top of another
 
 
 	// Use this for initialization
@@ -189,6 +190,15 @@ public class RocketTurret : MonoBehaviour {
 			targetScript = nearestEnemy.GetComponent<EnemyScript> ();
 		}
 	}
+	/*
+	void OnTriggerEnter(Collider c){
+		if (c.gameObject.tag == "Turret")
+			turretConflict = true;
+	}
+	void OnTriggerExit(Collider c){
+		if (c.gameObject.tag == "Turret")
+			turretConflict = false;
+	}*/
 
 
 	//Draws the wirefram that show turret range in editor
