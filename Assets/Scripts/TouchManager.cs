@@ -113,6 +113,12 @@ public class TouchManager : MonoBehaviour {
 			case TurretType.Basic:
 				ghostTurret.GetComponent<TurretScript> ().SetRangeCircleActive(false);
 				break;
+			case TurretType.Slow:
+				ghostTurret.GetComponent<SlowTurret> ().SetRangeCircleActive(false);
+				break;
+			case TurretType.Rocket:
+				ghostTurret.GetComponent<RocketTurret> ().SetRangeCircleActive(false);
+				break;
 			}
 			//print ("turret placed");
 		}
@@ -275,7 +281,7 @@ public class TouchManager : MonoBehaviour {
 				ghostTurret.GetComponent<TurretScript> ().ChangeRangeCircleColor (Color.red);
 				
 			break;
-		/*case TurretType.Slow:
+		case TurretType.Slow:
 			if (locationValid)
 				ghostTurret.GetComponent<SlowTurret> ().ChangeRangeCircleColor (Color.green);
 			else
@@ -286,7 +292,7 @@ public class TouchManager : MonoBehaviour {
 				ghostTurret.GetComponent<RocketTurret> ().ChangeRangeCircleColor (Color.green);
 			else
 				ghostTurret.GetComponent<RocketTurret> ().ChangeRangeCircleColor (Color.red);
-			break;*/
+			break;
 		}
 			
 	}

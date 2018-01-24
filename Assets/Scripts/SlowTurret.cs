@@ -12,17 +12,21 @@ public class SlowTurret : MonoBehaviour {
 	public float power;
 	public ParticleSystem slowParticles;
 	private List<GameObject> enemiesInRange;
+	public GameObject rangeCircle;
+	public Transform thisTransform;
 	[HideInInspector]public bool turretConflict = false; //if you try to place a turret on top of another
 
 	// Use this for initialization
 	void Start () {
 		enemiesInRange = new List<GameObject> ();
 		GetComponent<SphereCollider> ().radius = range;
+		thisTransform = transform;
 		range = 18f;
 		fireRate = 1f;
 		fireCountdown = 0f;
 		slowPercent = 0.3f;
 	 	power = 0f;
+		rangeCircle.transform.localScale = new Vector3 (range * 2 / thisTransform.localScale.x,0.0001f,range * 2 / thisTransform.localScale.z);
 	}
 	
 	// Update is called once per frame
@@ -73,6 +77,15 @@ public class SlowTurret : MonoBehaviour {
 		/*if (c.gameObject.tag == "Turret")
 			turretConflict = false;*/
 
+	}
+	public void ToggleRangeCircle(){
+		rangeCircle.SetActive (!rangeCircle.activeSelf);
+	}
+	public void SetRangeCircleActive(bool b){
+		rangeCircle.SetActive (b);
+	}
+	public void ChangeRangeCircleColor(Color c){
+		rangeCircle.GetComponent<Renderer> ().material.color = c;
 	}
 
 	//Draws the wirefram that show turret range in editor

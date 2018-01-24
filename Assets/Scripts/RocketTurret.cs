@@ -15,6 +15,7 @@ public class RocketTurret : MonoBehaviour {
 	private float fireCountdown;
 	public float rotationSpeed;
 	[Header("Other")]
+	public GameObject rangeCircle;
 	public Transform partToRotate;
 	public Transform firePoint;
 	public GameObject rocketPrefab;
@@ -35,6 +36,7 @@ public class RocketTurret : MonoBehaviour {
 	
 		thisTransform = GetComponent<Transform> ();
 		//updates target every half second to save computing power
+		rangeCircle.transform.localScale = new Vector3 (range * 2 / thisTransform.localScale.x,0.0001f,range * 2 / thisTransform.localScale.z);
 		InvokeRepeating ("UpdateTarget", 0f, 0.5f);
 	}
 
@@ -189,6 +191,15 @@ public class RocketTurret : MonoBehaviour {
 			target = nearestEnemy.transform;
 			targetScript = nearestEnemy.GetComponent<EnemyScript> ();
 		}
+	}
+	public void ToggleRangeCircle(){
+		rangeCircle.SetActive (!rangeCircle.activeSelf);
+	}
+	public void SetRangeCircleActive(bool b){
+		rangeCircle.SetActive (b);
+	}
+	public void ChangeRangeCircleColor(Color c){
+		rangeCircle.GetComponent<Renderer> ().material.color = c;
 	}
 	/*
 	void OnTriggerEnter(Collider c){
