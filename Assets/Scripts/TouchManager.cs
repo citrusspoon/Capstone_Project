@@ -114,6 +114,8 @@ public class TouchManager : MonoBehaviour {
 
 	RaycastHit locHit;
 	Ray nRay,sRay,eRay,wRay, cRay;//north south east and west center?
+	Vector3 ghostPos;
+	float turretDistTolerance = 5f;
 	//TODO: include placed turrets in check
 	/// <summary>
 	/// Raycasts around the turret being placed to determine if it is currently above a valid placement location.
@@ -122,17 +124,16 @@ public class TouchManager : MonoBehaviour {
 		//sets raycasts based on turret type
 		locationValid = true;
 		//==========Checks for surrrounding turrets===========//
-
+		ghostPos = ghostTurret.transform.position;
 
 		//loop method
 
-		for (int i = 0; i < TurretManager.instance.placedTurretPositions.Count; i++) {
+		for (int i = 0; i < TurretManager.instance.placedTurretPositions.Count && locationValid; i++) {
 			//loop and calculate distance between turrets
+			if (Vector3.Distance (ghostPos, TurretManager.instance.placedTurretPositions [i]) < turretDistTolerance)
+				locationValid = false;
 		}
-
-
-
-
+			
 
 
 
