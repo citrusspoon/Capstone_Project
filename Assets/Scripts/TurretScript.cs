@@ -13,6 +13,7 @@ public class TurretScript : MonoBehaviour {
 	private float fireCountdown;
 	public float rotationSpeed;
 	[Header("Other")]
+	public GameObject rangeCircle;
 	public Transform partToRotate;
 	public Transform firePoint;
 	public GameObject bulletPrefab;
@@ -32,6 +33,7 @@ public class TurretScript : MonoBehaviour {
 		fireRate = 1f;
 		fireCountdown = 0f;
 		rotationSpeed = 10f;
+		rangeCircle.transform.localScale = new Vector3 (range * 2 / thisTransform.localScale.x,0.0001f,range * 2 / thisTransform.localScale.z);
 	}
 	
 	//========Update Variables============//
@@ -186,6 +188,15 @@ public class TurretScript : MonoBehaviour {
 			target = nearestEnemy.transform;
 			targetScript = nearestEnemy.GetComponent<EnemyScript> ();
 		}
+	}
+	public void ToggleRangeCircle(){
+		rangeCircle.SetActive (!rangeCircle.activeSelf);
+	}
+	public void SetRangeCircleActive(bool b){
+		rangeCircle.SetActive (b);
+	}
+	public void ChangeRangeCircleColor(Color c){
+		rangeCircle.GetComponent<Renderer> ().material.color = c;
 	}
 	/*
 	void OnTriggerEnter(Collider c){

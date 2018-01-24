@@ -77,6 +77,7 @@ public class TouchManager : MonoBehaviour {
 	}
 	GameObject ghostTurret;
 	Transform ghostTurretTransform;
+
 	/// <summary>
 	/// Selects a turret from the tray, and creates a copy to be placed.
 	/// </summary>
@@ -108,6 +109,11 @@ public class TouchManager : MonoBehaviour {
 		if (Input.touchCount < 1 && locationValid) {
 			placingTurret = false;
 			TurretManager.instance.placedTurretPositions.Add (ghostTurret.transform.position);
+			switch (selectedTurretType) {
+			case TurretType.Basic:
+				ghostTurret.GetComponent<TurretScript> ().SetRangeCircleActive(false);
+				break;
+			}
 			//print ("turret placed");
 		}
 	}
@@ -116,7 +122,6 @@ public class TouchManager : MonoBehaviour {
 	Ray nRay,sRay,eRay,wRay, cRay;//north south east and west center?
 	Vector3 ghostPos;
 	float turretDistTolerance = 5f;
-	//TODO: include placed turrets in check
 	/// <summary>
 	/// Raycasts around the turret being placed to determine if it is currently above a valid placement location.
 	/// </summary>
@@ -194,6 +199,7 @@ public class TouchManager : MonoBehaviour {
 		}
 
 */
+		UpdateGhostRangeCircleColor ();
 		if (!locationValid)
 			return;
 
@@ -244,7 +250,7 @@ public class TouchManager : MonoBehaviour {
 				locationValid = false;
 			}
 		}
-
+		UpdateGhostRangeCircleColor ();
 		//print (locationValid);
 
 		
@@ -259,6 +265,30 @@ public class TouchManager : MonoBehaviour {
 			z = -80f + 160f * touch.position.y / Screen.height;
 			ghostTurretTransform.position = new Vector3 (x, 0.6f, z);
 		}
+	}
+	void UpdateGhostRangeCircleColor(){
+		switch (selectedTurretType) {
+		case TurretType.Basic:
+			if (locationValid)
+				ghostTurret.GetComponent<TurretScript> ().ChangeRangeCircleColor (Color.green);
+			else
+				ghostTurret.GetComponent<TurretScript> ().ChangeRangeCircleColor (Color.red);
+				
+			break;
+		/*case TurretType.Slow:
+			if (locationValid)
+				ghostTurret.GetComponent<SlowTurret> ().ChangeRangeCircleColor (Color.green);
+			else
+				ghostTurret.GetComponent<SlowTurret> ().ChangeRangeCircleColor (Color.red);
+			break;
+		case TurretType.Rocket:
+			if (locationValid)
+				ghostTurret.GetComponent<RocketTurret> ().ChangeRangeCircleColor (Color.green);
+			else
+				ghostTurret.GetComponent<RocketTurret> ().ChangeRangeCircleColor (Color.red);
+			break;*/
+		}
+			
 	}
 
 	void TestDrag(){
