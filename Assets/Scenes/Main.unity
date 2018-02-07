@@ -9193,11 +9193,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBetweenWaves: 5
-  enemyPrefab: {fileID: 1182593654076648, guid: 4f54ade7089985740841a4c3e77f0c4b,
-    type: 2}
   spawnPoint: {fileID: 1341565017}
   enemyList: []
   spawnerActive: 0
+  totalWaves: 10
+  lv1EnemyPrefab: {fileID: 1182593654076648, guid: 4f54ade7089985740841a4c3e77f0c4b,
+    type: 2}
+  lv2EnemyPrefab: {fileID: 1133722368689280, guid: afd410988bb8eac41ae6b103747dde31,
+    type: 2}
+  lv3EnemyPrefab: {fileID: 1924576607151490, guid: c81653d72b2fa56419b683caaf0416ac,
+    type: 2}
+  bossEnemyPrefab: {fileID: 1296491687367894, guid: 0556b0da30d43094f8bdd3b071906061,
+    type: 2}
+  lv1EnemyPoolSize: 100
+  lv2EnemyPoolSize: 100
+  lv3EnemyPoolSize: 100
+  bossEnemyPoolSize: 10
 --- !u!4 &906424297
 Transform:
   m_ObjectHideFlags: 0
