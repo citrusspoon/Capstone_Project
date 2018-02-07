@@ -85,7 +85,7 @@ public class SlowTurret : MonoBehaviour {
 		rangeCircle.SetActive (b);
 	}
 	public void ChangeRangeCircleColor(Color c){
-		rangeCircle.GetComponent<Renderer> ().material.color = c;
+		rangeCircle.GetComponent<Renderer> ().material.color = new Color(c.r, c.g, c.b, 0.5f);
 	}
 
 	//Draws the wirefram that show turret range in editor

@@ -199,7 +199,7 @@ public class RocketTurret : MonoBehaviour {
 		rangeCircle.SetActive (b);
 	}
 	public void ChangeRangeCircleColor(Color c){
-		rangeCircle.GetComponent<Renderer> ().material.color = c;
+		rangeCircle.GetComponent<Renderer> ().material.color = new Color(c.r, c.g, c.b, 0.5f);
 	}
 	/*
 	void OnTriggerEnter(Collider c){

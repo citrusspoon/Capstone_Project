@@ -4420,10 +4420,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 1484738765732636, guid: 0436c1da1f2c9aa4e82ca45c8ce9e1cd, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1229600278437786, guid: 0436c1da1f2c9aa4e82ca45c8ce9e1cd, type: 2}
       propertyPath: m_IsActive
       value: 0
