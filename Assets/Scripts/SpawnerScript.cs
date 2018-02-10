@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpawnerScript : MonoBehaviour {
 
@@ -13,6 +14,7 @@ public class SpawnerScript : MonoBehaviour {
 	public List<Wave> waveList;
 	public bool spawnerActive;
 	public int totalWaves = 10;
+	public Text waveNumText;
 
 	[Header("Enemy Prefabs")]
 	public GameObject lv1EnemyPrefab;
@@ -33,7 +35,7 @@ public class SpawnerScript : MonoBehaviour {
 	public Stack<GameObject> bossEnemyStack;
 
 
-	//TODO: start making the waves do stuff. add temp button to progress wave. add wave display. when spawning eneimes, take randomly from 
+	//TODO: start making the waves do stuff. when spawning eneimes, take randomly from 
 	//all possible ones in wave so it doesnt just go in order
 	public class Wave
 	{
@@ -112,6 +114,16 @@ public class SpawnerScript : MonoBehaviour {
 		countdown -= Time.deltaTime;
 		//print (countdown);
 
+	}
+	public void NextWave(){
+		
+	}
+	/// <summary>
+	/// Updates the wave number text.
+	/// </summary>
+	/// <param name="w">Wave number</param>
+	public void UpdateWaveDisplay(int w){
+		waveNumText.text = "Wave: " + w;
 	}
 
 	IEnumerator SpawnWave(){
