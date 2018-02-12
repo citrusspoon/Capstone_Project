@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour {
 	public static GameController instance = null;
 
 	public SpawnerScript spawnerScriptRef;
+	public FlashcardTray flashcardTrayRef;
 	public TouchManager touchManagerRef;
 	public TurretManager turretManagerRef;
 	public TurretTray turretTrayRef;

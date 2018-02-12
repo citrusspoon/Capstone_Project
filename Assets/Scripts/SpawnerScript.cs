@@ -143,11 +143,13 @@ public class SpawnerScript : MonoBehaviour {
 	}
 	public void StartNextWave(){
 		GameController.instance.turretTrayRef.ToggleTray ();
+		GameController.instance.flashcardTrayRef.ToggleTray ();
 		PopulateEnemyWaitingRoom ();
 		currentGameState = GameState.WaveActive;
 	}
 	void EndWave(){
 		GameController.instance.turretTrayRef.ToggleTray ();
+		GameController.instance.flashcardTrayRef.ToggleTray ();
 		currentGameState = GameState.WaveInactive;
 		UpdateWaveDisplay (++waveNum + 1);
 	}
