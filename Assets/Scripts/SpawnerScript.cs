@@ -135,12 +135,21 @@ public class SpawnerScript : MonoBehaviour {
 			countdown -= Time.deltaTime;
 		}
 
+		if (currentGameState == GameState.WaveActive && enemyList.Count < 1 && enemyWaitingRoom.Count < 1) {
+			EndWave ();
+		}
+
 
 	}
 	public void StartNextWave(){
 		GameController.instance.turretTrayRef.ToggleTray ();
 		PopulateEnemyWaitingRoom ();
 		currentGameState = GameState.WaveActive;
+	}
+	void EndWave(){
+		GameController.instance.turretTrayRef.ToggleTray ();
+		currentGameState = GameState.WaveInactive;
+		UpdateWaveDisplay (++waveNum + 1);
 	}
 	/// <summary>
 	/// Adds enemies for the current wave to the enemy waiting room from the stacks
