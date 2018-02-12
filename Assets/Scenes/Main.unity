@@ -7078,6 +7078,7 @@ MonoBehaviour:
   spawnerScriptRef: {fileID: 906424296}
   touchManagerRef: {fileID: 1203091691}
   turretManagerRef: {fileID: 318659690}
+  turretTrayRef: {fileID: 1088156428}
 --- !u!4 &714375247
 Transform:
   m_ObjectHideFlags: 0
@@ -9269,9 +9270,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBetweenWaves: 5
+  currentGameState: 0
   spawnPoint: {fileID: 1341565017}
   enemyList: []
-  spawnerActive: 0
+  enemyWaitingRoom: []
+  spawnerActive: 1
   totalWaves: 10
   waveNumText: {fileID: 1351517089}
   lv1EnemyPrefab: {fileID: 1182593654076648, guid: 4f54ade7089985740841a4c3e77f0c4b,
@@ -16466,7 +16469,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 906424296}
-        m_MethodName: NextWave
+        m_MethodName: StartNextWave
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

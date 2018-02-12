@@ -5,12 +5,18 @@ using UnityEngine.UI;
 
 public class SpawnerScript : MonoBehaviour {
 
-	public float timeBetweenWaves = 5f;
+	public float timeBetweenEnemies = 1f;
 	private float countdown = 0f;
 	private int waveNum = 0;
+	public GameState currentGameState;
+
+	public static SpawnerScript instance = null;
 
 	public Transform spawnPoint;
+	//list of enemies currently on the board
 	public List<GameObject> enemyList;
+	//list of enemies to be spawned
+	public List<GameObject> enemyWaitingRoom;
 	public List<Wave> waveList;
 	public bool spawnerActive;
 	public int totalWaves = 10;
@@ -41,12 +47,14 @@ public class SpawnerScript : MonoBehaviour {
 	{
 		public int lv1Count, lv2Count, lv3Count, bossCount;
 		public int waveNum;
+		public int totalCount;
 
 		public Wave(int lv1, int lv2, int lv3, int b){
 			lv1Count = lv1;
 			lv2Count = lv2;
 			lv3Count = lv3;
 			bossCount = b;
+			totalCount = lv1Count + lv2Count + lv3Count + bossCount;
 			waveNum = 0;
 		}
 		public Wave(int lv1, int lv2, int lv3, int b, int w){
@@ -54,6 +62,7 @@ public class SpawnerScript : MonoBehaviour {
 			lv2Count = lv2;
 			lv3Count = lv3;
 			bossCount = b;
+			totalCount = lv1Count + lv2Count + lv3Count + bossCount;
 			waveNum = w;
 		}
 		public Wave(){
@@ -61,15 +70,26 @@ public class SpawnerScript : MonoBehaviour {
 			lv2Count = 0;
 			lv3Count = 0;
 			bossCount = 0;
+			totalCount = lv1Count + lv2Count + lv3Count + bossCount;
 			waveNum = 0;
 		}
 	}
+
+	void Awake()
+	{
+		if (instance == null)
+			instance = this;
+		else if (instance != this)
+			Destroy (gameObject);
+	}
+
 	//=====Start Variables=========//
 	GameObject temp;
 	void Start(){
 		enemyList = new List<GameObject>();
+		enemyWaitingRoom = new List<GameObject>();
 		waveList = new List<Wave> ();
-
+		currentGameState = GameState.WaveInactive;
 
 		lv1EnemyStack = new Stack<GameObject>();
 		lv2EnemyStack = new Stack<GameObject>();
@@ -96,8 +116,8 @@ public class SpawnerScript : MonoBehaviour {
 			bossEnemyStack.Push (temp);
 		}
 
-
 		CreateWaves ();
+		UpdateWaveDisplay (waveNum+1);
 	}
 
 	void Update(){
@@ -107,15 +127,40 @@ public class SpawnerScript : MonoBehaviour {
 
 		StackFailsafe ();
 
-		if(countdown <= 0f){
-			StartCoroutine (SpawnWave());
-			countdown = timeBetweenWaves;
+		if (currentGameState == GameState.WaveActive && enemyWaitingRoom.Count > 0) {
+			if (countdown <= 0f) {
+				SpawnEnemy ();
+				countdown = timeBetweenEnemies;
+			}
+			countdown -= Time.deltaTime;
 		}
-		countdown -= Time.deltaTime;
-		//print (countdown);
+
 
 	}
-	public void NextWave(){
+	public void StartNextWave(){
+		GameController.instance.turretTrayRef.ToggleTray ();
+		PopulateEnemyWaitingRoom ();
+		currentGameState = GameState.WaveActive;
+	}
+	/// <summary>
+	/// Adds enemies for the current wave to the enemy waiting room from the stacks
+	/// </summary>
+	void PopulateEnemyWaitingRoom(){
+
+		enemyList.Clear ();
+
+		for(int j = 0; j < waveList[waveNum].lv1Count; j++)
+			enemyWaitingRoom.Add (lv1EnemyStack.Pop());
+
+		for(int j = 0; j < waveList[waveNum].lv2Count; j++)
+			enemyWaitingRoom.Add (lv2EnemyStack.Pop());
+		
+		for(int j = 0; j < waveList[waveNum].lv3Count; j++)
+			enemyWaitingRoom.Add (lv3EnemyStack.Pop());
+
+		for(int j = 0; j < waveList[waveNum].bossCount; j++)
+			enemyWaitingRoom.Add (bossEnemyStack.Pop());
+			
 		
 	}
 	/// <summary>
@@ -126,17 +171,28 @@ public class SpawnerScript : MonoBehaviour {
 		waveNumText.text = "Wave: " + w;
 	}
 
-	IEnumerator SpawnWave(){
-		for (int i = 0; i < waveNum; i++) {
+	IEnumerator SpawnSubWave(){
+		//while (enemyWaitingRoom.Count > 0) {
 			SpawnEnemy ();
-			yield return new WaitForSeconds (1f);
-		}
+			yield return new WaitForSeconds (2f);
+		//}
 
 		waveNum++;
 	}
 
+	GameObject tempEnemy;
 	void SpawnEnemy(){
-		enemyList.Add (Instantiate (lv1EnemyPrefab, spawnPoint.position, spawnPoint.rotation));
+
+		tempEnemy = enemyWaitingRoom [Random.Range (0, enemyWaitingRoom.Count)];
+
+		tempEnemy.transform.position = spawnPoint.position;
+		tempEnemy.transform.rotation = spawnPoint.rotation;
+		tempEnemy.SetActive (true);
+
+		enemyList.Add (tempEnemy);
+		//dont know if this will work
+		enemyWaitingRoom.Remove (tempEnemy);
+		//Instantiate (lv1EnemyPrefab, spawnPoint.position, spawnPoint.rotation)
 	}
 
 	/// <summary>

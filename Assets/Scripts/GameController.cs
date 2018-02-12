@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum TargetingMode {First, Last, Closest, Furthest};
 public enum TurretType {Basic, Slow, Rocket};
+public enum GameState {WaveActive, WaveInactive};
 
 public class GameController : MonoBehaviour {
 
@@ -12,6 +13,7 @@ public class GameController : MonoBehaviour {
 	public SpawnerScript spawnerScriptRef;
 	public TouchManager touchManagerRef;
 	public TurretManager turretManagerRef;
+	public TurretTray turretTrayRef;
 
 
 	void Awake()
