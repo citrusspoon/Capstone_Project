@@ -9,6 +9,9 @@ public class FlashcardManager : MonoBehaviour {
 
 	public List<Flashcard> currentFlashcardList;
 	public TextMeshPro cardTextMesh;
+	public TextMeshPro choice1TextMesh;
+	public TextMeshPro choice2TextMesh;
+	public TextMeshPro choice3TextMesh;
 
 
 	public class Flashcard{
@@ -37,6 +40,9 @@ public class FlashcardManager : MonoBehaviour {
 		//test stuff
 		PopulateFlashcardList ();
 		cardTextMesh.text = currentFlashcardList [4].question;
+		choice1TextMesh.text = currentFlashcardList [4].answer;
+		choice2TextMesh.text = currentFlashcardList [3].answer;
+		choice3TextMesh.text = currentFlashcardList [2].answer;
 	}
 	
 	// Update is called once per frame
