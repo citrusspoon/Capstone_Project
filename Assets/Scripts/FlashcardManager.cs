@@ -1,22 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class FlashcardManager : MonoBehaviour {
 
 	public static FlashcardManager instance = null;
 
 	public List<Flashcard> currentFlashcardList;
+	public TextMeshPro cardTextMesh;
 
 
 	public class Flashcard{
-		string question;
-		string answer;
+		public string question;
+		public string answer;
 
 		public Flashcard(string q, string a){
 			question = q;
 			answer = a;
 		}
+
+
 	}
 
 	void Awake()
@@ -30,6 +34,9 @@ public class FlashcardManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		currentFlashcardList = new List<Flashcard> ();
+		//test stuff
+		PopulateFlashcardList ();
+		cardTextMesh.text = currentFlashcardList [4].question;
 	}
 	
 	// Update is called once per frame
