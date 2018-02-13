@@ -39,15 +39,44 @@ public class FlashcardManager : MonoBehaviour {
 		currentFlashcardList = new List<Flashcard> ();
 		//test stuff
 		PopulateFlashcardList ();
-		cardTextMesh.text = currentFlashcardList [4].question;
-		choice1TextMesh.text = currentFlashcardList [4].answer;
-		choice2TextMesh.text = currentFlashcardList [3].answer;
-		choice3TextMesh.text = currentFlashcardList [2].answer;
+		NewCard(currentFlashcardList [4]);
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
+	}
+	//=======New Card Variables=========//
+	List<string> choices = new List<string> ();
+	public List<string> choicePool = new List<string> (); 
+	int r;
+	/// <summary>
+	/// Loads a new card and answer choices onto the tray. Choices consist of the answer to the card, and two randomly chosen answers from the other cards.
+	/// </summary>
+	/// <param name="c">Flashcard to load.</param>
+	public void NewCard(Flashcard c){
+		choices.Clear ();
+		for (int i = 0; i < currentFlashcardList.Count; i++) {
+			if(currentFlashcardList[i] != c)
+				choicePool.Add (currentFlashcardList [i].answer);
+		}
+		r = Random.Range(0, choicePool.Count);
+		choices.Add (c.answer);
+	
+		choices.Add (choicePool[r]);
+
+		choicePool.RemoveAt (r);
+		r = Random.Range(0, choicePool.Count);
+
+		choices.Add (choicePool[r]);
+
+		//TODO: shuffle choices
+
+		cardTextMesh.text = c.question;
+		choice1TextMesh.text = choices[0];
+		choice2TextMesh.text = choices[1];
+		choice3TextMesh.text = choices[2];
 	}
 	void PopulateFlashcardList(){
 		//test stuff
@@ -59,4 +88,7 @@ public class FlashcardManager : MonoBehaviour {
 		currentFlashcardList.Add (new Flashcard("What?", "Yes"));
 		currentFlashcardList.Add (new Flashcard("Who is considered the father of computers, and is also a mech dude with a steam hammer?", "Charles Babbage"));
 	}
+
+	private Random rng = new Random();  
+
 }
