@@ -50,6 +50,7 @@ public class FlashcardManager : MonoBehaviour {
 	void Update () {
 		
 	}
+
 	public void Select(int index){
 		TouchManager.instance.choiceSelectionMade = true;
 		//if correct answer is selected
@@ -66,8 +67,21 @@ public class FlashcardManager : MonoBehaviour {
 			for (int i = 0; i < choices.Count; i++)
 				if(choices [i] == currentCard.answer)
 					choiceButtons [i].GetComponent<Renderer> ().material.color = Color.green;
+			//pause for one second
+			//load new card
 		}
+		StartCoroutine (PauseAndLoadNextCard());
+
 	}
+
+	IEnumerator PauseAndLoadNextCard(){
+		yield return new WaitForSeconds (1.0f);
+		ResetChoiceColors ();
+		NewCard (currentFlashcardList[Random.Range(0,currentFlashcardList.Count)]);
+		TouchManager.instance.choiceSelectionMade = false;
+
+	}
+
 	void ResetChoiceColors(){
 		for (int i = 0; i < choiceButtons.Length; i++)
 			choiceButtons [i].GetComponent<Renderer> ().material.color = Color.white;
