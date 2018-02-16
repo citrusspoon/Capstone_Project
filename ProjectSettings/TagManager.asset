@@ -11,6 +11,10 @@ TagManager:
   - TraySlow
   - TrayRocket
   - TurretNode
+  - ChoiceButtton
+  - Choice1
+  - Choice2
+  - Choice0
   layers:
   - Default
   - TransparentFX

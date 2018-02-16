@@ -9,6 +9,7 @@ public class TouchManager : MonoBehaviour {
 	public static TouchManager instance = null;
 	public GameObject testObject;
 	private bool placingTurret = false;
+	public bool choiceSelectionMade = false;
 	private bool locationValid = true;
 	//======Update Variables======/
 
@@ -39,11 +40,7 @@ public class TouchManager : MonoBehaviour {
 		} else {
 			CheckTrayTouch();
 		}
-
-	
 			
-
-
 	}
 
 	TurretType type;
@@ -66,7 +63,19 @@ public class TouchManager : MonoBehaviour {
 					type = TurretType.Slow;
 				} else if (hit.transform.tag == "TrayRocket") {
 					type = TurretType.Rocket;
-				} else {
+				}else if(hit.transform.tag == "Choice0" && !choiceSelectionMade){
+					FlashcardManager.instance.Select (0);
+					return;
+				}
+				else if(hit.transform.tag == "Choice1" && !choiceSelectionMade){
+					FlashcardManager.instance.Select (1);
+					return;
+				}
+				else if(hit.transform.tag == "Choice2" && !choiceSelectionMade){
+					FlashcardManager.instance.Select (2);
+					return;
+				}
+				else {
 					return;
 				}
 			}

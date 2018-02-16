@@ -2138,8 +2138,8 @@ GameObject:
   - component: {fileID: 175977426}
   - component: {fileID: 175977425}
   m_Layer: 0
-  m_Name: Choice3
-  m_TagString: Untagged
+  m_Name: Choice2
+  m_TagString: Choice2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3983,9 +3983,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardTextMesh: {fileID: 1601855135}
-  choice1TextMesh: {fileID: 1569967925}
-  choice2TextMesh: {fileID: 365290698}
-  choice3TextMesh: {fileID: 1796161557}
+  choice0TextMesh: {fileID: 1569967925}
+  choice1TextMesh: {fileID: 365290698}
+  choice2TextMesh: {fileID: 1796161557}
+  choiceButtons:
+  - {fileID: 1476334994}
+  - {fileID: 543935884}
+  - {fileID: 175977423}
+  choicePool: []
 --- !u!1001 &337203742
 Prefab:
   m_ObjectHideFlags: 0
@@ -4522,7 +4527,7 @@ GameObject:
   - component: {fileID: 365290699}
   - component: {fileID: 365290698}
   m_Layer: 0
-  m_Name: Choice2Text
+  m_Name: Choice1Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6279,8 +6284,8 @@ GameObject:
   - component: {fileID: 543935887}
   - component: {fileID: 543935886}
   m_Layer: 0
-  m_Name: Choice2
-  m_TagString: Untagged
+  m_Name: Choice1
+  m_TagString: Choice1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15500,8 +15505,8 @@ GameObject:
   - component: {fileID: 1476334997}
   - component: {fileID: 1476334996}
   m_Layer: 0
-  m_Name: Choice1
-  m_TagString: Untagged
+  m_Name: Choice0
+  m_TagString: Choice0
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16646,7 +16651,7 @@ GameObject:
   - component: {fileID: 1569967926}
   - component: {fileID: 1569967925}
   m_Layer: 0
-  m_Name: Choice1Text
+  m_Name: Choice0Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19892,7 +19897,7 @@ GameObject:
   - component: {fileID: 1796161558}
   - component: {fileID: 1796161557}
   m_Layer: 0
-  m_Name: Choice3Text
+  m_Name: Choice2Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
