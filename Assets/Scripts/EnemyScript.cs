@@ -61,9 +61,12 @@ public class EnemyScript : MonoBehaviour {
 
 	void GetNextWaypoint(){
 
+		//reaches end
 		if (nextWaypointIndex >= WaypointScript.waypoints.Length - 1) {
 			GameController.instance.spawnerScriptRef.enemyList.Remove (this.gameObject);
 			this.gameObject.SetActive (false);
+			//TODO: change amount of damage based on enemy type
+			ResourceManager.instance.ChangeHealth (-10f);
 		}
 		else {
 			nextWaypointIndex++;

@@ -57,9 +57,7 @@ public class FlashcardManager : MonoBehaviour {
 		if (choices [index] == currentCard.answer) {
 			//turn button green
 			choiceButtons [index].GetComponent<Renderer> ().material.color = Color.green;
-			//pause for 1 second
-			//add resources
-			//load new card
+			ResourceManager.instance.ChangeMana (10f);
 		} else {
 			//turn button red
 			choiceButtons [index].GetComponent<Renderer> ().material.color = Color.red;
@@ -67,8 +65,6 @@ public class FlashcardManager : MonoBehaviour {
 			for (int i = 0; i < choices.Count; i++)
 				if(choices [i] == currentCard.answer)
 					choiceButtons [i].GetComponent<Renderer> ().material.color = Color.green;
-			//pause for one second
-			//load new card
 		}
 		StartCoroutine (PauseAndLoadNextCard());
 
