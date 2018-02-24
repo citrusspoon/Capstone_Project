@@ -9,16 +9,20 @@ public class TurretManager : MonoBehaviour {
 	public int basicPoolSize;
 	public int slowPoolSize;
 	public int rocketPoolSize;
+	public int FRPowerupPoolSize;
 	[Header("Turret Prefabs")]
 	public GameObject basicPrefab;
 	public GameObject slowPrefab;
 	public GameObject rocketPrefab;
+	public GameObject FRPowerupPrefab;
 	[Header("Stacks")]
 	public Stack<GameObject> basicStack;
 	public Stack<GameObject> slowStack;
 	public Stack<GameObject> rocketStack;
+	public Stack<GameObject> FRPowerupStack;
 	[Header("Lists")]
 	public List<Vector3> placedTurretPositions;
+	public List<GameObject> placedTurrets;
 	/*[Header("Tray")]
 	public Vector3 basicTraySpawnPoint;
 	public Vector3 slowTraySpawnPoint;
@@ -38,9 +42,11 @@ public class TurretManager : MonoBehaviour {
 	GameObject temp;
 	void Start () {
 		placedTurretPositions = new List<Vector3> ();
+		placedTurrets = new List<GameObject> ();
 		basicStack = new Stack<GameObject> ();
 		slowStack = new Stack<GameObject> ();
 		rocketStack = new Stack<GameObject> ();
+		FRPowerupStack = new Stack<GameObject> ();
 		for (int i = 0; i < basicPoolSize; i++) {
 			temp = (GameObject)Instantiate (basicPrefab);
 			temp.SetActive (false);
@@ -55,6 +61,11 @@ public class TurretManager : MonoBehaviour {
 			temp = (GameObject)Instantiate (rocketPrefab);
 			temp.SetActive (false);
 			rocketStack.Push (temp);
+		}
+		for (int i = 0; i < FRPowerupPoolSize; i++) {
+			temp = (GameObject)Instantiate (FRPowerupPrefab);
+			temp.SetActive (false);
+			FRPowerupStack.Push (temp);
 		}
 	}
 
@@ -83,6 +94,11 @@ public class TurretManager : MonoBehaviour {
 			temp = (GameObject)Instantiate (rocketPrefab);
 			temp.SetActive (false);
 			rocketStack.Push (temp);
+		}
+		if (FRPowerupStack.Count < 2) {
+			temp = (GameObject)Instantiate (FRPowerupPrefab);
+			temp.SetActive (false);
+			FRPowerupStack.Push (temp);
 		}
 	}
 }

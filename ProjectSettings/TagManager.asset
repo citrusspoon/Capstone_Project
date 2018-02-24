@@ -15,6 +15,7 @@ TagManager:
   - Choice1
   - Choice2
   - Choice0
+  - FRPowerup
   layers:
   - Default
   - TransparentFX

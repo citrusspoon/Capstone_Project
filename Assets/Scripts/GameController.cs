@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum TargetingMode {First, Last, Closest, Furthest};
-public enum TurretType {Basic, Slow, Rocket};
+public enum TurretType {Basic, Slow, Rocket, FRPowerup};
 public enum GameState {WaveActive, WaveInactive};
 
 public class GameController : MonoBehaviour {
