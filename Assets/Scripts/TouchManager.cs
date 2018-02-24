@@ -165,6 +165,7 @@ public class TouchManager : MonoBehaviour {
 				//ghostTurret.GetComponent<RocketTurret> ().SetRangeCircleActive(false);
 				ResourceManager.instance.ChangeMana (-1 * ghostTurret.GetComponent<FRPowerup> ().cost);
 				//dp powerup stuff
+				turretUnderPowerup.GetComponent<ITurretInfo>().BoostFireRate(ghostTurret.GetComponent<FRPowerup>().boostAmount);
 				ghostTurret.SetActive (false);
 				TurretManager.instance.FRPowerupStack.Push (ghostTurret);
 				print ("powerup placed");
@@ -195,8 +196,9 @@ public class TouchManager : MonoBehaviour {
 		if (selectedTurretType == TurretType.FRPowerup) {
 			for (int i = 0; i < TurretManager.instance.placedTurretPositions.Count && locationValid; i++) {
 				//loop and calculate distance between turrets
-				if (Vector3.Distance (ghostPos, TurretManager.instance.placedTurretPositions [i]) < turretDistTolerance)
-					turretUnderPowerup = TurretManager.instance.placedTurrets[i];
+				if (Vector3.Distance (ghostPos, TurretManager.instance.placedTurretPositions [i]) < turretDistTolerance+3f) 
+					turretUnderPowerup = TurretManager.instance.placedTurrets [i];
+				
 			}
 			if (turretUnderPowerup == null)
 				locationValid = false;

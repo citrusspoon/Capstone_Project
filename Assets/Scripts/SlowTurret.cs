@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlowTurret : MonoBehaviour {
+public class SlowTurret : MonoBehaviour, ITurretInfo {
 
 	public float range;
 	public float fireRate;
 	private float fireCountdown;
+	[HideInInspector]public TurretType type;
 	public float cost = 50f;
 	//how much to reduce speed by
 	public float slowPercent;
@@ -28,6 +29,13 @@ public class SlowTurret : MonoBehaviour {
 		slowPercent = 0.3f;
 	 	power = 0f;
 		rangeCircle.transform.localScale = new Vector3 (range * 2 / thisTransform.localScale.x,0.0001f,range * 2 / thisTransform.localScale.z);
+		type = TurretType.Slow;
+	}
+	TurretType ITurretInfo.GetType(){
+		return type;
+	}
+	void ITurretInfo.BoostFireRate(float boostAmount){
+		fireRate *= boostAmount;
 	}
 	
 	// Update is called once per frame

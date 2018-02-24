@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-public class RocketTurret : MonoBehaviour {
+public class RocketTurret : MonoBehaviour, ITurretInfo {
 
 	private Transform target;
 	private EnemyScript targetScript;
@@ -15,6 +15,7 @@ public class RocketTurret : MonoBehaviour {
 	public float cost = 80f;
 	private float fireCountdown;
 	public float rotationSpeed;
+	[HideInInspector]public TurretType type;
 	[Header("Other")]
 	public GameObject rangeCircle;
 	public Transform partToRotate;
@@ -32,13 +33,20 @@ public class RocketTurret : MonoBehaviour {
 		fireRate = 1f;
 		fireCountdown = 0f;
 		rotationSpeed = 10f;
-		
+		type = TurretType.Rocket;
 		GCInstance = GameController.instance;
 	
 		thisTransform = GetComponent<Transform> ();
 		//updates target every half second to save computing power
 		rangeCircle.transform.localScale = new Vector3 (range * 2 / thisTransform.localScale.x,0.0001f,range * 2 / thisTransform.localScale.z);
 		InvokeRepeating ("UpdateTarget", 0f, 0.5f);
+	}
+
+	TurretType ITurretInfo.GetType(){
+		return type;
+	}
+	void ITurretInfo.BoostFireRate(float boostAmount){
+		fireRate *= boostAmount;
 	}
 
 	//========Update Variables============//

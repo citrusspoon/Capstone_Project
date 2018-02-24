@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretScript : MonoBehaviour {
+public class TurretScript : MonoBehaviour, ITurretInfo {
 
 	private Transform target;
 	private EnemyScript targetScript;
@@ -13,6 +13,7 @@ public class TurretScript : MonoBehaviour {
 	public float cost = 30f;
 	private float fireCountdown;
 	public float rotationSpeed;
+	[HideInInspector]public TurretType type;
 	[Header("Other")]
 	public GameObject rangeCircle;
 	public Transform partToRotate;
@@ -28,6 +29,7 @@ public class TurretScript : MonoBehaviour {
 	void Start () {
 		GCInstance = GameController.instance;
 		thisTransform = GetComponent<Transform> ();
+		type = TurretType.Basic;
 		//updates target every half second to save computing power
 		InvokeRepeating ("UpdateTarget", 0f, 0.5f);
 		range = 18f;
@@ -35,6 +37,12 @@ public class TurretScript : MonoBehaviour {
 		fireCountdown = 0f;
 		rotationSpeed = 10f;
 		rangeCircle.transform.localScale = new Vector3 (range * 2 / thisTransform.localScale.x,0.0001f,range * 2 / thisTransform.localScale.z);
+	}
+	TurretType ITurretInfo.GetType(){
+		return type;
+	}
+	void ITurretInfo.BoostFireRate(float boostAmount){
+		fireRate *= boostAmount;
 	}
 	
 	//========Update Variables============//
