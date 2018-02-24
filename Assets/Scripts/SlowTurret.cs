@@ -7,6 +7,7 @@ public class SlowTurret : MonoBehaviour {
 	public float range;
 	public float fireRate;
 	private float fireCountdown;
+	public float cost = 50f;
 	//how much to reduce speed by
 	public float slowPercent;
 	public float power;

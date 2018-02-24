@@ -10,6 +10,7 @@ public class TurretScript : MonoBehaviour {
 	public TargetingMode mode;
 	public float range;
 	public float fireRate;
+	public float cost = 30f;
 	private float fireCountdown;
 	public float rotationSpeed;
 	[Header("Other")]

@@ -92,17 +92,32 @@ public class TouchManager : MonoBehaviour {
 	/// </summary>
 	/// <param name="t">The type of turret to be selected</param>
 	void SelectTurret(TurretType t){
-		//print ("Selected " + t);
+		//TODO: have on screen not enough mana indication
 		switch (t) {
 		case TurretType.Basic:
+			if (ResourceManager.instance.mana < TurretManager.instance.basicStack.Peek ().GetComponent<TurretScript> ().cost) {
+				print ("Not enough mana");
+				placingTurret = false;
+				return;
+			}
 			ghostTurret = TurretManager.instance.basicStack.Pop ();
 			selectedTurretType = TurretType.Basic;
 			break;
 		case TurretType.Slow:
+			if (ResourceManager.instance.mana < TurretManager.instance.slowStack.Peek ().GetComponent<SlowTurret> ().cost) {
+				print ("Not enough mana");
+				placingTurret = false;
+				return;
+			}
 			ghostTurret = TurretManager.instance.slowStack.Pop ();
 			selectedTurretType = TurretType.Slow;
 			break;
 		case TurretType.Rocket:
+			if (ResourceManager.instance.mana < TurretManager.instance.rocketStack.Peek ().GetComponent<RocketTurret> ().cost) {
+				print ("Not enough mana");
+				placingTurret = false;
+				return;
+			}
 			ghostTurret = TurretManager.instance.rocketStack.Pop ();
 			selectedTurretType = TurretType.Rocket;
 			break;
@@ -121,15 +136,20 @@ public class TouchManager : MonoBehaviour {
 			switch (selectedTurretType) {
 			case TurretType.Basic:
 				ghostTurret.GetComponent<TurretScript> ().SetRangeCircleActive(false);
+				ResourceManager.instance.ChangeMana(-1*ghostTurret.GetComponent<TurretScript>().cost);
 				break;
 			case TurretType.Slow:
 				ghostTurret.GetComponent<SlowTurret> ().SetRangeCircleActive(false);
+				ResourceManager.instance.ChangeMana(-1*ghostTurret.GetComponent<SlowTurret>().cost);
 				break;
 			case TurretType.Rocket:
 				ghostTurret.GetComponent<RocketTurret> ().SetRangeCircleActive(false);
+				ResourceManager.instance.ChangeMana(-1*ghostTurret.GetComponent<RocketTurret>().cost);
 				break;
 			}
 			//print ("turret placed");
+			//decrease mana appropriately
+
 		}
 	}
 

@@ -12,6 +12,7 @@ public class RocketTurret : MonoBehaviour {
 	public TargetingMode mode;
 	public float range;
 	public float fireRate;
+	public float cost = 80f;
 	private float fireCountdown;
 	public float rotationSpeed;
 	[Header("Other")]
