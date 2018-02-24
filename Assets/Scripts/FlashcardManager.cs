@@ -13,6 +13,9 @@ public class FlashcardManager : MonoBehaviour {
 	public TextMeshPro choice1TextMesh;
 	public TextMeshPro choice2TextMesh;
 
+	private int correctChain;
+	public float baseManaGain = 3f;
+
 	public GameObject[] choiceButtons = new GameObject[3];
 
 	public Flashcard currentCard;
@@ -25,8 +28,6 @@ public class FlashcardManager : MonoBehaviour {
 			question = q;
 			answer = a;
 		}
-
-
 	}
 
 	void Awake()
@@ -40,12 +41,15 @@ public class FlashcardManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		currentFlashcardList = new List<Flashcard> ();
+		correctChain = 0;
 		//test stuff
 		PopulateFlashcardList ();
 		NewCard(currentFlashcardList [4]);
 
 	}
-	
+
+	//TODO: display correct chain on screen
+
 	// Update is called once per frame
 	void Update () {
 		
@@ -57,7 +61,8 @@ public class FlashcardManager : MonoBehaviour {
 		if (choices [index] == currentCard.answer) {
 			//turn button green
 			choiceButtons [index].GetComponent<Renderer> ().material.color = Color.green;
-			ResourceManager.instance.ChangeMana (10f);
+			ResourceManager.instance.ChangeMana (baseManaGain + correctChain*2);
+			correctChain++;
 		} else {
 			//turn button red
 			choiceButtons [index].GetComponent<Renderer> ().material.color = Color.red;
@@ -65,6 +70,7 @@ public class FlashcardManager : MonoBehaviour {
 			for (int i = 0; i < choices.Count; i++)
 				if(choices [i] == currentCard.answer)
 					choiceButtons [i].GetComponent<Renderer> ().material.color = Color.green;
+			correctChain = 0;
 		}
 		StartCoroutine (PauseAndLoadNextCard());
 
