@@ -65,6 +65,8 @@ public class TouchManager : MonoBehaviour {
 					type = TurretType.Rocket;
 				}else if (hit.transform.tag == "FRPowerup") {
 					type = TurretType.FRPowerup;
+				}else if (hit.transform.tag == "RangePowerup") {
+					type = TurretType.RangePowerup;
 				}
 				else if(hit.transform.tag == "Choice0" && !choiceSelectionMade){
 					FlashcardManager.instance.Select (0);
@@ -133,7 +135,15 @@ public class TouchManager : MonoBehaviour {
 			ghostTurret = TurretManager.instance.FRPowerupStack.Pop ();
 			selectedTurretType = TurretType.FRPowerup;
 			break;
-			
+		case TurretType.RangePowerup:
+			if (ResourceManager.instance.mana < TurretManager.instance.rangePowerupStack.Peek ().GetComponent<RangePowerup> ().cost) {
+				print ("Not enough mana");
+				placingTurret = false;
+				return;
+			}
+			ghostTurret = TurretManager.instance.rangePowerupStack.Pop ();
+			selectedTurretType = TurretType.RangePowerup;
+			break;	
 		}
 		ghostTurret.transform.position = new Vector3 (x, 0.6f, z);
 		ghostTurret.transform.localRotation = Quaternion.Euler (0,0,0);
@@ -144,7 +154,7 @@ public class TouchManager : MonoBehaviour {
 	void CheckPlaceTurret(){
 		if (Input.touchCount < 1 && locationValid) {
 			placingTurret = false;
-			if (selectedTurretType != TurretType.FRPowerup) {
+			if (selectedTurretType != TurretType.FRPowerup && selectedTurretType != TurretType.RangePowerup) {
 				TurretManager.instance.placedTurretPositions.Add (ghostTurret.transform.position);
 				TurretManager.instance.placedTurrets.Add (ghostTurret);
 			}
@@ -168,6 +178,14 @@ public class TouchManager : MonoBehaviour {
 				turretUnderPowerup.GetComponent<ITurretInfo>().BoostFireRate(ghostTurret.GetComponent<FRPowerup>().boostAmount);
 				ghostTurret.SetActive (false);
 				TurretManager.instance.FRPowerupStack.Push (ghostTurret);
+				break;
+			case TurretType.RangePowerup:
+				//ghostTurret.GetComponent<RocketTurret> ().SetRangeCircleActive(false);
+				ResourceManager.instance.ChangeMana (-1 * ghostTurret.GetComponent<RangePowerup> ().cost);
+				//dp powerup stuff
+				turretUnderPowerup.GetComponent<ITurretInfo>().BoostRange(ghostTurret.GetComponent<RangePowerup>().boostAmount);
+				ghostTurret.SetActive (false);
+				TurretManager.instance.rangePowerupStack.Push (ghostTurret);
 				print ("powerup placed");
 				break;
 			}
@@ -193,7 +211,7 @@ public class TouchManager : MonoBehaviour {
 
 		//loop method
 
-		if (selectedTurretType == TurretType.FRPowerup) {
+		if (selectedTurretType == TurretType.FRPowerup || selectedTurretType == TurretType.RangePowerup) {
 			for (int i = 0; i < TurretManager.instance.placedTurretPositions.Count && locationValid; i++) {
 				//loop and calculate distance between turrets
 				if (Vector3.Distance (ghostPos, TurretManager.instance.placedTurretPositions [i]) < turretDistTolerance+3f) 

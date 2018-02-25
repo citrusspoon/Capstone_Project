@@ -44,6 +44,11 @@ public class TurretScript : MonoBehaviour, ITurretInfo {
 	void ITurretInfo.BoostFireRate(float boostAmount){
 		fireRate *= boostAmount;
 	}
+	void ITurretInfo.BoostRange(float boostAmount){
+		range *= boostAmount;
+		print ("boosted");
+	}
+
 	
 	//========Update Variables============//
 	Vector3 dir;

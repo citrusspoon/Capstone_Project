@@ -6,4 +6,5 @@ public interface ITurretInfo {
 
 	TurretType GetType();
 	void BoostFireRate(float boostAmount);
+	void BoostRange (float boostAmout);
 }

@@ -37,6 +37,9 @@ public class SlowTurret : MonoBehaviour, ITurretInfo {
 	void ITurretInfo.BoostFireRate(float boostAmount){
 		fireRate *= boostAmount;
 	}
+	void ITurretInfo.BoostRange(float boostAmount){
+		range *= boostAmount;
+	}
 	
 	// Update is called once per frame
 	void Update () {

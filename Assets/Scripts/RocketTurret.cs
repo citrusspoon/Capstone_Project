@@ -48,6 +48,9 @@ public class RocketTurret : MonoBehaviour, ITurretInfo {
 	void ITurretInfo.BoostFireRate(float boostAmount){
 		fireRate *= boostAmount;
 	}
+	void ITurretInfo.BoostRange(float boostAmount){
+		range *= boostAmount;
+	}
 
 	//========Update Variables============//
 	Vector3 dir;
