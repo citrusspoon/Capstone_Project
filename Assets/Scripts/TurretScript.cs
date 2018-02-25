@@ -46,7 +46,6 @@ public class TurretScript : MonoBehaviour, ITurretInfo {
 	}
 	void ITurretInfo.BoostRange(float boostAmount){
 		range *= boostAmount;
-		print ("boosted");
 	}
 
 	

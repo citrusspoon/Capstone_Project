@@ -186,7 +186,6 @@ public class TouchManager : MonoBehaviour {
 				turretUnderPowerup.GetComponent<ITurretInfo>().BoostRange(ghostTurret.GetComponent<RangePowerup>().boostAmount);
 				ghostTurret.SetActive (false);
 				TurretManager.instance.rangePowerupStack.Push (ghostTurret);
-				print ("powerup placed");
 				break;
 			}
 			//print ("turret placed");
