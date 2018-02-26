@@ -29,6 +29,7 @@ public class TurretManager : MonoBehaviour {
 	[Header("Lists")]
 	public List<Vector3> placedTurretPositions;
 	public List<GameObject> placedTurrets;
+	public List<GameObject> placedGuardTurrets;
 	/*[Header("Tray")]
 	public Vector3 basicTraySpawnPoint;
 	public Vector3 slowTraySpawnPoint;
@@ -49,6 +50,7 @@ public class TurretManager : MonoBehaviour {
 	void Start () {
 		placedTurretPositions = new List<Vector3> ();
 		placedTurrets = new List<GameObject> ();
+		placedGuardTurrets = new List<GameObject> ();
 		basicStack = new Stack<GameObject> ();
 		slowStack = new Stack<GameObject> ();
 		rocketStack = new Stack<GameObject> ();

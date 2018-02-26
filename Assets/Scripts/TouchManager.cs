@@ -169,6 +169,9 @@ public class TouchManager : MonoBehaviour {
 				TurretManager.instance.placedTurretPositions.Add (ghostTurret.transform.position);
 				TurretManager.instance.placedTurrets.Add (ghostTurret);
 			}
+			if (selectedTurretType == TurretType.Guard)
+				TurretManager.instance.placedGuardTurrets.Add (ghostTurret);
+			
 			switch (selectedTurretType) {
 			case TurretType.Basic:
 				ghostTurret.GetComponent<TurretScript> ().SetRangeCircleActive(false);

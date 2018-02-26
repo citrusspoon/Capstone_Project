@@ -13,7 +13,7 @@ public class FlashcardManager : MonoBehaviour {
 	public TextMeshPro choice1TextMesh;
 	public TextMeshPro choice2TextMesh;
 
-	private int correctChain;
+	public int correctChain;
 	public float baseManaGain = 3f;
 
 	public GameObject[] choiceButtons = new GameObject[3];
@@ -70,7 +70,12 @@ public class FlashcardManager : MonoBehaviour {
 			for (int i = 0; i < choices.Count; i++)
 				if(choices [i] == currentCard.answer)
 					choiceButtons [i].GetComponent<Renderer> ().material.color = Color.green;
-			correctChain = 0;
+			if (guardPossible ()) {
+				//TODO: some kind of guard effect/popup
+			} else {
+				correctChain = 0;
+			}
+				
 		}
 		StartCoroutine (PauseAndLoadNextCard());
 
@@ -138,6 +143,19 @@ public class FlashcardManager : MonoBehaviour {
 		currentFlashcardList.Add (new Flashcard("What does static mean?", "Something new every time"));
 		currentFlashcardList.Add (new Flashcard("What?", "Yes"));
 		currentFlashcardList.Add (new Flashcard("Who is considered the father of computers, and is also a mech dude with a steam hammer?", "Charles Babbage"));
+	}
+	/// <summary>
+	/// Iterates through currently placed guard turrets, and if one is unbroken, returns true and breaks the turret.
+	/// </summary>
+	/// <returns><c>true</c>, if guard is possible, <c>false</c> otherwise.</returns>
+	bool guardPossible(){
+		for(int i = 0; i < TurretManager.instance.placedGuardTurrets.Count; i++){
+			if (!TurretManager.instance.placedGuardTurrets [i].GetComponent<GuardTurret> ().broken) {
+				TurretManager.instance.placedGuardTurrets [i].GetComponent<GuardTurret> ().breakTurret();
+				return true;
+			}	
+		}
+		return false;
 	}
 
 

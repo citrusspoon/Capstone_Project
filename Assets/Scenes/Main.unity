@@ -4002,6 +4002,7 @@ MonoBehaviour:
     type: 2}
   placedTurretPositions: []
   placedTurrets: []
+  placedGuardTurrets: []
 --- !u!1 &321163098
 GameObject:
   m_ObjectHideFlags: 0
@@ -4125,6 +4126,7 @@ MonoBehaviour:
   choice0TextMesh: {fileID: 1569967925}
   choice1TextMesh: {fileID: 365290698}
   choice2TextMesh: {fileID: 1796161557}
+  correctChain: 0
   baseManaGain: 5
   choiceButtons:
   - {fileID: 1476334994}
@@ -12660,7 +12662,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4240091700193030, guid: d3c6a68de54d89648a2fdabe5c9ca424, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 3.98
+      value: 3.85
       objectReference: {fileID: 0}
     - target: {fileID: 4240091700193030, guid: d3c6a68de54d89648a2fdabe5c9ca424, type: 2}
       propertyPath: m_LocalPosition.y
