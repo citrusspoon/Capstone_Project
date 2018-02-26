@@ -17,6 +17,8 @@ TagManager:
   - Choice0
   - FRPowerup
   - RangePowerup
+  - TrayGuard
+  - Guard
   layers:
   - Default
   - TransparentFX

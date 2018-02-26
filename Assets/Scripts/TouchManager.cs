@@ -67,6 +67,8 @@ public class TouchManager : MonoBehaviour {
 					type = TurretType.FRPowerup;
 				}else if (hit.transform.tag == "RangePowerup") {
 					type = TurretType.RangePowerup;
+				}else if (hit.transform.tag == "TrayGuard") {
+					type = TurretType.Guard;
 				}
 				else if(hit.transform.tag == "Choice0" && !choiceSelectionMade){
 					FlashcardManager.instance.Select (0);
@@ -143,7 +145,16 @@ public class TouchManager : MonoBehaviour {
 			}
 			ghostTurret = TurretManager.instance.rangePowerupStack.Pop ();
 			selectedTurretType = TurretType.RangePowerup;
-			break;	
+			break;
+		case TurretType.Guard:
+			if (ResourceManager.instance.mana < TurretManager.instance.guardStack.Peek ().GetComponent<GuardTurret> ().cost) {
+				print ("Not enough mana");
+				placingTurret = false;
+				return;
+			}
+			ghostTurret = TurretManager.instance.guardStack.Pop ();
+			selectedTurretType = TurretType.Guard;
+			break;
 		}
 		ghostTurret.transform.position = new Vector3 (x, 0.6f, z);
 		ghostTurret.transform.localRotation = Quaternion.Euler (0,0,0);
@@ -170,6 +181,10 @@ public class TouchManager : MonoBehaviour {
 			case TurretType.Rocket:
 				ghostTurret.GetComponent<RocketTurret> ().SetRangeCircleActive(false);
 				ResourceManager.instance.ChangeMana(-1*ghostTurret.GetComponent<RocketTurret>().cost);
+				break;
+			case TurretType.Guard:
+				ghostTurret.GetComponent<GuardTurret> ().SetRangeCircleActive(false);
+				ResourceManager.instance.ChangeMana(-1*ghostTurret.GetComponent<GuardTurret>().cost);
 				break;
 			case TurretType.FRPowerup:
 				//ghostTurret.GetComponent<RocketTurret> ().SetRangeCircleActive(false);
@@ -317,6 +332,14 @@ public class TouchManager : MonoBehaviour {
 			eRay = new Ray(new Vector3(x+3.5f,5,z), Vector3.down*5);Debug.DrawRay (new Vector3(x +3.5f,5,z), Vector3.down*5, Color.red);
 			wRay = new Ray(new Vector3(x-3.5f,5,z), Vector3.down*5);Debug.DrawRay (new Vector3(x -3.5f,5,z), Vector3.down*5, Color.red);
 			break;
+		case TurretType.Guard:
+			nRay = new Ray(new Vector3(x,5,z+5f), Vector3.down*5);Debug.DrawRay (new Vector3(x ,5,z+5f), Vector3.down*5, Color.red);
+			sRay = new Ray(new Vector3(x,5,z-5f), Vector3.down*5);Debug.DrawRay (new Vector3(x ,5,z-5f), Vector3.down*5, Color.red);
+			eRay = new Ray(new Vector3(x+4.5f,5,z), Vector3.down*5);Debug.DrawRay (new Vector3(x +4.5f,5,z), Vector3.down*5, Color.red);
+			wRay = new Ray(new Vector3(x-4.5f,5,z), Vector3.down*5);Debug.DrawRay (new Vector3(x -4.5f,5,z), Vector3.down*5, Color.red);
+			//cRay = new Ray(new Vector3(x,5,z), Vector3.down*5);Debug.DrawRay (new Vector3(x,5,z), Vector3.down*5, Color.red);
+
+			break;
 
 		}
 
@@ -376,6 +399,12 @@ public class TouchManager : MonoBehaviour {
 				ghostTurret.GetComponent<RocketTurret> ().ChangeRangeCircleColor (Color.green);
 			else
 				ghostTurret.GetComponent<RocketTurret> ().ChangeRangeCircleColor (Color.red);
+			break;
+		case TurretType.Guard:
+			if (locationValid)
+				ghostTurret.GetComponent<GuardTurret> ().ChangeRangeCircleColor (Color.green);
+			else
+				ghostTurret.GetComponent<GuardTurret> ().ChangeRangeCircleColor (Color.red);
 			break;
 		}
 			

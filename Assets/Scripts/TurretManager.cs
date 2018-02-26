@@ -11,18 +11,21 @@ public class TurretManager : MonoBehaviour {
 	public int rocketPoolSize;
 	public int FRPowerupPoolSize;
 	public int rangePowerupPoolSize;
+	public int guardPoolSize;
 	[Header("Turret Prefabs")]
 	public GameObject basicPrefab;
 	public GameObject slowPrefab;
 	public GameObject rocketPrefab;
 	public GameObject FRPowerupPrefab;
 	public GameObject rangePowerupPrefab;
+	public GameObject guardPrefab;
 	[Header("Stacks")]
 	public Stack<GameObject> basicStack;
 	public Stack<GameObject> slowStack;
 	public Stack<GameObject> rocketStack;
 	public Stack<GameObject> FRPowerupStack;
 	public Stack<GameObject> rangePowerupStack;
+	public Stack<GameObject> guardStack;
 	[Header("Lists")]
 	public List<Vector3> placedTurretPositions;
 	public List<GameObject> placedTurrets;
@@ -51,6 +54,7 @@ public class TurretManager : MonoBehaviour {
 		rocketStack = new Stack<GameObject> ();
 		FRPowerupStack = new Stack<GameObject> ();
 		rangePowerupStack = new Stack<GameObject> ();
+		guardStack = new Stack<GameObject> ();
 		for (int i = 0; i < basicPoolSize; i++) {
 			temp = (GameObject)Instantiate (basicPrefab);
 			temp.SetActive (false);
@@ -75,6 +79,11 @@ public class TurretManager : MonoBehaviour {
 			temp = (GameObject)Instantiate (rangePowerupPrefab);
 			temp.SetActive (false);
 			rangePowerupStack.Push (temp);
+		}
+		for (int i = 0; i < guardPoolSize; i++) {
+			temp = (GameObject)Instantiate (guardPrefab);
+			temp.SetActive (false);
+			guardStack.Push (temp);
 		}
 	}
 
@@ -113,6 +122,11 @@ public class TurretManager : MonoBehaviour {
 			temp = (GameObject)Instantiate (rangePowerupPrefab);
 			temp.SetActive (false);
 			rangePowerupStack.Push (temp);
+		}
+		if (guardStack.Count < 2) {
+			temp = (GameObject)Instantiate (guardPrefab);
+			temp.SetActive (false);
+			guardStack.Push (temp);
 		}
 	}
 }
