@@ -6,6 +6,13 @@ public class TouchManager : MonoBehaviour {
 
 	//Screen world x = -50 ~ 50
 	//				y = -80 ~ 80
+
+
+	/*
+		Flow: CheckTrayTouch() responds when tray turret is touched. Sends type of turret selected to SelectTurret(). Mana is checked, if sufficient
+		a "ghostTurret" is created (what the user drags around while placing). Location validity is constantly being checked by CheckLocation(). 
+		If location is valid, and finger is lifted, turret is placed, mana is subtracted, and turret is added to appropriate list
+	*/
 	public static TouchManager instance = null;
 	public GameObject testObject;
 	private bool placingTurret = false;
