@@ -8,7 +8,9 @@ public class ResourceManager : MonoBehaviour {
 	public static ResourceManager instance = null;
 
 	public float playerHealth = 100f;
+	public float maxPlayerHealth = 100f;
 	public float mana = 100f;
+	public float maxMana = 100f;
 	public Slider healthBar;
 	public Slider manaBar;
 	public Text healthText;
@@ -37,13 +39,18 @@ public class ResourceManager : MonoBehaviour {
 	public void ChangeHealth(float delta){
 		playerHealth += delta;
 		healthBar.value = playerHealth;
-		healthText.text = "Health (" + playerHealth+ ")";
+		healthText.text = "Health (" + playerHealth+ "/" + maxPlayerHealth + ")";
 	}
 	public void ChangeMana(float delta){
 		mana += delta;
-		if (mana > 100f)
-			mana = 100f;
+		if (mana > maxMana)
+			mana = maxMana;
 		manaBar.value = mana;
-		manaText.text = "Mana (" + mana + ")";
+		manaText.text = "Mana (" + mana + "/" + maxMana + ")";
+	}
+	public void changeMaxMana(float delta){
+		maxMana += delta;
+		manaBar.maxValue = maxMana;
+		manaText.text = "Mana (" + mana + "/" + maxMana + ")";
 	}
 }

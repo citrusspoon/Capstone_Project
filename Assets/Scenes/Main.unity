@@ -6034,8 +6034,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -310.7, y: -620}
-  m_SizeDelta: {x: 163.55, y: 43.46}
+  m_AnchoredPosition: {x: -284.67, y: -620}
+  m_SizeDelta: {x: 215.62, y: 43.46}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &483553933
 MonoBehaviour:
@@ -6069,7 +6069,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Mana (000)
+  m_Text: Mana (000/000)
 --- !u!222 &483553934
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7078,7 +7078,7 @@ Prefab:
     - target: {fileID: 224721562227884090, guid: 4ac92ea25d6b91b4e8a83f8080742cd2,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -49.100006
+      value: -7.02
       objectReference: {fileID: 0}
     - target: {fileID: 224721562227884090, guid: 4ac92ea25d6b91b4e8a83f8080742cd2,
         type: 2}
@@ -11645,7 +11645,7 @@ Prefab:
     - target: {fileID: 224721562227884090, guid: 4ac92ea25d6b91b4e8a83f8080742cd2,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -60.80002
+      value: -18.3
       objectReference: {fileID: 0}
     - target: {fileID: 224721562227884090, guid: 4ac92ea25d6b91b4e8a83f8080742cd2,
         type: 2}
@@ -21403,7 +21403,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: 100
+  maxPlayerHealth: 100
   mana: 100
+  maxMana: 100
   healthBar: {fileID: 611585888}
   manaBar: {fileID: 1042399300}
   healthText: {fileID: 1972615188}
@@ -22573,8 +22575,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -310.7, y: -587.68}
-  m_SizeDelta: {x: 163.55, y: 43.46}
+  m_AnchoredPosition: {x: -276.27, y: -587.68}
+  m_SizeDelta: {x: 232.42, y: 43.46}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1972615188
 MonoBehaviour:
@@ -22608,7 +22610,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Health (000)
+  m_Text: Health (000/000)
 --- !u!222 &1972615189
 CanvasRenderer:
   m_ObjectHideFlags: 0

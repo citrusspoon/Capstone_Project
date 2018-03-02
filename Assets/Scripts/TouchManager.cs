@@ -186,8 +186,9 @@ public class TouchManager : MonoBehaviour {
 				ResourceManager.instance.ChangeMana(-1*ghostTurret.GetComponent<RocketTurret>().cost);
 				break;
 			case TurretType.Guard:
-				ghostTurret.GetComponent<GuardTurret> ().SetRangeCircleActive(false);
-				ResourceManager.instance.ChangeMana(-1*ghostTurret.GetComponent<GuardTurret>().cost);
+				ghostTurret.GetComponent<GuardTurret> ().SetRangeCircleActive (false);
+				ResourceManager.instance.ChangeMana (-1 * ghostTurret.GetComponent<GuardTurret> ().cost);
+				ResourceManager.instance.changeMaxMana (20f);
 				break;
 			case TurretType.FRPowerup:
 				//ghostTurret.GetComponent<RocketTurret> ().SetRangeCircleActive(false);
@@ -207,6 +208,7 @@ public class TouchManager : MonoBehaviour {
 				break;
 			}
 			//print ("turret placed");
+			TurretManager.instance.turretCounts[selectedTurretType] = ((int)(TurretManager.instance.turretCounts[selectedTurretType])) + 1;
 
 		}
 	}

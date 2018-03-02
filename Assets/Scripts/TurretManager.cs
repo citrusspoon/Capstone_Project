@@ -30,6 +30,7 @@ public class TurretManager : MonoBehaviour {
 	public List<Vector3> placedTurretPositions;
 	public List<GameObject> placedTurrets;
 	public List<GameObject> placedGuardTurrets;
+	public Hashtable turretCounts;
 	/*[Header("Tray")]
 	public Vector3 basicTraySpawnPoint;
 	public Vector3 slowTraySpawnPoint;
@@ -49,6 +50,11 @@ public class TurretManager : MonoBehaviour {
 	GameObject temp;
 	void Start () {
 		placedTurretPositions = new List<Vector3> ();
+		turretCounts = new Hashtable ();
+		turretCounts.Add (TurretType.Basic, 0);
+		turretCounts.Add (TurretType.Rocket, 0);
+		turretCounts.Add (TurretType.Slow, 0);
+		turretCounts.Add (TurretType.Guard, 0);
 		placedTurrets = new List<GameObject> ();
 		placedGuardTurrets = new List<GameObject> ();
 		basicStack = new Stack<GameObject> ();
@@ -92,8 +98,7 @@ public class TurretManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		StackFailsafe ();
-		
+		StackFailsafe ();	
 	}
 	/// <summary>
 	/// Instantiates more turrets if the stack runs low.
