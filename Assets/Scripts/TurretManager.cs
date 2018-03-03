@@ -108,6 +108,7 @@ public class TurretManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		StackFailsafe ();	
+		print (rangePowerupStack.Count);
 	}
 	/// <summary>
 	/// Instantiates more turrets if the stack runs low.

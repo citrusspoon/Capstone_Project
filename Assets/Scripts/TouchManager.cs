@@ -240,6 +240,39 @@ public class TouchManager : MonoBehaviour {
 			if(selectedTurretType != TurretType.FRPowerup && selectedTurretType != TurretType.RangePowerup && selectedTurretType != TurretType.Destroy)
 				TurretManager.instance.turretCounts[selectedTurretType] = ((int)(TurretManager.instance.turretCounts[selectedTurretType])) + 1;
 
+		}else if (Input.touchCount < 1 && !locationValid) { //if user lifts finger over a nonvalid location, process restarts
+			placingTurret = false;
+
+			switch (selectedTurretType) {
+			case TurretType.Basic:
+				ghostTurret.SetActive (false);
+				TurretManager.instance.basicStack.Push (ghostTurret);
+				break;
+			case TurretType.Slow:
+				ghostTurret.SetActive (false);
+				TurretManager.instance.slowStack.Push (ghostTurret);
+				break;
+			case TurretType.Rocket:
+				ghostTurret.SetActive (false);
+				TurretManager.instance.rocketStack.Push (ghostTurret);
+				break;
+			case TurretType.Guard:
+				ghostTurret.SetActive (false);
+				TurretManager.instance.guardStack.Push (ghostTurret);
+				break;
+			case TurretType.FRPowerup:
+				ghostTurret.SetActive (false);
+				TurretManager.instance.FRPowerupStack.Push (ghostTurret);
+				break;
+			case TurretType.RangePowerup:
+				ghostTurret.SetActive (false);
+				TurretManager.instance.rangePowerupStack.Push (ghostTurret);
+				break;
+			case TurretType.Destroy:
+				ghostTurret.SetActive (false);
+				TurretManager.instance.destroyStack.Push (ghostTurret);
+				break;
+			}
 		}
 	}
 
