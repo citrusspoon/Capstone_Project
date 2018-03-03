@@ -19,6 +19,7 @@ TagManager:
   - RangePowerup
   - TrayGuard
   - Guard
+  - Destroy
   layers:
   - Default
   - TransparentFX

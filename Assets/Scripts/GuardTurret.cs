@@ -35,6 +35,9 @@ public class GuardTurret : MonoBehaviour, ITurretInfo {
 	void ITurretInfo.BoostRange(float boostAmount){
 		range *= boostAmount;
 	}
+	void ITurretInfo.DestroySelf(){
+		print ("destroyed");
+	}
 	
 	// Update is called once per frame
 	void Update () {

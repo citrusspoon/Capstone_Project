@@ -12,6 +12,7 @@ public class TurretManager : MonoBehaviour {
 	public int FRPowerupPoolSize;
 	public int rangePowerupPoolSize;
 	public int guardPoolSize;
+	public int destroyPoolSize;
 	[Header("Turret Prefabs")]
 	public GameObject basicPrefab;
 	public GameObject slowPrefab;
@@ -19,6 +20,7 @@ public class TurretManager : MonoBehaviour {
 	public GameObject FRPowerupPrefab;
 	public GameObject rangePowerupPrefab;
 	public GameObject guardPrefab;
+	public GameObject destroyPrefab;
 	[Header("Stacks")]
 	public Stack<GameObject> basicStack;
 	public Stack<GameObject> slowStack;
@@ -26,6 +28,7 @@ public class TurretManager : MonoBehaviour {
 	public Stack<GameObject> FRPowerupStack;
 	public Stack<GameObject> rangePowerupStack;
 	public Stack<GameObject> guardStack;
+	public Stack<GameObject> destroyStack;
 	[Header("Lists")]
 	public List<Vector3> placedTurretPositions;
 	public List<GameObject> placedTurrets;
@@ -56,6 +59,7 @@ public class TurretManager : MonoBehaviour {
 		turretCounts.Add (TurretType.Slow, 0);
 		turretCounts.Add (TurretType.Guard, 0);
 		placedTurrets = new List<GameObject> ();
+		destroyStack = new Stack<GameObject> ();
 		placedGuardTurrets = new List<GameObject> ();
 		basicStack = new Stack<GameObject> ();
 		slowStack = new Stack<GameObject> ();
@@ -92,6 +96,11 @@ public class TurretManager : MonoBehaviour {
 			temp = (GameObject)Instantiate (guardPrefab);
 			temp.SetActive (false);
 			guardStack.Push (temp);
+		}
+		for (int i = 0; i < destroyPoolSize; i++) {
+			temp = (GameObject)Instantiate (destroyPrefab);
+			temp.SetActive (false);
+			destroyStack.Push (temp);
 		}
 	}
 
@@ -134,6 +143,11 @@ public class TurretManager : MonoBehaviour {
 			temp = (GameObject)Instantiate (guardPrefab);
 			temp.SetActive (false);
 			guardStack.Push (temp);
+		}
+		if (destroyStack.Count < 2) {
+			temp = (GameObject)Instantiate (destroyPrefab);
+			temp.SetActive (false);
+			destroyStack.Push (temp);
 		}
 	}
 }
