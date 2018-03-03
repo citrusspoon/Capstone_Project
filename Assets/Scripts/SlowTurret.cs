@@ -41,7 +41,12 @@ public class SlowTurret : MonoBehaviour, ITurretInfo {
 		range *= boostAmount;
 	}
 	void ITurretInfo.DestroySelf(){
-		print ("destroyed");
+		TurretManager.instance.placedTurrets.Remove (this.gameObject);
+		TurretManager.instance.placedTurretPositions.Remove (thisTransform.position);
+		SetRangeCircleActive (true);
+		TurretManager.instance.turretCounts[type] = ((int)(TurretManager.instance.turretCounts[type])) - 1;
+		this.gameObject.SetActive (false);
+		TurretManager.instance.basicStack.Push (this.gameObject);
 	}
 	
 	// Update is called once per frame
