@@ -53,7 +53,11 @@ public class QuizletHandler : MonoBehaviour {
 		print ("done");
 		loadingIcon.SetActive (false);
 		FlashcardSet f = JsonUtility.FromJson<FlashcardSet> (req.text);
-		FlashcardManager.instance.PopulateFlashcardList (f);
+		//TODO: make on screen indication
+		if (f.http_code == 404)
+			print ("Invalid set ID");
+		else
+			FlashcardManager.instance.PopulateFlashcardList (f);
 		//testText.text = f.ToString();
 		//testText.text = req.text;
 	}

@@ -2722,7 +2722,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 1, z: 1.4}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &175977427
 MeshFilter:
@@ -4592,6 +4592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e093373ebc22d6439497bc81b6cbe44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentFlashcardList: []
   cardTextMesh: {fileID: 1601855135}
   choice0TextMesh: {fileID: 1569967925}
   choice1TextMesh: {fileID: 365290698}
@@ -4602,6 +4603,9 @@ MonoBehaviour:
   - {fileID: 1476334994}
   - {fileID: 543935884}
   - {fileID: 175977423}
+  currentCard:
+    term: 
+    definition: 
   choicePool: []
 --- !u!1001 &337203742
 Prefab:
@@ -7167,7 +7171,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 1, z: 1.4}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &543935888
 MeshFilter:
@@ -17101,7 +17105,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 1, z: 1.4}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &1476334998
 MeshFilter:

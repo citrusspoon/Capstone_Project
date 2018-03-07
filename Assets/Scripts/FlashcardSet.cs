@@ -6,6 +6,7 @@ using UnityEngine;
 public class FlashcardSet {
 
 	public Flashcard[] terms;
+	public int http_code;
 
 	public string ToString(){
 		string s = "";
