@@ -151,6 +151,17 @@ public class FlashcardManager : MonoBehaviour {
 		choice2TextMesh.text = choices[2];
 		currentCard = c;
 	}
+
+	public void PopulateFlashcardList(FlashcardSet f){
+		//test stuff
+		currentFlashcardList.Clear();
+		for (int i = 0; i < f.terms.Length; i++)
+			currentFlashcardList.Add (f.terms [i]);
+
+		NewCard (currentFlashcardList[Random.Range(0,currentFlashcardList.Count)]);
+			
+	
+	}
 	void PopulateFlashcardList(){
 		//test stuff
 		currentFlashcardList.Clear();

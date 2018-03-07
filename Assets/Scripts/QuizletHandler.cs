@@ -53,7 +53,8 @@ public class QuizletHandler : MonoBehaviour {
 		print ("done");
 		loadingIcon.SetActive (false);
 		FlashcardSet f = JsonUtility.FromJson<FlashcardSet> (req.text);
-		testText.text = f.ToString();
+		FlashcardManager.instance.PopulateFlashcardList (f);
+		//testText.text = f.ToString();
 		//testText.text = req.text;
 	}
 }
