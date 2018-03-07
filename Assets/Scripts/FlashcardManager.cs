@@ -19,16 +19,33 @@ public class FlashcardManager : MonoBehaviour {
 	public GameObject[] choiceButtons = new GameObject[3];
 
 	public Flashcard currentCard;
-
+	/*
+	[System.Serializable]
 	public class Flashcard{
-		public string question;
-		public string answer;
+		public string term;
+		public string definition;
 
-		public Flashcard(string q, string a){
-			question = q;
-			answer = a;
+		public Flashcard(string t, string d){
+			term = t;
+			definition = d;
+		}
+		public string ToString(){
+			return "Term: " + term + "\nDef: " + definition;
 		}
 	}
+
+	[System.Serializable]
+	public class FlashcardSet{
+		public Flashcard[] terms;
+
+		public string ToString(){
+			string s = "";
+			for (int i = 0; i < terms.Length; i++)
+				s += terms [i].ToString (); 
+			return s;
+		}
+	}
+	*/
 
 	void Awake()
 	{
@@ -58,7 +75,7 @@ public class FlashcardManager : MonoBehaviour {
 	public void Select(int index){
 		TouchManager.instance.choiceSelectionMade = true;
 		//if correct answer is selected
-		if (choices [index] == currentCard.answer) {
+		if (choices [index] == currentCard.definition) {
 			//turn button green
 			choiceButtons [index].GetComponent<Renderer> ().material.color = Color.green;
 			ResourceManager.instance.ChangeMana (baseManaGain + correctChain*2);
@@ -68,7 +85,7 @@ public class FlashcardManager : MonoBehaviour {
 			choiceButtons [index].GetComponent<Renderer> ().material.color = Color.red;
 			//turn correct button green
 			for (int i = 0; i < choices.Count; i++)
-				if(choices [i] == currentCard.answer)
+				if(choices [i] == currentCard.definition)
 					choiceButtons [i].GetComponent<Renderer> ().material.color = Color.green;
 			if (guardPossible ()) {
 				//TODO: some kind of guard effect/popup
@@ -108,10 +125,10 @@ public class FlashcardManager : MonoBehaviour {
 		choicePool.Clear ();
 		for (int i = 0; i < currentFlashcardList.Count; i++) {
 			if(currentFlashcardList[i] != c)
-				choicePool.Add (currentFlashcardList [i].answer);
+				choicePool.Add (currentFlashcardList [i].definition);
 		}
 		r = Random.Range(0, choicePool.Count);
-		choices.Add (c.answer);
+		choices.Add (c.definition);
 	
 		choices.Add (choicePool[r]);
 
@@ -128,7 +145,7 @@ public class FlashcardManager : MonoBehaviour {
 		choices [0] = choices [r];
 		choices [r] = swapChoice;
 
-		cardTextMesh.text = c.question;
+		cardTextMesh.text = c.term;
 		choice0TextMesh.text = choices[0];
 		choice1TextMesh.text = choices[1];
 		choice2TextMesh.text = choices[2];
