@@ -17,6 +17,7 @@ public class FlashcardManager : MonoBehaviour {
 
 	public TextMeshProUGUI[] loadedSetsMenuText; 
 	public Button[] removeSetButtons;
+	public Toggle[] swapToggles;
 
 	public int correctChain;
 	public float baseManaGain = 3f;
@@ -163,7 +164,18 @@ public class FlashcardManager : MonoBehaviour {
 				return;
 		}
 		loadedFlashcardSets.Add (f);
+		swapToggles [loadedFlashcardSets.Count - 1].isOn = false;
 		UpdateLoadedSetsUIElements ();
+	}
+	/// <summary>
+	/// Swaps the term and definitions of all cards in the set.
+	/// </summary>
+	/// <param name="index">Index of loaded flashcard set.</param>
+	public void SwapFlashcardSetElements(int index){
+		if (loadedSetsMenuText [index].text == "Empty")
+			return;
+		loadedFlashcardSets [index].SwapFlashcardElements (swapToggles[index].isOn);
+		PopulateFlashcardList ();
 	}
 	/// <summary>
 	/// Updates the text for the currently loaded sets in the quizlet menu.
@@ -181,15 +193,22 @@ public class FlashcardManager : MonoBehaviour {
 	void UpdateLoadedSetsUIElements(int remIndex){
 		loadedSetsMenuText [remIndex].text = "Empty";
 		int j = 0;
+		//sets text to the title of the flashcard set
 		for (int i = 0; i < loadedFlashcardSets.Count; i++) {
 			loadedSetsMenuText [i].text = loadedFlashcardSets [i].title;
+			swapToggles [i].isOn = loadedFlashcardSets [i].swapped;
 			j++;
 		}
+		//sets remaining texts to empty
 		while (j < loadedSetsMenuText.Length) {
 			loadedSetsMenuText [j].text = "Empty";
 			j++;
 		}
-
+		//sets swap toggle to false for all empty items
+		for (int k = 0; k < loadedSetsMenuText.Length; k++) {
+			if (loadedSetsMenuText [k].text == "Empty")
+				swapToggles [k].isOn = false;
+		}
 
 		PopulateFlashcardList ();
 	}

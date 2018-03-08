@@ -56,8 +56,9 @@ public class QuizletHandler : MonoBehaviour {
 		//TODO: make on screen indication
 		if (f.http_code == 404)
 			print ("Invalid set ID");
-		else
-			FlashcardManager.instance.AddFlashcardSet(f);
+		else 
+			FlashcardManager.instance.AddFlashcardSet (f);
+
 		//testText.text = f.ToString();
 		//testText.text = req.text;
 	}
