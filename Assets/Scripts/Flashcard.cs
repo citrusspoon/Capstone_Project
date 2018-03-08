@@ -4,7 +4,7 @@ using UnityEngine;
 
 [System.Serializable]
 public class Flashcard {
-
+	
 	public string term;
 	public string definition;
 

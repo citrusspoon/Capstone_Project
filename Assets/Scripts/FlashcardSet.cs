@@ -7,6 +7,8 @@ public class FlashcardSet {
 
 	public Flashcard[] terms;
 	public int http_code;
+	public int id;
+	public string title;
 
 	public string ToString(){
 		string s = "";

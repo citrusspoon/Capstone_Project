@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class FlashcardManager : MonoBehaviour {
@@ -8,10 +9,14 @@ public class FlashcardManager : MonoBehaviour {
 	public static FlashcardManager instance = null;
 
 	public List<Flashcard> currentFlashcardList;
+	public List<FlashcardSet> loadedFlashcardSets;
 	public TextMeshPro cardTextMesh;
 	public TextMeshPro choice0TextMesh;
 	public TextMeshPro choice1TextMesh;
 	public TextMeshPro choice2TextMesh;
+
+	public TextMeshProUGUI[] loadedSetsMenuText; 
+	public Button[] removeSetButtons;
 
 	public int correctChain;
 	public float baseManaGain = 3f;
@@ -19,33 +24,7 @@ public class FlashcardManager : MonoBehaviour {
 	public GameObject[] choiceButtons = new GameObject[3];
 
 	public Flashcard currentCard;
-	/*
-	[System.Serializable]
-	public class Flashcard{
-		public string term;
-		public string definition;
 
-		public Flashcard(string t, string d){
-			term = t;
-			definition = d;
-		}
-		public string ToString(){
-			return "Term: " + term + "\nDef: " + definition;
-		}
-	}
-
-	[System.Serializable]
-	public class FlashcardSet{
-		public Flashcard[] terms;
-
-		public string ToString(){
-			string s = "";
-			for (int i = 0; i < terms.Length; i++)
-				s += terms [i].ToString (); 
-			return s;
-		}
-	}
-	*/
 
 	void Awake()
 	{
@@ -58,10 +37,14 @@ public class FlashcardManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		currentFlashcardList = new List<Flashcard> ();
+		loadedFlashcardSets = new List<FlashcardSet> ();
 		correctChain = 0;
+		//TODO: add an initial set that is independent of quizlet
+
+
 		//test stuff
-		PopulateFlashcardList ();
-		NewCard(currentFlashcardList [4]);
+		//PopulateFlashcardList ();
+		//NewCard(currentFlashcardList [4]);
 
 	}
 
@@ -112,6 +95,7 @@ public class FlashcardManager : MonoBehaviour {
 	}
 
 	//=======New Card Variables=========//
+	//TODO: possibly swap term and definition?
 	List<string> choices = new List<string> ();
 	public List<string> choicePool = new List<string> (); 
 	int r;
@@ -151,7 +135,7 @@ public class FlashcardManager : MonoBehaviour {
 		choice2TextMesh.text = choices[2];
 		currentCard = c;
 	}
-
+	/*
 	public void PopulateFlashcardList(FlashcardSet f){
 		//test stuff
 		currentFlashcardList.Clear();
@@ -161,16 +145,73 @@ public class FlashcardManager : MonoBehaviour {
 		NewCard (currentFlashcardList[Random.Range(0,currentFlashcardList.Count)]);
 			
 	
+	}*/
+
+	/// <summary>
+	/// Removes the specified set. Will not allow there to be no loaded sets.
+	/// </summary>
+	/// <param name="index">Index of set in menu</param>
+	public void RemoveFlashcardSet(int index){
+		if (loadedSetsMenuText [index].text != "Empty" && loadedFlashcardSets.Count > 1) {
+			loadedFlashcardSets.RemoveAt (index);
+			UpdateLoadedSetsUIElements (index);
+		}
+	}
+	public void AddFlashcardSet(FlashcardSet f){
+		for (int i = 0; i < loadedFlashcardSets.Count; i++) {
+			if (f.id == loadedFlashcardSets [i].id)
+				return;
+		}
+		loadedFlashcardSets.Add (f);
+		UpdateLoadedSetsUIElements ();
+	}
+	/// <summary>
+	/// Updates the text for the currently loaded sets in the quizlet menu.
+	/// </summary>
+	void UpdateLoadedSetsUIElements(){
+		for (int i = 0; i < loadedFlashcardSets.Count; i++) {
+				loadedSetsMenuText [i].text = loadedFlashcardSets [i].title;
+		}
+		PopulateFlashcardList ();
+	}
+	/// <summary>
+	/// Updates the text for the currently loaded sets in the quizlet menu. Sets recently removed set to "Empty".
+	/// </summary>
+	/// <param name="remIndex">Index of set recently removed</param>
+	void UpdateLoadedSetsUIElements(int remIndex){
+		loadedSetsMenuText [remIndex].text = "Empty";
+		int j = 0;
+		for (int i = 0; i < loadedFlashcardSets.Count; i++) {
+			loadedSetsMenuText [i].text = loadedFlashcardSets [i].title;
+			j++;
+		}
+		while (j < loadedSetsMenuText.Length) {
+			loadedSetsMenuText [j].text = "Empty";
+			j++;
+		}
+
+
+		PopulateFlashcardList ();
 	}
 	void PopulateFlashcardList(){
 		//test stuff
 		currentFlashcardList.Clear();
 
+		for (int i = 0; i < loadedFlashcardSets.Count; i++) {
+			for (int j = 0; j < loadedFlashcardSets [i].terms.Length; j++) {
+				currentFlashcardList.Add (loadedFlashcardSets[i].terms[j]);
+			}
+		}
+		if(currentFlashcardList.Count > 0)
+			NewCard (currentFlashcardList[0]);
+
+		/*
 		currentFlashcardList.Add (new Flashcard("What color is the ocean?", "Blue"));
 		currentFlashcardList.Add (new Flashcard("How old is Flandre Scarlet?", "495"));
 		currentFlashcardList.Add (new Flashcard("What does static mean?", "Something new every time"));
 		currentFlashcardList.Add (new Flashcard("What?", "Yes"));
 		currentFlashcardList.Add (new Flashcard("Who is considered the father of computers, and is also a mech dude with a steam hammer?", "Charles Babbage"));
+		*/
 	}
 	/// <summary>
 	/// Iterates through currently placed guard turrets, and if one is unbroken, returns true and breaks the turret.

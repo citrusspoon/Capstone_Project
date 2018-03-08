@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour {
 	public Transform gameViewTransform;
 	public Transform quizletViewTransform;
 	public GameObject testUI;
-	public GameObject IDElements;
+	public GameObject quizletElements;
 	private Transform thisTransform;
 	// Use this for initialization
 	void Start () {
@@ -28,6 +28,6 @@ public class CameraController : MonoBehaviour {
 
 		gameView = !gameView;
 		testUI.SetActive (gameView);
-		IDElements.SetActive (!gameView);
+		quizletElements.SetActive (!gameView);
 	}
 }
