@@ -10,6 +10,7 @@ public class FlashcardSet {
 	public int id;
 	public string title;
 	public bool swapped = false;
+	public string jsonString;
 
 	public string ToString(){
 		string s = "";

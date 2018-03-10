@@ -32,6 +32,7 @@ public class QuizletHandler : MonoBehaviour {
 	}
 	void ImportInitialFlashcardSet(){
 		FlashcardSet f = JsonUtility.FromJson<FlashcardSet> (initialFlashcardSet);
+		f.jsonString = initialFlashcardSet;
 		FlashcardManager.instance.AddFlashcardSet (f);
 	}
 	
@@ -59,6 +60,7 @@ public class QuizletHandler : MonoBehaviour {
 		print ("done");
 		loadingIcon.SetActive (false);
 		FlashcardSet f = JsonUtility.FromJson<FlashcardSet> (req.text);
+		f.jsonString = req.text;
 		//TODO: make on screen indication
 		if (f.http_code == 404)
 			print ("Invalid set ID");

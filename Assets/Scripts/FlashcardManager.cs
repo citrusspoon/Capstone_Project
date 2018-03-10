@@ -172,8 +172,9 @@ public class FlashcardManager : MonoBehaviour {
 		UpdateRecentFlashcardSets (f);
 		UpdateLoadedSetsUIElements ();
 	}
-
-	int recentsListMaxSize = 3; 
+	//TODO: make recents save even if game is closed (possibly use playerprefs to store json string)
+	//TODO: make it so dropdown is ordered most to least recent
+	int recentsListMaxSize = 5; 
 	void UpdateRecentFlashcardSets(FlashcardSet f){
 		for (int i = 0; i < recentFlashcardSets.Count; i++) {
 			if (f.id == recentFlashcardSets [i].id) {
@@ -205,6 +206,10 @@ public class FlashcardManager : MonoBehaviour {
 		recentSetsDropdown.AddOptions (recentSetsTitles);
 	
 	}
+	public void ImportRecentFlashcardSet(){
+		AddFlashcardSet (recentFlashcardSets[recentSetsDropdown.value]);
+	}
+
 	/// <summary>
 	/// Swaps the term and definitions of all cards in the set.
 	/// </summary>
