@@ -10,10 +10,14 @@ public class FlashcardManager : MonoBehaviour {
 
 	public List<Flashcard> currentFlashcardList;
 	public List<FlashcardSet> loadedFlashcardSets;
+	public List<FlashcardSet> recentFlashcardSets;
+	private List<string> recentSetsTitles;
 	public TextMeshPro cardTextMesh;
 	public TextMeshPro choice0TextMesh;
 	public TextMeshPro choice1TextMesh;
 	public TextMeshPro choice2TextMesh;
+	public TMP_Dropdown recentSetsDropdown;
+
 
 	public TextMeshProUGUI[] loadedSetsMenuText; 
 	public Button[] removeSetButtons;
@@ -39,10 +43,10 @@ public class FlashcardManager : MonoBehaviour {
 	void Start () {
 		currentFlashcardList = new List<Flashcard> ();
 		loadedFlashcardSets = new List<FlashcardSet> ();
+		recentFlashcardSets = new List<FlashcardSet> ();
+		recentSetsTitles = new List<string> ();
 		correctChain = 0;
 		//TODO: add an initial set that is independent of quizlet
-
-
 		//test stuff
 		//PopulateFlashcardList ();
 		//NewCard(currentFlashcardList [4]);
@@ -165,7 +169,41 @@ public class FlashcardManager : MonoBehaviour {
 		}
 		loadedFlashcardSets.Add (f);
 		swapToggles [loadedFlashcardSets.Count - 1].isOn = false;
+		UpdateRecentFlashcardSets (f);
 		UpdateLoadedSetsUIElements ();
+	}
+
+	int recentsListMaxSize = 3; 
+	void UpdateRecentFlashcardSets(FlashcardSet f){
+		for (int i = 0; i < recentFlashcardSets.Count; i++) {
+			if (f.id == recentFlashcardSets [i].id) {
+				//if fcs is already in recents, pushes it to the end of the list
+				recentFlashcardSets.RemoveAt (i);
+				recentFlashcardSets.Add (f);
+				UpdateRecentSetsUI ();
+				return;
+			}
+		}
+
+		recentFlashcardSets.Add (f);
+		if (recentFlashcardSets.Count > recentsListMaxSize)
+			recentFlashcardSets.RemoveAt (0);
+
+		UpdateRecentSetsUI ();
+
+	}
+
+	void UpdateRecentSetsUI(){
+
+		recentSetsTitles.Clear ();
+
+		for (int i = 0; i < recentFlashcardSets.Count; i++)
+			recentSetsTitles.Add (recentFlashcardSets[i].title);
+
+		recentSetsDropdown.ClearOptions ();
+
+		recentSetsDropdown.AddOptions (recentSetsTitles);
+	
 	}
 	/// <summary>
 	/// Swaps the term and definitions of all cards in the set.
