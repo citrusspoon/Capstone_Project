@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		thisTransform = transform;
-		MoveTo (WindowState.Game);
+		SetTo (WindowState.MainMenu);
 	}
 	Vector3 dir;
 	Transform target;
@@ -47,16 +47,39 @@ public class CameraController : MonoBehaviour {
 		}
 		
 	}
+	/// <summary>
+	/// Moves camera to designated area
+	/// </summary>
+	/// <param name="s">Window state</param>
 	public void MoveTo(WindowState s){
 		currentWindow = s;
 		moving = true;
 	}
+	/// <summary>
+	/// Sets cmaera to designated view
+	/// </summary>
+	/// <param name="s">S.</param>
+	public void SetTo(WindowState s){
+		switch (s) {
+		case WindowState.MainMenu:
+			transform.position = mainMenuTransform.position;
+			break;
+		case WindowState.ImportMenu:
+			transform.position = importMenuTransform.position;
+			break;
+		case WindowState.Game:
+			transform.position = 
+				gameWindowTransform.position;
+			break;
+		}
+		currentWindow = s;
+	}
 
 	public void SwapCamera(){
 		if (currentWindow == WindowState.Game)
-			MoveTo(WindowState.ImportMenu);
+			SetTo(WindowState.ImportMenu);
 		else
-			MoveTo(WindowState.Game);
+			SetTo(WindowState.Game);
 
 		testUI.SetActive (currentWindow == WindowState.Game);
 		quizletElements.SetActive (currentWindow == WindowState.ImportMenu);
