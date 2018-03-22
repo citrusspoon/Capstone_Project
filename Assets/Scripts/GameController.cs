@@ -60,6 +60,9 @@ public class GameController : MonoBehaviour {
 	public void Ready (){
 		ChangeGameWindow (WindowState.Game);
 	}
+	public void Reimport (){
+		ChangeGameWindow (WindowState.ImportMenu);
+	}
 
 	public void ChangeGameWindow(WindowState w){
 

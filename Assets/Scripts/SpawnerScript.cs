@@ -147,6 +147,7 @@ public class SpawnerScript : MonoBehaviour {
 		FlashcardManager.instance.correctChain = 0;
 		PopulateEnemyWaitingRoom ();
 		currentGameState = GameState.WaveActive;
+		UIManager.instance.UpdateGameStateDependentElments (currentGameState);
 	}
 	void EndWave(){
 		GameController.instance.turretTrayRef.ToggleTray ();
@@ -154,7 +155,7 @@ public class SpawnerScript : MonoBehaviour {
 		currentGameState = GameState.WaveInactive;
 		resetGuardTurrets ();
 		UpdateWaveDisplay (++waveNum + 1);
-
+		UIManager.instance.UpdateGameStateDependentElments (currentGameState);
 	}
 	/// <summary>
 	/// Adds enemies for the current wave to the enemy waiting room from the stacks

@@ -13,9 +13,12 @@ public class UIManager : MonoBehaviour {
 	public Button startButton;
 
 	[Header("Game Elements")]
+	public GameObject gameElementsRoot;
 	public GameObject healthDisplay;
 	public GameObject manaDisplay;
 	public GameObject waveDisplay;
+	public Button reimportButton;
+	public Button advanceWaveButton;
 
 	[Header("Import Menu Elements")]
 	public GameObject importElementsRoot;
@@ -73,6 +76,19 @@ public class UIManager : MonoBehaviour {
 			break;
 		}
 	}
+
+	public void UpdateGameStateDependentElments(GameState s){
+		switch (s) {
+		case GameState.WaveActive:
+			reimportButton.gameObject.SetActive (false);
+			advanceWaveButton.gameObject.SetActive (false);
+			break;
+		case GameState.WaveInactive:
+			reimportButton.gameObject.SetActive (true);
+			advanceWaveButton.gameObject.SetActive (true);
+			break;
+		}
+	}
 	public void SetMainMenuElementsActive(bool b){
 		startButton.gameObject.SetActive (b);
 	}
@@ -80,8 +96,10 @@ public class UIManager : MonoBehaviour {
 		importElementsRoot.SetActive (b);
 	}
 	public void SetGameElementsActive(bool b){
-		healthDisplay.SetActive (b);
+		gameElementsRoot.SetActive (b);
+
+		/*healthDisplay.SetActive (b);
 		manaDisplay.SetActive (b);
-		waveDisplay.SetActive (b);
+		waveDisplay.SetActive (b);*/
 	}
 }
