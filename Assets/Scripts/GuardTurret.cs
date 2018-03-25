@@ -7,6 +7,8 @@ public class GuardTurret : MonoBehaviour, ITurretInfo {
 	[Header("Attributes")]
 	public float range;
 	public float fireRate;
+	public float originalRange;
+	public float originalFireRate;
 	public float cost = 90f;
 	[HideInInspector]public TurretType type;
 	[Header("Other")]
@@ -23,7 +25,9 @@ public class GuardTurret : MonoBehaviour, ITurretInfo {
 		thisTransform = GetComponent<Transform> ();
 		type = TurretType.Guard;
 		range = 7f;
+		originalRange = range;
 		fireRate = 1f;
+		originalFireRate = fireRate;
 		rangeCircle.transform.localScale = new Vector3 (range * 2 / thisTransform.localScale.x,0.0001f,range * 2 / thisTransform.localScale.z);
 	}
 	TurretType ITurretInfo.GetType(){
@@ -40,6 +44,8 @@ public class GuardTurret : MonoBehaviour, ITurretInfo {
 		TurretManager.instance.placedGuardTurrets.Remove (this.gameObject);
 		TurretManager.instance.placedTurretPositions.Remove (thisTransform.position);
 		SetRangeCircleActive (true);
+		fireRate = originalFireRate;
+		range = originalRange;
 		TurretManager.instance.turretCounts[type] = ((int)(TurretManager.instance.turretCounts[type])) - 1;
 		this.gameObject.SetActive (false);
 		TurretManager.instance.basicStack.Push (this.gameObject);

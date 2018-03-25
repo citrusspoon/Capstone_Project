@@ -8,8 +8,10 @@ public class TurretScript : MonoBehaviour, ITurretInfo {
 	private EnemyScript targetScript;
 	[Header("Attributes")]
 	public TargetingMode mode;
-	public float range;
+	public float range = 18f;
+	public float originalRange;
 	public float fireRate;
+	public float originalFireRate;
 	public float cost = 30f;
 	private float fireCountdown;
 	public float rotationSpeed;
@@ -33,7 +35,9 @@ public class TurretScript : MonoBehaviour, ITurretInfo {
 		//updates target every half second to save computing power
 		InvokeRepeating ("UpdateTarget", 0f, 0.5f);
 		range = 18f;
+		originalRange = range;
 		fireRate = 1f;
+		originalFireRate = fireRate;
 		fireCountdown = 0f;
 		rotationSpeed = 10f;
 		rangeCircle.transform.localScale = new Vector3 (range * 2 / thisTransform.localScale.x,0.0001f,range * 2 / thisTransform.localScale.z);
@@ -51,6 +55,8 @@ public class TurretScript : MonoBehaviour, ITurretInfo {
 		TurretManager.instance.placedTurrets.Remove (this.gameObject);
 		TurretManager.instance.placedTurretPositions.Remove (thisTransform.position);
 		SetRangeCircleActive (true);
+		range = originalRange;
+		fireRate = originalFireRate;
 		TurretManager.instance.turretCounts[type] = ((int)(TurretManager.instance.turretCounts[type])) - 1;
 		this.gameObject.SetActive (false);
 		TurretManager.instance.basicStack.Push (this.gameObject);

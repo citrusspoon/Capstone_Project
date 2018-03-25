@@ -12,6 +12,8 @@ public class RocketTurret : MonoBehaviour, ITurretInfo {
 	public TargetingMode mode;
 	public float range;
 	public float fireRate;
+	public float originalRange;
+	public float originalFireRate;
 	public float cost = 80f;
 	private float fireCountdown;
 	public float rotationSpeed;
@@ -32,6 +34,8 @@ public class RocketTurret : MonoBehaviour, ITurretInfo {
 		range = 18f;
 		fireRate = 1f;
 		fireCountdown = 0f;
+		originalRange = range;
+		originalFireRate = fireRate;
 		rotationSpeed = 10f;
 		type = TurretType.Rocket;
 		GCInstance = GameController.instance;
@@ -55,6 +59,8 @@ public class RocketTurret : MonoBehaviour, ITurretInfo {
 		TurretManager.instance.placedTurrets.Remove (this.gameObject);
 		TurretManager.instance.placedTurretPositions.Remove (thisTransform.position);
 		SetRangeCircleActive (true);
+		fireRate = originalFireRate;
+		range = originalRange;
 		TurretManager.instance.turretCounts[type] = ((int)(TurretManager.instance.turretCounts[type])) - 1;
 		this.gameObject.SetActive (false);
 		TurretManager.instance.basicStack.Push (this.gameObject);

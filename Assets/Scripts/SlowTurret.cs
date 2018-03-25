@@ -6,6 +6,8 @@ public class SlowTurret : MonoBehaviour, ITurretInfo {
 
 	public float range;
 	public float fireRate;
+	public float originalRange;
+	public float originalFireRate;
 	private float fireCountdown;
 	[HideInInspector]public TurretType type;
 	public float cost = 50f;
@@ -25,6 +27,8 @@ public class SlowTurret : MonoBehaviour, ITurretInfo {
 		thisTransform = transform;
 		range = 18f;
 		fireRate = 1f;
+		originalRange = range;
+		originalFireRate = fireRate;
 		fireCountdown = 0f;
 		slowPercent = 0.3f;
 	 	power = 0f;
@@ -44,6 +48,8 @@ public class SlowTurret : MonoBehaviour, ITurretInfo {
 		TurretManager.instance.placedTurrets.Remove (this.gameObject);
 		TurretManager.instance.placedTurretPositions.Remove (thisTransform.position);
 		SetRangeCircleActive (true);
+		fireRate = originalFireRate;
+		range = originalRange;
 		TurretManager.instance.turretCounts[type] = ((int)(TurretManager.instance.turretCounts[type])) - 1;
 		this.gameObject.SetActive (false);
 		TurretManager.instance.basicStack.Push (this.gameObject);
