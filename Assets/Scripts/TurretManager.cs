@@ -40,6 +40,8 @@ public class TurretManager : MonoBehaviour {
 	public Vector3 rocketTraySpawnPoint;*/
 
 
+
+
 	void Awake()
 	{
 		if (instance == null)
@@ -149,5 +151,24 @@ public class TurretManager : MonoBehaviour {
 			temp.SetActive (false);
 			destroyStack.Push (temp);
 		}
+	}
+	public void RecallTurrets(){
+		//clear placed turret positions
+		placedTurretPositions.Clear();
+		//iterate through placed turrets and destory
+		int x = placedTurrets.Count;
+		for (int i = 0; i < x; i++)
+			placedTurrets [0].GetComponent<ITurretInfo> ().DestroySelf ();
+			
+		//iterate through placed guard turrets and destroy
+		int y = placedGuardTurrets.Count;
+		//TODO: turret destroy effect
+		for (int j = 0; j < y; j++)
+			placedGuardTurrets [0].GetComponent<ITurretInfo> ().DestroySelf ();
+		//set hashtable counts to 0
+		turretCounts[TurretType.Basic] = 0;
+		turretCounts [TurretType.Slow] = 0;
+		turretCounts [TurretType.Rocket] = 0;
+		turretCounts [TurretType.Guard] = 0;
 	}
 }

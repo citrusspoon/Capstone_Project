@@ -22,6 +22,9 @@ public class SpawnerScript : MonoBehaviour {
 	public int totalWaves = 10;
 	public Text waveNumText;
 
+
+
+
 	[Header("Enemy Prefabs")]
 	public GameObject lv1EnemyPrefab;
 	public GameObject lv2EnemyPrefab;
@@ -149,6 +152,9 @@ public class SpawnerScript : MonoBehaviour {
 		currentGameState = GameState.WaveActive;
 		UIManager.instance.UpdateGameStateDependentElments (currentGameState);
 	}
+	/// <summary>
+	/// Initiates the natural end of a wave.
+	/// </summary>
 	void EndWave(){
 		GameController.instance.turretTrayRef.ToggleTray ();
 		GameController.instance.flashcardTrayRef.ToggleTray ();
@@ -157,6 +163,18 @@ public class SpawnerScript : MonoBehaviour {
 		UpdateWaveDisplay (++waveNum + 1);
 		UIManager.instance.UpdateGameStateDependentElments (currentGameState);
 	}
+	/// <summary>
+	/// Stops the wave before it finishes naturally.
+	/// </summary>
+	public void StopWave(){
+		currentGameState = GameState.WaveInactive;
+	}
+	public void DestroyEnemiesOnBoard(){
+		int x = enemyList.Count;
+		for (int i = 0; i < x; i++)
+			enemyList [0].GetComponent<EnemyScript> ().ReduceHealth (enemyList [0].GetComponent<EnemyScript> ().health);
+	}
+
 	/// <summary>
 	/// Adds enemies for the current wave to the enemy waiting room from the stacks
 	/// </summary>
@@ -240,8 +258,17 @@ public class SpawnerScript : MonoBehaviour {
 		for(int i = 0; i < TurretManager.instance.placedGuardTurrets.Count; i++)
 			TurretManager.instance.placedGuardTurrets [i].GetComponent<GuardTurret> ().unBreakTurret();
 	}
+	public void Reset(){
+		//set wave to 0
+		waveNum = 0;
+		UpdateWaveDisplay (waveNum+1);
+		UIManager.instance.UpdateGameStateDependentElments (currentGameState);
+	}
 
 	void CreateWaves(){
+		//TODO: move this wave back to bottom
+		waveList.Add (new Wave(50,0,0,3,10));
+
 		waveList.Add (new Wave(20,0,0,0,1));
 		waveList.Add (new Wave(40,0,0,0,2));
 		waveList.Add (new Wave(30,20,0,0,3));
@@ -251,7 +278,7 @@ public class SpawnerScript : MonoBehaviour {
 		waveList.Add (new Wave(50,50,40,0,7));
 		waveList.Add (new Wave(50,30,10,1,8));
 		waveList.Add (new Wave(80,50,50,0,9));
-		waveList.Add (new Wave(50,0,0,3,10));
+
 	}
 
 

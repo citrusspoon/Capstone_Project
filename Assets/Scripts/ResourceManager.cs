@@ -11,6 +11,7 @@ public class ResourceManager : MonoBehaviour {
 	public float maxPlayerHealth = 100f;
 	public float mana = 100f;
 	public float maxMana = 100f;
+	public float originalMana;
 	public Slider healthBar;
 	public Slider manaBar;
 	public Text healthText;
@@ -30,6 +31,7 @@ public class ResourceManager : MonoBehaviour {
 	void Start () {
 		ChangeHealth (0);
 		ChangeMana (0);
+		originalMana = maxMana;
 	}
 	
 	// Update is called once per frame
@@ -37,9 +39,20 @@ public class ResourceManager : MonoBehaviour {
 		
 	}
 	public void ChangeHealth(float delta){
+		if (playerHealth <= 0)
+			return;
+
 		playerHealth += delta;
+		if (playerHealth <= 0) {
+			playerHealth = 0;
+			healthBar.value = playerHealth;
+			healthText.text = "Health (" + playerHealth+ "/" + maxPlayerHealth + ")";
+			GameController.instance.GameOver ();
+			return;
+		}
 		healthBar.value = playerHealth;
 		healthText.text = "Health (" + playerHealth+ "/" + maxPlayerHealth + ")";
+
 	}
 	public void ChangeMana(float delta){
 		mana += delta;
@@ -52,5 +65,12 @@ public class ResourceManager : MonoBehaviour {
 		maxMana += delta;
 		manaBar.maxValue = maxMana;
 		manaText.text = "Mana (" + mana + "/" + maxMana + ")";
+	}
+	public void Reset(){
+		playerHealth = maxPlayerHealth;
+		maxMana = originalMana;
+		mana = maxMana;
+		ChangeHealth (0);
+		ChangeMana (0);
 	}
 }

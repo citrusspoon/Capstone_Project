@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour {
 
@@ -29,6 +30,8 @@ public class UIManager : MonoBehaviour {
 
 	[Header("Other Elements")]
 	public GameObject testDisplay;
+	public GameObject gameOverElementsRoot;
+	public TextMeshProUGUI gameOverText;
 
 
 	void Awake()
@@ -101,5 +104,8 @@ public class UIManager : MonoBehaviour {
 		/*healthDisplay.SetActive (b);
 		manaDisplay.SetActive (b);
 		waveDisplay.SetActive (b);*/
+	}
+	public void SetGameOverElementsActive(bool b){
+		gameOverElementsRoot.SetActive (b);
 	}
 }

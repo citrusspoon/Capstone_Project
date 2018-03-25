@@ -59,6 +59,9 @@ public class FlashcardManager : MonoBehaviour {
 	void Update () {
 		
 	}
+	public void Reset(){
+		correctChain = 0;
+	}
 
 	public void Select(int index){
 		TouchManager.instance.choiceSelectionMade = true;

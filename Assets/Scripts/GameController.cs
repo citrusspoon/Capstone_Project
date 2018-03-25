@@ -81,4 +81,33 @@ public class GameController : MonoBehaviour {
 		UIManager.instance.SetWindowDisplaysActive (w, true);
 
 	}
+	public void GameOver(){
+		//remove flashcard tray
+		flashcardTrayRef.ToggleTray();
+		//stop spawner
+		spawnerScriptRef.StopWave();
+		//destroy remaining enemies
+		spawnerScriptRef.DestroyEnemiesOnBoard();
+		//some kind of game over screen
+		UIManager.instance.gameOverText.text = "Game Over";
+		UIManager.instance.SetGameOverElementsActive(true);
+
+	}
+	public void Win(){
+	}
+	public void ResetGame(){
+		//destroy placed turrets
+		TurretManager.instance.RecallTurrets();
+		//reset health/mana
+		ResourceManager.instance.Reset();
+		//reset spawner
+		spawnerScriptRef.Reset();
+		//reset flashcard manager
+		FlashcardManager.instance.Reset();
+		//change window to game to reset ui
+		ChangeGameWindow(WindowState.Game);
+		turretTrayRef.ToggleTray ();
+		UIManager.instance.SetGameOverElementsActive (false);
+
+	}
 }
