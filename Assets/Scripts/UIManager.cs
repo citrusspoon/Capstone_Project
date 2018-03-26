@@ -115,6 +115,6 @@ public class UIManager : MonoBehaviour {
 		restartButton.gameObject.SetActive (b);
 	}
 	public void UpdateGameOverStatsElement(){
-		statsText.text = "Longest Chain: " + StatsManager.instance.longestChain + "\nMost Missed Cards: ";
+		statsText.text = "Longest Chain: " + StatsManager.instance.longestChain + "\nMost Missed Cards: \n" + StatsManager.instance.MostMissedCardsToString();
 	}
 }

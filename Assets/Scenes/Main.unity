@@ -5093,6 +5093,7 @@ MonoBehaviour:
   currentCard:
     term: 
     definition: 
+    misses: 0
   choicePool: []
 --- !u!1 &336990542
 GameObject:
@@ -23570,6 +23571,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   longestChain: 0
+  mostMissedCards: []
+  mostMissedCardsMaxLength: 5
 --- !u!1 &1619540878
 GameObject:
   m_ObjectHideFlags: 0

@@ -74,6 +74,10 @@ public class FlashcardManager : MonoBehaviour {
 		} else {
 			//turn button red
 			choiceButtons [index].GetComponent<Renderer> ().material.color = Color.red;
+			//increments misses on this card
+			currentCard.misses++;
+			//updates most missed card list
+			StatsManager.instance.UpdateMostMissedCards (currentCard);
 			//turn correct button green
 			for (int i = 0; i < choices.Count; i++)
 				if(choices [i] == currentCard.definition)
