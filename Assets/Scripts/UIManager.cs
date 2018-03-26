@@ -114,4 +114,7 @@ public class UIManager : MonoBehaviour {
 		gameOverElementsRoot.SetActive (b);
 		restartButton.gameObject.SetActive (b);
 	}
+	public void UpdateGameOverStatsElement(){
+		statsText.text = "Longest Chain: " + StatsManager.instance.longestChain + "\nMost Missed Cards: ";
+	}
 }

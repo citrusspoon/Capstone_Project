@@ -70,7 +70,7 @@ public class FlashcardManager : MonoBehaviour {
 			//turn button green
 			choiceButtons [index].GetComponent<Renderer> ().material.color = Color.green;
 			ResourceManager.instance.ChangeMana (baseManaGain + correctChain*2);
-			correctChain++;
+			StatsManager.instance.UpdateLongestChain (++correctChain);
 		} else {
 			//turn button red
 			choiceButtons [index].GetComponent<Renderer> ().material.color = Color.red;

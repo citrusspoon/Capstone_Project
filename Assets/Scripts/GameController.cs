@@ -91,6 +91,7 @@ public class GameController : MonoBehaviour {
 		spawnerScriptRef.DestroyEnemiesOnBoard();
 		//some kind of game over screen
 		UIManager.instance.gameOverText.text = "Game Over";
+		UIManager.instance.UpdateGameOverStatsElement ();
 		UIManager.instance.SetGameOverElementsActive(true);
 
 	}
@@ -98,7 +99,8 @@ public class GameController : MonoBehaviour {
 		//remove flashcard tray
 		flashcardTrayRef.ToggleTray();
 		//some kind of win screen
-		UIManager.instance.gameOverText.text = "Game Over";
+		UIManager.instance.gameOverText.text = "You Win";
+		UIManager.instance.UpdateGameOverStatsElement ();
 		UIManager.instance.SetGameOverElementsActive(true);
 	}
 	public void ResetGame(){

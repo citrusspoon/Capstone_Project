@@ -23529,6 +23529,47 @@ Transform:
   m_PrefabParentObject: {fileID: 4364004340437948, guid: 26c1b0b54a3eaca488f8c4c5f0b011fd,
     type: 2}
   m_PrefabInternal: {fileID: 1618759520}
+--- !u!1 &1619048352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1619048353}
+  - component: {fileID: 1619048354}
+  m_Layer: 0
+  m_Name: StatsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1619048353
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1619048352}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2123756508}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1619048354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1619048352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af4d487453edbdb42bf2a090909ad726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  longestChain: 0
 --- !u!1 &1619540878
 GameObject:
   m_ObjectHideFlags: 0
@@ -30165,7 +30206,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: "Longest Chain: \nMost Missed Card:\nLeast Missed Card:\n"
+  m_text: "Longest Chain: \nMost Missed Cards:\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 715b80e429c437e40867928a4e1fc975, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 715b80e429c437e40867928a4e1fc975, type: 2}
@@ -30232,10 +30273,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 2089442721}
-    characterCount: 53
+    characterCount: 36
     spriteCount: 0
-    spaceCount: 9
-    wordCount: 8
+    spaceCount: 7
+    wordCount: 5
     linkCount: 0
     lineCount: 3
     pageCount: 1
@@ -30742,6 +30783,7 @@ Transform:
   - {fileID: 636585541}
   - {fileID: 751520545}
   - {fileID: 419512980}
+  - {fileID: 1619048353}
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

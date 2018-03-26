@@ -274,6 +274,7 @@ public class SpawnerScript : MonoBehaviour {
 
 	void CreateWaves(){
 		
+		waveList.Add (new Wave(50,0,0,3,10));
 
 		waveList.Add (new Wave(20,0,0,0,1));
 		waveList.Add (new Wave(40,0,0,0,2));
@@ -284,7 +285,7 @@ public class SpawnerScript : MonoBehaviour {
 		waveList.Add (new Wave(50,50,40,0,7));
 		waveList.Add (new Wave(50,30,10,1,8));
 		waveList.Add (new Wave(80,50,50,0,9));
-		waveList.Add (new Wave(50,0,0,3,10));
+
 
 
 	}
