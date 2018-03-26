@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public enum TargetingMode {First, Last, Closest, Furthest};
 public enum TurretType {Basic, Slow, Rocket, FRPowerup, RangePowerup, Destroy, Guard};
@@ -94,6 +95,11 @@ public class GameController : MonoBehaviour {
 
 	}
 	public void Win(){
+		//remove flashcard tray
+		flashcardTrayRef.ToggleTray();
+		//some kind of win screen
+		UIManager.instance.gameOverText.text = "Game Over";
+		UIManager.instance.SetGameOverElementsActive(true);
 	}
 	public void ResetGame(){
 		//destroy placed turrets

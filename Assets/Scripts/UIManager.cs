@@ -28,10 +28,15 @@ public class UIManager : MonoBehaviour {
 	public GameObject IDElements;
 	public GameObject recentSetsDropdown;
 
+	[Header("Game Over Elements")]
+	public GameObject gameOverElementsRoot;
+	public TextMeshPro gameOverText;
+	public TextMeshPro statsText;
+	public Button restartButton;
+
 	[Header("Other Elements")]
 	public GameObject testDisplay;
-	public GameObject gameOverElementsRoot;
-	public TextMeshProUGUI gameOverText;
+
 
 
 	void Awake()
@@ -107,5 +112,6 @@ public class UIManager : MonoBehaviour {
 	}
 	public void SetGameOverElementsActive(bool b){
 		gameOverElementsRoot.SetActive (b);
+		restartButton.gameObject.SetActive (b);
 	}
 }

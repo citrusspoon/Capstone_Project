@@ -7,7 +7,7 @@ public class SpawnerScript : MonoBehaviour {
 
 	public float timeBetweenEnemies = 1f;
 	private float countdown = 0f;
-	private int waveNum = 0;
+	private int waveNum = 9;
 	public GameState currentGameState;
 
 	public static SpawnerScript instance = null;
@@ -156,11 +156,18 @@ public class SpawnerScript : MonoBehaviour {
 	/// Initiates the natural end of a wave.
 	/// </summary>
 	void EndWave(){
-		GameController.instance.turretTrayRef.ToggleTray ();
-		GameController.instance.flashcardTrayRef.ToggleTray ();
+		waveNum++;
 		currentGameState = GameState.WaveInactive;
+		GameController.instance.flashcardTrayRef.ToggleTray ();
+		//check for final wave
+		if (waveNum == totalWaves) {
+			UpdateWaveDisplay (waveNum);
+			GameController.instance.Win ();
+			return;
+		}
+		GameController.instance.turretTrayRef.ToggleTray ();
 		resetGuardTurrets ();
-		UpdateWaveDisplay (++waveNum + 1);
+		UpdateWaveDisplay (waveNum + 1);
 		UIManager.instance.UpdateGameStateDependentElments (currentGameState);
 	}
 	/// <summary>
@@ -266,8 +273,7 @@ public class SpawnerScript : MonoBehaviour {
 	}
 
 	void CreateWaves(){
-		//TODO: move this wave back to bottom
-		waveList.Add (new Wave(50,0,0,3,10));
+		
 
 		waveList.Add (new Wave(20,0,0,0,1));
 		waveList.Add (new Wave(40,0,0,0,2));
@@ -278,6 +284,8 @@ public class SpawnerScript : MonoBehaviour {
 		waveList.Add (new Wave(50,50,40,0,7));
 		waveList.Add (new Wave(50,30,10,1,8));
 		waveList.Add (new Wave(80,50,50,0,9));
+		waveList.Add (new Wave(50,0,0,3,10));
+
 
 	}
 
