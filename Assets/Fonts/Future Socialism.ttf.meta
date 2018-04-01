@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: d2e3a233329ac6f489f501813a890953
+timeCreated: 1522611084
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Future Socialism
+  fontNames:
+  - Future Socialism
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
