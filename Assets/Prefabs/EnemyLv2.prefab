@@ -122,6 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 12
+  type: 1
   isSlowed: 0
   slowRecovery: 2
   thisTransform: {fileID: 4341562455395374}

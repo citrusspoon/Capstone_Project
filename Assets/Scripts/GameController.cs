@@ -8,6 +8,7 @@ public enum TargetingMode {First, Last, Closest, Furthest};
 public enum TurretType {Basic, Slow, Rocket, FRPowerup, RangePowerup, Destroy, Guard};
 public enum GameState {WaveActive, WaveInactive};
 public enum WindowState {Game, ImportMenu, MainMenu};
+public enum EnemyType {Lv1, Lv2, Lv3, Boss};
 
 public class GameController : MonoBehaviour {
 

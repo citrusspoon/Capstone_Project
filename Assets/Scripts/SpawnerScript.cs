@@ -13,6 +13,7 @@ public class SpawnerScript : MonoBehaviour {
 	public static SpawnerScript instance = null;
 
 	public Transform spawnPoint;
+	public Transform startMenuSpawnPoint;
 	//list of enemies currently on the board
 	public List<GameObject> enemyList;
 	//list of enemies to be spawned

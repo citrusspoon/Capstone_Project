@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour {
 
 	public float speed;
+	public EnemyType type;
 	private float originalSpeed;
 	[HideInInspector]public bool isSlowed;
 	public float slowRecovery;
@@ -14,6 +15,7 @@ public class EnemyScript : MonoBehaviour {
 	private Transform target;
 	private int nextWaypointIndex;
 	public float health;
+	public float originalHealth;
 	public GameObject deathEffect;
 	public ParticleSystem hitEffect;
 
@@ -23,7 +25,12 @@ public class EnemyScript : MonoBehaviour {
 
 
 	void Start(){
-		target = WaypointScript.waypoints[0];
+
+		if(GameController.instance.cameraRef.currentWindow == WindowState.MainMenu)
+			target = SpawnerScript.instance.startMenuSpawnPoint;
+		else
+			target = WaypointScript.waypoints[0];
+		originalHealth = health;
 		originalSpeed = speed;
 		originalSlowRecovery = slowRecovery;
 		isSlowed = false;
@@ -38,8 +45,15 @@ public class EnemyScript : MonoBehaviour {
 		dir = target.position - thisTransform.position;
 		transform.Translate (dir.normalized * speed * Time.deltaTime, Space.World);
 
-		if (Vector3.Distance (thisTransform.position, target.position) < 0.4f)
-			GetNextWaypoint ();
+		if (Vector3.Distance (thisTransform.position, target.position) < 0.4f) {
+			
+			if (GameController.instance.cameraRef.currentWindow == WindowState.MainMenu) {
+				GameController.instance.spawnerScriptRef.enemyList.Remove (this.gameObject);
+				this.gameObject.SetActive (false);
+			}
+			else
+				GetNextWaypoint ();
+		}
 		
 			//HandleSlowRecovery ();
 		
@@ -88,7 +102,30 @@ public class EnemyScript : MonoBehaviour {
 			Destroy (effect, 1f);
 			GameController.instance.spawnerScriptRef.enemyList.Remove (this.gameObject);
 			this.gameObject.SetActive (false);
-			//thisTransform.position = new Vector3(100f,100f,100f);
+
+			switch (type) {
+			case EnemyType.Lv1:
+				SpawnerScript.instance.lv1EnemyStack.Push (this.gameObject);
+				break;
+			case EnemyType.Lv2:
+				SpawnerScript.instance.lv2EnemyStack.Push (this.gameObject);
+				break;
+			case EnemyType.Lv3:
+				SpawnerScript.instance.lv3EnemyStack.Push (this.gameObject);
+				break;
+			case EnemyType.Boss:
+				SpawnerScript.instance.bossEnemyStack.Push (this.gameObject);
+				break;
+			}
+
+			if(GameController.instance.cameraRef.currentWindow == WindowState.MainMenu)
+				target = SpawnerScript.instance.startMenuSpawnPoint;
+			else
+				target = WaypointScript.waypoints[0];
+
+			health = originalHealth;
+			ResetSpeed ();
+			nextWaypointIndex = 0;
 		}
 	}
 
