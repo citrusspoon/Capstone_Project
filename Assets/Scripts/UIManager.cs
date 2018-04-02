@@ -34,6 +34,10 @@ public class UIManager : MonoBehaviour {
 	public TextMeshPro statsText;
 	public Button restartButton;
 
+	[Header("Main Menu Elements")]
+	public GameObject startElementsRoot;
+
+
 	[Header("Other Elements")]
 	public GameObject testDisplay;
 
@@ -97,11 +101,11 @@ public class UIManager : MonoBehaviour {
 			break;
 		}
 	}
-	public void SetMainMenuElementsActive(bool b){
-		startButton.gameObject.SetActive (b);
-	}
 	public void SetImportMenuElementsActive(bool b){
 		importElementsRoot.SetActive (b);
+	}
+	public void SetMainMenuElementsActive(bool b){
+		startElementsRoot.SetActive (b);
 	}
 	public void SetGameElementsActive(bool b){
 		gameElementsRoot.SetActive (b);

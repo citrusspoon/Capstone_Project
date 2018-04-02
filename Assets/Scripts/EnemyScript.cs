@@ -12,8 +12,8 @@ public class EnemyScript : MonoBehaviour {
 	private float originalSlowRecovery;
 	//reference to this object's Transform component
 	public Transform thisTransform;
-	private Transform target;
-	private int nextWaypointIndex;
+	public Transform target;
+	public int nextWaypointIndex;
 	public float health;
 	public float originalHealth;
 	public GameObject deathEffect;
@@ -27,9 +27,10 @@ public class EnemyScript : MonoBehaviour {
 	void Start(){
 
 		if(GameController.instance.cameraRef.currentWindow == WindowState.MainMenu)
-			target = SpawnerScript.instance.startMenuSpawnPoint;
+			target = MainMenuSpawner.instance.endPoint;
 		else
 			target = WaypointScript.waypoints[0];
+		
 		originalHealth = health;
 		originalSpeed = speed;
 		originalSlowRecovery = slowRecovery;
@@ -48,8 +49,10 @@ public class EnemyScript : MonoBehaviour {
 		if (Vector3.Distance (thisTransform.position, target.position) < 0.4f) {
 			
 			if (GameController.instance.cameraRef.currentWindow == WindowState.MainMenu) {
-				GameController.instance.spawnerScriptRef.enemyList.Remove (this.gameObject);
-				this.gameObject.SetActive (false);
+				//target = MainMenuSpawner.instance.endPoint;
+				//MainMenuSpawner.instance.enemyList.Remove (this.gameObject);
+				//this.gameObject.SetActive (false);
+				ReduceHealth (health);
 			}
 			else
 				GetNextWaypoint ();
@@ -77,10 +80,13 @@ public class EnemyScript : MonoBehaviour {
 
 		//reaches end
 		if (nextWaypointIndex >= WaypointScript.waypoints.Length - 1) {
-			GameController.instance.spawnerScriptRef.enemyList.Remove (this.gameObject);
-			this.gameObject.SetActive (false);
+			//GameController.instance.spawnerScriptRef.enemyList.Remove (this.gameObject);
+			ReduceHealth (health);
+			//this.gameObject.SetActive (false);
 			//TODO: change amount of damage based on enemy type
 			ResourceManager.instance.ChangeHealth (-10f);
+
+
 		}
 		else {
 			nextWaypointIndex++;
@@ -100,28 +106,34 @@ public class EnemyScript : MonoBehaviour {
 		if (health < 1) {
 			effect = Instantiate (deathEffect, thisTransform.position, thisTransform.rotation);
 			Destroy (effect, 1f);
+			if (GameController.instance.cameraRef.currentWindow == WindowState.MainMenu) {
+				target = MainMenuSpawner.instance.endPoint;
+				MainMenuSpawner.instance.enemyStack.Push (this.gameObject);
+			}
+			else {
+				target = WaypointScript.waypoints [0];
+
+				switch (type) {
+				case EnemyType.Lv1:
+					SpawnerScript.instance.lv1EnemyStack.Push (this.gameObject);
+					break;
+				case EnemyType.Lv2:
+					SpawnerScript.instance.lv2EnemyStack.Push (this.gameObject);
+					break;
+				case EnemyType.Lv3:
+					SpawnerScript.instance.lv3EnemyStack.Push (this.gameObject);
+					break;
+				case EnemyType.Boss:
+					SpawnerScript.instance.bossEnemyStack.Push (this.gameObject);
+					break;
+				}
+			}
 			GameController.instance.spawnerScriptRef.enemyList.Remove (this.gameObject);
 			this.gameObject.SetActive (false);
 
-			switch (type) {
-			case EnemyType.Lv1:
-				SpawnerScript.instance.lv1EnemyStack.Push (this.gameObject);
-				break;
-			case EnemyType.Lv2:
-				SpawnerScript.instance.lv2EnemyStack.Push (this.gameObject);
-				break;
-			case EnemyType.Lv3:
-				SpawnerScript.instance.lv3EnemyStack.Push (this.gameObject);
-				break;
-			case EnemyType.Boss:
-				SpawnerScript.instance.bossEnemyStack.Push (this.gameObject);
-				break;
-			}
 
-			if(GameController.instance.cameraRef.currentWindow == WindowState.MainMenu)
-				target = SpawnerScript.instance.startMenuSpawnPoint;
-			else
-				target = WaypointScript.waypoints[0];
+
+
 
 			health = originalHealth;
 			ResetSpeed ();

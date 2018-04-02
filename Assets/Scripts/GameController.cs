@@ -56,7 +56,9 @@ public class GameController : MonoBehaviour {
 	/// Starts the game from the main menu.
 	/// </summary>
 	public void StartGame(){
-		startButton.gameObject.SetActive (false);
+		UIManager.instance.SetMainMenuElementsActive (false);
+		MainMenuSpawner.instance.spawnerActive = false;
+		MainMenuSpawner.instance.DestroyEnemiesOnBoard ();
 		ChangeGameWindow (WindowState.ImportMenu);
 	}
 	public void Ready (){

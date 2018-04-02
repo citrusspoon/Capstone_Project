@@ -13,7 +13,6 @@ public class SpawnerScript : MonoBehaviour {
 	public static SpawnerScript instance = null;
 
 	public Transform spawnPoint;
-	public Transform startMenuSpawnPoint;
 	//list of enemies currently on the board
 	public List<GameObject> enemyList;
 	//list of enemies to be spawned
@@ -131,6 +130,7 @@ public class SpawnerScript : MonoBehaviour {
 
 		StackFailsafe ();
 
+
 		if (currentGameState == GameState.WaveActive && enemyWaitingRoom.Count > 0) {
 			if (countdown <= 0f) {
 				SpawnEnemy ();
@@ -211,7 +211,7 @@ public class SpawnerScript : MonoBehaviour {
 	public void UpdateWaveDisplay(int w){
 		waveNumText.text = "Wave: " + w;
 	}
-
+	/*
 	IEnumerator SpawnSubWave(){
 		//while (enemyWaitingRoom.Count > 0) {
 			SpawnEnemy ();
@@ -220,6 +220,7 @@ public class SpawnerScript : MonoBehaviour {
 
 		waveNum++;
 	}
+	*/
 
 	GameObject tempEnemy;
 	void SpawnEnemy(){
@@ -231,15 +232,13 @@ public class SpawnerScript : MonoBehaviour {
 		tempEnemy.SetActive (true);
 
 		enemyList.Add (tempEnemy);
-		//dont know if this will work
 		enemyWaitingRoom.Remove (tempEnemy);
-		//Instantiate (lv1EnemyPrefab, spawnPoint.position, spawnPoint.rotation)
 	}
 
 	/// <summary>
 	/// Instantiates more enemies if the stack runs low.
 	/// </summary>
-	void StackFailsafe(){
+	public void StackFailsafe(){
 		//if stack runs low
 		if (lv1EnemyStack.Count < 5) {
 			temp = (GameObject)Instantiate (lv1EnemyPrefab);
