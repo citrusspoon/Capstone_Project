@@ -9,6 +9,7 @@ public enum TurretType {Basic, Slow, Rocket, FRPowerup, RangePowerup, Destroy, G
 public enum GameState {WaveActive, WaveInactive};
 public enum WindowState {Game, ImportMenu, MainMenu};
 public enum EnemyType {Lv1, Lv2, Lv3, Boss};
+public enum LogoType {Main, Import};
 
 public class GameController : MonoBehaviour {
 
