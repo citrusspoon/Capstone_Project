@@ -17,6 +17,8 @@ public class FlashcardManager : MonoBehaviour {
 	public TextMeshPro choice1TextMesh;
 	public TextMeshPro choice2TextMesh;
 	public TMP_Dropdown recentSetsDropdown;
+	public AudioSource incorrectSound;
+	public AudioSource correctSound;
 
 
 	public TextMeshProUGUI[] loadedSetsMenuText; 
@@ -50,10 +52,10 @@ public class FlashcardManager : MonoBehaviour {
 		//test stuff
 		//PopulateFlashcardList ();
 		//NewCard(currentFlashcardList [4]);
+	
 
 	}
-
-	//TODO: display correct chain on screen
+		
 
 	// Update is called once per frame
 	void Update () {
@@ -67,11 +69,15 @@ public class FlashcardManager : MonoBehaviour {
 		TouchManager.instance.choiceSelectionMade = true;
 		//if correct answer is selected
 		if (choices [index] == currentCard.definition) {
+			//play sound
+			correctSound.Play();
 			//turn button green
 			choiceButtons [index].GetComponent<Renderer> ().material.color = Color.green;
 			ResourceManager.instance.ChangeMana (baseManaGain + correctChain*2);
 			StatsManager.instance.UpdateLongestChain (++correctChain);
 		} else {
+			//play sound
+			incorrectSound.Play();
 			//turn button red
 			choiceButtons [index].GetComponent<Renderer> ().material.color = Color.red;
 			//increments misses on this card
@@ -89,6 +95,7 @@ public class FlashcardManager : MonoBehaviour {
 			}
 				
 		}
+		UIManager.instance.UpdateChainDisplay (correctChain);
 		StartCoroutine (PauseAndLoadNextCard());
 
 	}

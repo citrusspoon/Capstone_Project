@@ -40,6 +40,7 @@ public class UIManager : MonoBehaviour {
 
 	[Header("Other Elements")]
 	public GameObject testDisplay;
+	public Text chainDisplay;
 
 
 
@@ -120,5 +121,8 @@ public class UIManager : MonoBehaviour {
 	}
 	public void UpdateGameOverStatsElement(){
 		statsText.text = "Longest Chain: " + StatsManager.instance.longestChain + "\nMost Missed Cards: \n" + StatsManager.instance.MostMissedCardsToString();
+	}
+	public void UpdateChainDisplay(int c){
+		chainDisplay.text = "Chain: " + c;
 	}
 }
