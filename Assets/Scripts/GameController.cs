@@ -9,7 +9,7 @@ public enum TurretType {Basic, Slow, Rocket, FRPowerup, RangePowerup, Destroy, G
 public enum GameState {WaveActive, WaveInactive};
 public enum WindowState {Game, ImportMenu, MainMenu};
 public enum EnemyType {Lv1, Lv2, Lv3, Boss};
-public enum LogoType {Main, Import};
+public enum LogoType {Main, Import, Quizlet};
 
 public class GameController : MonoBehaviour {
 
@@ -81,6 +81,8 @@ public class GameController : MonoBehaviour {
 			break;
 		case WindowState.Game:
 			cameraRef.SetTo (WindowState.Game);
+			if (AudioManager.instance.menuMusic.isPlaying)
+				AudioManager.instance.PlayMainMusic ();
 			break;
 		}
 		UIManager.instance.SetWindowDisplaysActive (w, true);

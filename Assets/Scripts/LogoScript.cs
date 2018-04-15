@@ -19,16 +19,30 @@ public class LogoScript : MonoBehaviour {
 	Vector3 tempPos = new Vector3 ();
 
 	// Use this for initialization
-	void Start () {
+	IEnumerator Start () {
 		// Store the starting position & rotation of the object
 		posOffset = transform.position;
 		spriteRenderer = GetComponent<SpriteRenderer> ();
+		if (type == LogoType.Quizlet) {
+
+			// Start a download of the given URL
+			using (WWW www = new WWW("https://quizlet.com/static/ThisUsesQuizlet-Blue.png"))
+			{
+				// Wait for download to complete
+				yield return www;
+
+				// assign texture
+				Renderer renderer = GetComponent<Renderer>();
+				renderer.material.mainTexture = www.texture;
+			}
+		}
+			
 	}
 
 	// Update is called once per frame
 	void Update () {
 		// Float up/down with a Sin()
-		if (floating && type != LogoType.Import) {
+		if (floating && type == LogoType.Main ) {
 			tempPos = posOffset;
 			tempPos.z += Mathf.Sin (Time.fixedTime * Mathf.PI * frequency) * amplitude;
 
@@ -52,5 +66,9 @@ public class LogoScript : MonoBehaviour {
 		spriteRenderer.sprite = sprites[spriteIndex++];
 		if (spriteIndex > 2)
 			spriteIndex = 0;	
+	}
+
+	public void GoToQuizletSite(){
+		Application.OpenURL ("https://quizlet.com/");
 	}
 }
