@@ -91,6 +91,11 @@ public class TouchManager : MonoBehaviour {
 					FlashcardManager.instance.Select (2);
 					return;
 				}
+				else if(hit.transform.tag == "Turret"){
+					hit.transform.gameObject.GetComponent<ITurretInfo> ().BoostRange (1f);
+					print ("yes");
+					return;
+				}
 				else {
 					return;
 				}

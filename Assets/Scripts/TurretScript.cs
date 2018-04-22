@@ -50,6 +50,16 @@ public class TurretScript : MonoBehaviour, ITurretInfo {
 	}
 	void ITurretInfo.BoostRange(float boostAmount){
 		range *= boostAmount;
+		SetRangeCircleActive (true);
+		ChangeRangeCircleColor (Color.green);
+		StartCoroutine(DisableRangeCircleWithDelay (3f));
+
+	}
+
+	IEnumerator DisableRangeCircleWithDelay(float s){
+		yield return new WaitForSeconds (s);
+
+		SetRangeCircleActive (false);
 	}
 	void ITurretInfo.DestroySelf(){
 		TurretManager.instance.placedTurrets.Remove (this.gameObject);
@@ -220,6 +230,7 @@ public class TurretScript : MonoBehaviour, ITurretInfo {
 		rangeCircle.SetActive (!rangeCircle.activeSelf);
 	}
 	public void SetRangeCircleActive(bool b){
+		rangeCircle.transform.localScale = new Vector3 (range * 2 / thisTransform.localScale.x,0.0001f,range * 2 / thisTransform.localScale.z);
 		rangeCircle.SetActive (b);
 	}
 	public void ChangeRangeCircleColor(Color c){

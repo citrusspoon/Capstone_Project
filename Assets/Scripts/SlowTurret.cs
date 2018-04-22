@@ -43,6 +43,16 @@ public class SlowTurret : MonoBehaviour, ITurretInfo {
 	}
 	void ITurretInfo.BoostRange(float boostAmount){
 		range *= boostAmount;
+		SetRangeCircleActive (true);
+		ChangeRangeCircleColor (Color.green);
+		StartCoroutine(DisableRangeCircleWithDelay (3f));
+
+	}
+
+	IEnumerator DisableRangeCircleWithDelay(float s){
+		yield return new WaitForSeconds (s);
+
+		SetRangeCircleActive (false);
 	}
 	void ITurretInfo.DestroySelf(){
 		TurretManager.instance.placedTurrets.Remove (this.gameObject);

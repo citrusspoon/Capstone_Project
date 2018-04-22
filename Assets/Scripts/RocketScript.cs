@@ -79,6 +79,7 @@ public class RocketScript : MonoBehaviour {
 		AmmoBank.instance.rockets.Push (this.gameObject);
 		this.gameObject.SetActive (false);
 		//targetScript.ReduceHealth (power);
+		EffectManager.instance.ExplosionAtPos (this.gameObject.transform.position);
 		AOEHit ();
 	}
 

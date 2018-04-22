@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4401057181238904}
   - component: {fileID: 33563535961789276}
   - component: {fileID: 23409292979169570}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RangeCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -410,7 +410,11 @@ MonoBehaviour:
   mode: 0
   range: 18
   fireRate: 1
+  originalRange: 0
+  originalFireRate: 0
+  cost: 80
   rotationSpeed: 10
+  type: 0
   rangeCircle: {fileID: 1179434969750272}
   partToRotate: {fileID: 4549186077485254}
   firePoint: {fileID: 4540734302276522}
