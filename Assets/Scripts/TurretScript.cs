@@ -23,6 +23,7 @@ public class TurretScript : MonoBehaviour, ITurretInfo {
 	public GameObject bulletPrefab;
 	private GameController GCInstance;
 	private Transform thisTransform;
+	private AudioSource audioSrc;
 	[HideInInspector]public bool turretConflict = false; //if you try to place a turret on top of another
 	//piece of the turret that rotates to face the target
 
@@ -41,6 +42,7 @@ public class TurretScript : MonoBehaviour, ITurretInfo {
 		fireCountdown = 0f;
 		rotationSpeed = 10f;
 		rangeCircle.transform.localScale = new Vector3 (range * 2 / thisTransform.localScale.x,0.0001f,range * 2 / thisTransform.localScale.z);
+		audioSrc = GetComponent<AudioSource> ();
 	}
 	TurretType ITurretInfo.GetType(){
 		return type;
@@ -104,6 +106,7 @@ public class TurretScript : MonoBehaviour, ITurretInfo {
 	BulletScript bulletScript;
 	void Shoot(){
 		//bullet = (GameObject)Instantiate (bulletPrefab, firePoint.position, firePoint.rotation);
+		audioSrc.PlayOneShot(audioSrc.clip, 0.2f);
 		bullet = AmmoBank.instance.bullets.Pop();
 		bullet.transform.position = firePoint.position;
 		bullet.transform.localRotation = firePoint.rotation;

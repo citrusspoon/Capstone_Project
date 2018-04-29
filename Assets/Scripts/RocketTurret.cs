@@ -25,6 +25,7 @@ public class RocketTurret : MonoBehaviour, ITurretInfo {
 	public GameObject rocketPrefab;
 	private GameController GCInstance;
 	private Transform thisTransform;
+	private AudioSource audioSrc;
 	[HideInInspector]public bool turretConflict = false; //if you try to place a turret on top of another
 
 
@@ -39,7 +40,7 @@ public class RocketTurret : MonoBehaviour, ITurretInfo {
 		rotationSpeed = 10f;
 		type = TurretType.Rocket;
 		GCInstance = GameController.instance;
-	
+		audioSrc = GetComponent<AudioSource> ();
 		thisTransform = GetComponent<Transform> ();
 		//updates target every half second to save computing power
 		rangeCircle.transform.localScale = new Vector3 (range * 2 / thisTransform.localScale.x,0.0001f,range * 2 / thisTransform.localScale.z);
@@ -114,6 +115,8 @@ public class RocketTurret : MonoBehaviour, ITurretInfo {
 
 		if (rocketScript != null)
 			rocketScript.Seek (target, targetScript);
+
+		audioSrc.PlayOneShot (audioSrc.clip, 1f);
 	}
 
 	//======UpdateTarget Variables=======//
