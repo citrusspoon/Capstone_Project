@@ -58,7 +58,7 @@ public class GuardTurret : MonoBehaviour, ITurretInfo {
 		range = originalRange;
 		TurretManager.instance.turretCounts[type] = ((int)(TurretManager.instance.turretCounts[type])) - 1;
 		this.gameObject.SetActive (false);
-		TurretManager.instance.basicStack.Push (this.gameObject);
+		TurretManager.instance.guardStack.Push (this.gameObject);
 	}
 	
 	// Update is called once per frame
@@ -77,6 +77,7 @@ public class GuardTurret : MonoBehaviour, ITurretInfo {
 		rangeCircle.SetActive (!rangeCircle.activeSelf);
 	}
 	public void SetRangeCircleActive(bool b){
+		rangeCircle.transform.localScale = new Vector3 (range * 2 / thisTransform.localScale.x,0.0001f,range * 2 / thisTransform.localScale.z);
 		rangeCircle.SetActive (b);
 	}
 	public void ChangeRangeCircleColor(Color c){

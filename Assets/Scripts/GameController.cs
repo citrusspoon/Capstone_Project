@@ -24,7 +24,6 @@ public class GameController : MonoBehaviour {
 	public CameraController cameraRef;
 
 	[Header("Other")]
-	//TODO: replace with non-ui button
 	public Button startButton;
 
 	//private bool toggling = false;

@@ -44,6 +44,7 @@ public class UIManager : MonoBehaviour {
 
 
 
+
 	void Awake()
 	{
 		if (instance == null)
@@ -70,6 +71,7 @@ public class UIManager : MonoBehaviour {
 		SetImportMenuElementsActive (b);
 		SetGameElementsActive (b);
 		SetTestDisplayActive (b);
+		SetGameOverElementsActive (b);
 	}
 	/// <summary>
 	/// Sets the active state of all UI elements specific to the game window

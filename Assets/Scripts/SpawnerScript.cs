@@ -7,7 +7,7 @@ public class SpawnerScript : MonoBehaviour {
 
 	public float timeBetweenEnemies = 1f;
 	private float countdown = 0f;
-	private int waveNum = 0;
+	public int waveNum = 0;
 	public GameState currentGameState;
 
 	public static SpawnerScript instance = null;
@@ -19,7 +19,7 @@ public class SpawnerScript : MonoBehaviour {
 	public List<GameObject> enemyWaitingRoom;
 	public List<Wave> waveList;
 	public bool spawnerActive;
-	public int totalWaves = 10;
+	public int totalWaves = 1;
 	public Text waveNumText;
 
 
@@ -274,7 +274,11 @@ public class SpawnerScript : MonoBehaviour {
 
 	void CreateWaves(){
 		
-
+		//demo waves
+		waveList.Add (new Wave(20,0,0,0,1));
+		waveList.Add (new Wave(40,0,0,0,2));
+		waveList.Add (new Wave(20,10,10,1,8));
+		/*
 		waveList.Add (new Wave(20,0,0,0,1));
 		waveList.Add (new Wave(40,0,0,0,2));
 		waveList.Add (new Wave(30,20,0,0,3));
@@ -285,6 +289,7 @@ public class SpawnerScript : MonoBehaviour {
 		waveList.Add (new Wave(50,30,10,1,8));
 		waveList.Add (new Wave(80,50,50,0,9));
 		waveList.Add (new Wave(50,0,0,3,10));
+		*/
 
 	}
 
